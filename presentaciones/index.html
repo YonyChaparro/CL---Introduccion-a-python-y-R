@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Introducción a Python y R</title>
+<style>
+  @font-face { font-family: "Ancizar Sans"; src: url("assets/fonts/AncizarSans-Regular.otf"); font-weight: 400; }
+  @font-face { font-family: "Ancizar Sans"; src: url("assets/fonts/AncizarSans-Extrabold.otf"); font-weight: 800; }
+  :root { --azul: #073763; --azul-noche: #020E18; --celeste: #B1D6FA; --uifce: #2A7FFF; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; padding: 48px 16px;
+    background: var(--azul-noche); color: #fff;
+    font-family: "Ancizar Sans", system-ui, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  .top { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .top img.logo { height: 56px; }
+  .top img.uifcito { height: 120px; margin-left: auto; }
+  h1 { font-weight: 800; font-size: clamp(32px, 6vw, 48px); margin: 24px 0 4px; }
+  p { color: var(--celeste); margin: 0 0 32px; font-size: 18px; }
+  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  a {
+    display: block; padding: 20px 24px; border-radius: 12px; text-decoration: none;
+    background: var(--azul); color: #fff; font-size: 20px; font-weight: 800;
+    border: 2px solid transparent; transition: border-color .15s;
+  }
+  a:hover, a:focus-visible { border-color: var(--uifce); outline: none; }
+  a span { display: block; color: var(--celeste); font-size: 15px; font-weight: 400; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <img class="logo" src="assets/img/logo_uifce_blanco.png" alt="UIFCE · Unidad de Informática">
+    <img class="uifcito" src="assets/uifcito/saludo.png" alt="UIFCITO saludando">
+  </div>
+  <h1>Introducción a Python y R</h1>
+  <p>Presentaciones del curso</p>
+  <ul>
+    <li><a href="sesion_01_que_es_programar/"><span>Sesión 1</span>¿Qué es programar? Primeros pasos con Python</a></li>
+    <li><a href="sesion_02_condicionales/"><span>Sesión 2</span>Condicionales</a></li>
+    <li><a href="sesion_03_listas_bucles_funciones/"><span>Sesión 3</span>Bucles</a></li>
+  </ul>
+</div>
+</body>
+</html>

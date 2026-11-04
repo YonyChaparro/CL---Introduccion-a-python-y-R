@@ -1,0 +1,890 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 1: Primeros pasos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/uifce.css">
+</head>
+<body>
+<div class="viewport">
+<main class="deck" id="deck">
+  <div class="progreso" id="progreso"></div>
+
+  <!-- 1 · Portada -->
+  <section class="slide portada">
+    <div class="bloque-azul"></div>
+    <img class="uifcito" src="../assets/uifcito/saludo.png" alt="UIFCITO saludando" style="right: 330px; top: 46px; width: 380px;">
+    <div class="textos">
+      <div class="curso">Introducción a Python y R · Sesión 1</div>
+      <h1>¿Qué es programar?</h1>
+      <div class="monitor">Nombre del monitor(a): Yony Sebastian Chaparro Mesa</div>
+      <div class="rol">Estudiante Auxiliar</div>
+    </div>
+    <div class="panel">
+      <img class="logo" src="../assets/img/logo_uifce.png" alt="UIFCE · Unidad de Informática">
+      <div class="dato" style="top: 196px;"><b>Curso:</b><span>Introducción a Python y R</span></div>
+      <div class="dato" style="top: 300px;"><b>Sesión 1:</b><span>¿Qué es programar? Primeros pasos con Python</span></div>
+    </div>
+    <div class="contacto">
+      <i>Correo:</i> <a href="mailto:uniic_bog@unal.edu.co">uniic_bog@unal.edu.co</a><br>
+      <i>Tel:</i> 3165000 &nbsp; <i>Ext:</i> 12301
+    </div>
+    <div class="franja" role="img" aria-label="Facultad de Ciencias Económicas, Unidad de Informática, Sede Bogotá · Universidad Nacional de Colombia"></div>
+    <aside class="notas"><b>Bienvenida (0:00–0:15).</b> Preséntate y presenta el curso con las diapositivas siguientes (información, reglas y evaluación). Ronda rápida: cada estudiante dice su carrera y algo que le gustaría automatizar o analizar. Anota dos o tres respuestas: las vas a retomar al cierre.</aside>
+  </section>
+
+  <!-- 0 · Presentación del curso -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>0</span></div>
+    <div class="textos">
+      <h2>Presentación del curso</h2>
+      <p>Información y reglas del curso libre</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas">Antes de entrar en materia, presenta las reglas del curso libre. Ve rápido por la información general y detente en las reglas de asistencia: son las que más dudas generan.</aside>
+  </section>
+
+  <!-- 0.1 · Información de interés -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Información de interés</h2>
+      <p class="subtitulo">Cursos Libres UIFCE · 2026-2</p>
+      <div class="grid3" style="margin-top: 44px;">
+        <div class="card dato-curso">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+          <div><small>Fechas</small><b>26 oct – 28 nov</b><span>de 2026</span></div>
+        </div>
+        <div class="card dato-curso">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <div><small>Horario</small><b>Martes y jueves</b><span>2:00 – 4:00 p. m.</span></div>
+        </div>
+        <div class="card dato-curso">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>
+          <div><small>Lugar</small><b>Sala 6</b><span>Sala de Informática 6, Facultad de Ciencias Económicas</span></div>
+        </div>
+        <div class="card dato-curso">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+          <div><small>¿Cuántas sesiones?</small><b>10 sesiones</b><span>20 horas en total</span></div>
+        </div>
+        <div class="card dato-curso">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>
+          <div><small>Asistencia mínima</small><b>8 sesiones</b><span>80 % del curso</span></div>
+        </div>
+        <div class="card dato-curso">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          <div><small>Material del curso</small><b>Moodle FCE</b><span>Notebooks, ejercicios y entregas</span></div>
+        </div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/presentando.png" alt="UIFCITO presentando" style="right: 210px; top: 18px; height: 140px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Pregunta quién ya entró al Moodle de la FCE y ve el curso en su lista. Quien no lo vea debe escribir al correo de la UIFCE hoy mismo. Recuerda que las clases son martes y jueves: son 10 clases, del martes 27 de octubre al jueves 26 de noviembre.</aside>
+  </section>
+
+  <!-- 0.2 · Objetivo -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Objetivo del curso</h2>
+      <p class="definicion" style="width: 780px;">Aprender la <span class="acento" style="font-weight:800">programación básica</span> en los lenguajes <span class="acento" style="font-weight:800">Python y R</span> para que pueda ser utilizada en las actividades cotidianas.</p>
+      <div class="chips" style="margin-top: 34px;">
+        <span class="chip">Sin experiencia previa</span><span class="chip">Desde el navegador</span><span class="chip">Con datos reales</span>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/feliz.png" alt="UIFCITO feliz" style="right: 70px; top: 96px; height: 420px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Insiste en que no necesitan saber programar. No se instala nada: Python se trabaja en Google Colab y R en Posit Cloud, ambos desde el navegador.</aside>
+  </section>
+
+  <!-- 0.3 · Módulos -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Módulos del curso</h2>
+      <div class="modulos">
+        <div class="modulo"><div class="n">1</div><h3>¿Qué es programar? Primeros pasos</h3><span class="leng">Python</span></div>
+        <div class="modulo"><div class="n">2</div><h3>Condicionales y lógica</h3><span class="leng">Python</span></div>
+        <div class="modulo"><div class="n">3</div><h3>Listas, bucles y funciones</h3><span class="leng">Python</span></div>
+        <div class="modulo"><div class="n">4</div><h3>Primeros datos reales: pandas</h3><span class="leng">Python</span></div>
+        <div class="modulo"><div class="n">5</div><h3>El puente a R</h3><span class="leng r">R</span></div>
+        <div class="modulo"><div class="n">6</div><h3>Manipulación de datos con dplyr</h3><span class="leng r">R</span></div>
+        <div class="modulo"><div class="n">7</div><h3>Visualización con ggplot2</h3><span class="leng r">R</span></div>
+        <div class="modulo"><div class="n">8</div><h3>Python y R lado a lado · grupos de proyecto</h3><span class="leng ambos">Ambos</span></div>
+        <div class="modulo"><div class="n">9</div><h3>Taller de proyecto</h3><span class="leng ambos">Ambos</span></div>
+        <div class="modulo"><div class="n">10</div><h3>Presentaciones y cierre</h3><span class="leng ambos">Ambos</span></div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Una sesión por módulo. Las cuatro primeras son en Python (Google Colab), las tres siguientes en R (Posit Cloud), y al final se comparan ambos lenguajes y se trabaja en un proyecto en grupo que se presenta en la última sesión.</aside>
+  </section>
+
+  <!-- 0.4 · Reglas -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Reglas de los cursos libres</h2>
+      <p class="subtitulo">Cursos Libres UIFCE</p>
+      <div class="grid2" style="position: absolute; left: 64px; right: 64px; top: 176px;">
+        <div class="card regla"><small>¿Qué pasa si no asisto a la primera clase?</small><h3>Pierde el cupo</h3></div>
+        <div class="card regla"><small>¿Qué plazo tengo para cancelar?</small><h3>Las tres primeras sesiones</h3></div>
+        <div class="card regla"><small>¿Qué pasa si pierdo el curso por fallas?</small><h3>Sanción durante 6 meses</h3></div>
+        <div class="card regla"><small>¿Qué pasa si se presentan casos de plagio?</small><h3>Pierde el curso y sanción por 6 meses</h3></div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/alerta2.png" alt="UIFCITO alerta" style="right: 210px; top: 14px; height: 140px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Lee cada pregunta y deja que intenten responder antes de leer la respuesta. Aclara que la sanción significa no poder inscribirse en otros cursos libres de la UIFCE durante 6 meses. Si alguien piensa cancelar, debe hacerlo dentro de las tres primeras sesiones.</aside>
+  </section>
+
+  <!-- 0.5 · Durante las clases -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Durante las clases</h2>
+      <ul class="lista" style="width: 760px; margin-top: 30px;">
+        <li>La clase empieza a las <strong>2:00 p. m.</strong> Lleguen puntuales.</li>
+        <li>Se toma lista con un <strong>formulario durante la clase</strong>.</li>
+        <li>No se reciben entregas <strong>después de la fecha máxima</strong> ni <strong>por correo electrónico</strong>.</li>
+        <li>Todas las entregas se hacen en el <strong>Moodle FCE</strong>.</li>
+      </ul>
+      <img class="uifcito" src="../assets/uifcito/explicando.png" alt="UIFCITO explicando" style="right: 70px; top: 96px; height: 420px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Comparte el enlace del formulario de asistencia en algún momento de la clase, no siempre al inicio. Recuerda que las entregas tardías o por correo no se reciben.</aside>
+  </section>
+
+  <!-- 0.6 · Evaluación -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Criterios de evaluación</h2>
+      <table class="tabla texto" style="margin-top: 26px; width: 720px;">
+        <tr><th>Criterio</th><th>Ponderación</th></tr>
+        <tr><td>Ejercicios cortos semanales</td><td><strong>40 %</strong></td></tr>
+        <tr><td>Proyecto final</td><td><strong>50 %</strong></td></tr>
+        <tr><td>Participación y retroalimentación entre pares</td><td><strong>10 %</strong></td></tr>
+      </table>
+      <ul class="lista" style="width: 760px; margin-top: 30px;">
+        <li>El curso se aprueba con <strong>3,5</strong>.</li>
+        <li>Se darán <strong>bonos</strong> durante las clases.</li>
+      </ul>
+      <img class="uifcito" src="../assets/uifcito/pensando.png" alt="UIFCITO pensando" style="right: 70px; top: 120px; height: 380px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Los ejercicios semanales se califican por completitud y esfuerzo, no por perfección. El proyecto final se hace en grupo, se forma en la sesión 8 y se presenta en la sesión 10.</aside>
+  </section>
+
+  <!-- 0.7 · Certificado y reclamos -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Certificado y reclamos</h2>
+      <div class="grid2" style="margin-top: 36px;">
+        <div class="card" style="padding: 32px 30px; min-height: 260px;">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg>
+          <h3>¿Cómo obtengo el certificado?</h3>
+          <p>Obtener una nota igual o superior a <strong>3,5</strong>.</p>
+          <p style="margin-top: 8px;">Responder la <strong>encuesta de evaluación y retroalimentación</strong>.</p>
+        </div>
+        <div class="card" style="padding: 32px 30px; min-height: 260px;">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <h3>¿Y si no estoy de acuerdo con mi nota?</h3>
+          <p>Tiene <strong>una semana</strong> después de terminado el curso para presentar el reclamo a <a href="mailto:uniic_bog@unal.edu.co">uniic_bog@unal.edu.co</a>.</p>
+        </div>
+      </div>
+      <div class="redes" style="position: absolute; left: 64px; right: 64px; bottom: 26px;">
+        <h4>Redes de la UIFCE</h4>
+        <span><b>Web:</b> fce.unal.edu.co/uifce</span>
+        <span><b>Facebook:</b> facebook.com/uifce</span>
+        <span><b>X (Twitter):</b> @FCEuifce</span>
+        <span><b>YouTube:</b> Unidad de Informática y Comunicaciones FCE</span>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">La encuesta se responde en la sesión 10. Abajo están las redes de la UIFCE, donde se anuncian los próximos cursos libres. Con esto termina la presentación del curso: pasa al contenido de la sesión 1.</aside>
+  </section>
+
+  <!-- Agenda -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Contenido</h2>
+      <p class="subtitulo">Sesión 1 · Python en Google Colab</p>
+      <div class="agenda">
+        <div class="item"><div class="circulo">1</div><div><h3>¿Qué es programar?</h3></div></div>
+        <div class="item"><div class="circulo">2</div><div><h3>Google Colab</h3></div></div>
+        <div class="item"><div class="circulo">3</div><div><h3>Variables y tipos de datos</h3></div></div>
+        <div class="item"><div class="circulo">4</div><div><h3>Operaciones</h3></div></div>
+        <div class="item"><div class="circulo">5</div><div><h3>Leer errores sin miedo</h3></div></div>
+        <div class="item"><div class="circulo">6</div><div><h3>¡A practicar!</h3></div></div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Muestra el mapa de la sesión en 30 segundos. Hay una pausa de 10 minutos a la 1:05.</aside>
+  </section>
+
+  <!-- 2 · Divisor de sección -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>1</span></div>
+    <div class="textos">
+      <h2>¿Qué es programar?</h2>
+      <p>De las instrucciones cotidianas al código</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Concepto (0:15–0:30).</b> Este bloque dura unos 15 minutos. La meta no es memorizar definiciones, sino quitarle el misterio a la palabra “programar”.</aside>
+  </section>
+
+  <!-- 3 · Programamos sin saberlo -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Programamos sin saberlo</h2>
+      <div class="dialogo" style="left: 64px; top: 128px; width: 560px; height: 152px;">¿Cuántas veces hoy le diste instrucciones a una máquina?</div>
+      <img class="uifcito" src="../assets/uifcito/pensando.png" alt="UIFCITO pensando" style="left: 650px; top: 92px; height: 210px;">
+      <div class="grid4" style="position: absolute; left: 64px; right: 64px; top: 318px;">
+        <div class="card">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="7"/><path d="M12 10v3l2 2M5 4 2 7M19 4l3 3"/></svg>
+          <h3>Una alarma</h3><p>“Todos los días hábiles a las 6:00 a. m.”</p>
+        </div>
+        <div class="card">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6z"/><path d="M6 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2M9 8h6M9 12h6M9 16h4"/></svg>
+          <h3>Una receta</h3><p>Pasos en orden, con cantidades exactas.</p>
+        </div>
+        <div class="card">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 4v16M15 4v16"/></svg>
+          <h3>Una fórmula</h3><p><code class="inline">=PROMEDIO(B2:B30)</code> en Excel.</p>
+        </div>
+        <div class="card">
+          <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <h3>Un filtro</h3><p>“Si el correo es de la U, muévelo a esta carpeta”.</p>
+        </div>
+      </div>
+      <p style="position: absolute; left: 64px; bottom: 26px; font-size: 26px;">Programar es <strong>describir, paso a paso, lo que queremos que pase.</strong></p>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Lanza la pregunta y deja que respondan antes de mostrar los ejemplos. La idea es que se den cuenta de que ya dan instrucciones a máquinas todos los días; programar es hacerlo de forma más explícita.</aside>
+  </section>
+
+  <!-- 4 · Definición -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Entonces, ¿qué es programar?</h2>
+      <p class="definicion"><strong>Programar</strong> es escribir <span class="acento" style="font-weight:800">instrucciones precisas</span> que un computador puede ejecutar para <span class="acento" style="font-weight:800">resolver un problema</span> o hacer una tarea.</p>
+      <p style="margin-top: 34px; font-weight: 700; color: var(--gris-azul); font-size: 22px;">Tres palabras clave</p>
+      <div class="chips" style="margin-top: 10px;">
+        <span class="chip">Instrucciones</span><span class="chip">Precisión</span><span class="chip">Problema</span>
+      </div>
+      <p style="margin-top: 26px; width: 760px; font-size: 23px;">Un <strong>programa</strong> es el resultado: una lista de instrucciones que el computador sigue <strong>en orden</strong>, de arriba hacia abajo.</p>
+      <img class="uifcito" src="../assets/uifcito/explicando.png" alt="UIFCITO explicando" style="right: 70px; top: 96px; height: 420px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Lee la definición en voz alta y subraya las tres palabras clave. Conecta con la sesión: hoy vamos a escribir nuestras primeras instrucciones en Python.</aside>
+  </section>
+
+  <!-- 5 · El computador es literal -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">El computador es literal</h2>
+      <p class="subtitulo">Hace exactamente lo que le dices, no lo que quisiste decir.</p>
+      <ul class="lista" style="width: 760px;">
+        <li>No interpreta, no supone, no “entiende el contexto”.</li>
+        <li>Si la instrucción está mal escrita, <strong>no la entiende</strong>.</li>
+        <li>Una receta para alguien que <strong>no improvisa</strong>.</li>
+      </ul>
+      <div class="actividad">
+        <span class="etiqueta">Actividad</span>
+        <p><b>La receta al pie de la letra.</b> El grupo le dicta al monitor cómo preparar un sándwich. El monitor obedece <em>exactamente</em> lo que escucha. ¿Qué instrucciones faltaron?</p>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/alerta1.png" alt="UIFCITO alerta" style="right: 56px; top: 120px; width: 360px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">En la actividad, sé muy literal: si dicen “pon la mantequilla en el pan” sin decir “abre el frasco”, no lo abras. Las risas ayudan a fijar la idea. Cierra preguntando qué instrucciones faltaron y por qué.</aside>
+  </section>
+
+  <!-- 6 · Algoritmo -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Algoritmo: la idea antes del código</h2>
+      <p style="margin-top: 14px; width: 800px;">Un <strong>algoritmo</strong> es una secuencia <strong>finita y ordenada</strong> de pasos para resolver un problema.</p>
+      <p style="margin-top: 16px; font-weight: 700; color: var(--gris-azul); font-size: 22px;">Ejemplo: calcular el promedio de mis notas</p>
+      <ol class="pasos">
+        <li>Reunir todas las notas.</li>
+        <li>Sumarlas.</li>
+        <li>Contar cuántas notas hay.</li>
+        <li>Dividir la suma entre la cantidad.</li>
+        <li>Mostrar el resultado.</li>
+      </ol>
+      <img class="uifcito" src="../assets/uifcito/presentando.png" alt="UIFCITO señalando" style="right: 60px; top: 150px; width: 380px; transform: scaleX(-1); animation: none;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Insiste en que esto todavía es español, no código. Primero se piensa la solución; después se escribe en un lenguaje. Pregunta: ¿qué pasaría si invertimos los pasos 2 y 4?</aside>
+  </section>
+
+  <!-- 7 · Del algoritmo al programa -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Del algoritmo al programa</h2>
+      <div class="flujo">
+        <div class="paso">Problema<small>¿qué quiero?</small></div><span class="flecha">→</span>
+        <div class="paso">Algoritmo<small>los pasos</small></div><span class="flecha">→</span>
+        <div class="paso on">Código<small>en un lenguaje</small></div><span class="flecha">→</span>
+        <div class="paso on">Ejecución<small>el computador</small></div><span class="flecha">→</span>
+        <div class="paso">Resultado<small>3.5</small></div>
+      </div>
+      <div class="grid2" style="margin-top: 26px;">
+        <div>
+          <span class="etiqueta">Python</span>
+<pre class="code"><span class="n">notas</span> <span class="o">=</span> [<span class="n">3.0</span>, <span class="n">4.0</span>, <span class="n">3.5</span>]
+<span class="n">promedio</span> <span class="o">=</span> <span class="f">sum</span>(notas) <span class="o">/</span> <span class="f">len</span>(notas)
+<span class="f">print</span>(promedio)   <span class="c"># 3.5</span></pre>
+        </div>
+        <div>
+          <span class="etiqueta">R</span>
+<pre class="code"><span class="n">notas</span> <span class="o">&lt;-</span> <span class="f">c</span>(<span class="n">3.0</span>, <span class="n">4.0</span>, <span class="n">3.5</span>)
+<span class="n">promedio</span> <span class="o">&lt;-</span> <span class="f">mean</span>(notas)
+<span class="f">print</span>(promedio)   <span class="c"># 3.5</span></pre>
+        </div>
+      </div>
+      <p style="margin-top: 20px; font-size: 23px; width: 820px;">El mismo algoritmo, dos lenguajes. <strong>No hay que entender cada símbolo todavía.</strong></p>
+      <img class="uifcito" src="../assets/uifcito/neutral.png" alt="UIFCITO" style="right: 70px; top: 418px; height: 170px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Solo para mostrar: no expliques la sintaxis. Señala que ambos programas siguen los mismos pasos de la diapositiva anterior. R ya trae <code>mean()</code>; en Python lo armamos con <code>sum</code> y <code>len</code>.</aside>
+  </section>
+
+  <!-- 8 · Lenguaje de programación -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">¿Qué es un lenguaje de programación?</h2>
+      <p style="margin-top: 12px; width: 820px;">Un idioma intermedio entre las personas y la máquina, con <strong>vocabulario</strong> (palabras reservadas) y <strong>gramática</strong> (sintaxis).</p>
+      <div class="escalera">
+        <div class="peldaño"><div class="nivel" style="background: var(--gris-azul);">Lenguaje humano</div><div class="ej">“Calcula el promedio de mis notas”</div></div>
+        <div class="peldaño destacado"><div class="nivel" style="background: var(--uifce);">Alto nivel</div><div class="ej"><code>mean(notas)</code> &nbsp;·&nbsp; Python, R</div></div>
+        <div class="peldaño"><div class="nivel" style="background: var(--azul-2);">Bajo nivel</div><div class="ej"><code>MOV EAX, [EBX]</code> &nbsp;·&nbsp; ensamblador</div></div>
+        <div class="peldaño"><div class="nivel" style="background: var(--azul);">Código máquina</div><div class="ej"><code>10110000 01100001</code></div></div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/neutral.png" alt="UIFCITO" style="right: 70px; top: 168px; height: 360px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Entre más alto el nivel, más se parece a nuestro idioma y menos detalles de la máquina hay que manejar. Python y R son de alto nivel: por eso son buenos para empezar.</aside>
+  </section>
+
+  <!-- 9 · Interpretado vs compilado -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">¿Cómo “entiende” el computador nuestro código?</h2>
+      <div class="grid2" style="margin-top: 24px; width: 820px;">
+        <div class="card" style="border-top-color: var(--gris-azul);">
+          <h3>Compilado</h3>
+          <p>Traduce <strong>todo</strong> el programa antes de ejecutarlo.</p>
+          <p style="margin-top: 8px; color: var(--gris-azul);">Como traducir un libro completo antes de publicarlo. <br>Ej.: C, Java</p>
+        </div>
+        <div class="card" style="border-top-color: var(--uifce); outline: 3px solid var(--uifce);">
+          <h3>Interpretado</h3>
+          <p>Lee y ejecuta <strong>línea por línea</strong>, de arriba hacia abajo.</p>
+          <p style="margin-top: 8px; color: var(--gris-azul);">Como un intérprete en una conferencia. <br>Ej.: <b style="color: var(--azul)">Python, R</b></p>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 300px 1fr; gap: 24px; align-items: center; margin-top: 24px; width: 820px;">
+<pre class="code">&gt;&gt;&gt; <span class="n">2</span> <span class="o">+</span> <span class="n">3</span>
+<span class="s">5</span></pre>
+        <p style="font-size: 23px;">Escribes una línea y ves el resultado <strong>al instante</strong>. Ideal para aprender y explorar datos.</p>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/explicando.png" alt="UIFCITO explicando" style="right: 60px; top: 150px; height: 360px; transform: scaleX(-1); animation: none;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">No profundices en compiladores. Lo importante: en Python y R ejecutamos una celda y vemos el resultado enseguida. Eso es lo que van a hacer en Colab en unos minutos.</aside>
+  </section>
+
+  <!-- 10 · Bloques básicos -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Los bloques de cualquier programa</h2>
+      <p class="subtitulo">Lo que vamos a ir armando durante el curso</p>
+      <div class="bloques">
+        <div class="bloque hoy"><span class="sello">Hoy</span><h3>Datos</h3><p>Variables y tipos: texto, números, verdadero/falso.</p>
+<pre>edad = 20
+nombre = "Ana"</pre></div>
+        <div class="bloque hoy"><span class="sello">Hoy</span><h3>Operaciones</h3><p>Cálculos y comparaciones.</p>
+<pre>total = 12000 * 3</pre></div>
+        <div class="bloque"><span class="sello luego">Sesión 2</span><h3>Decisiones</h3><p>Si pasa A, hacer B.</p>
+<pre>if edad &gt;= 18:
+    print("Adulto")</pre></div>
+        <div class="bloque"><span class="sello luego">Sesión 3</span><h3>Repetición</h3><p>Hacer algo muchas veces.</p>
+<pre>for n in notas:
+    print(n)</pre></div>
+        <div class="bloque"><span class="sello luego">Sesión 3</span><h3>Reutilización</h3><p>Agrupar pasos con un nombre.</p>
+<pre>def saludar(x):
+    print("Hola", x)</pre></div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Es solo un mapa del curso. Hoy trabajamos datos y operaciones; condicionales en la sesión 2; listas, bucles y funciones en la sesión 3.</aside>
+  </section>
+
+  <!-- 11 · Errores -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Equivocarse es parte del proceso</h2>
+      <div style="width: 780px; margin-top: 22px;">
+<pre class="code"><span class="f">print</span>(<span class="s">"Hola"</span>
+<span class="err">SyntaxError: '(' was never closed</span></pre>
+      </div>
+      <ul class="lista" style="width: 780px;">
+        <li>Los errores (<em>bugs</em>) son <strong>normales y esperados</strong>.</li>
+        <li>Lee la <strong>última línea</strong> del mensaje y el <strong>número de línea</strong>.</li>
+        <li>Depurar es parte del trabajo, no una señal de fracaso.</li>
+      </ul>
+      <div class="dialogo" style="left: 64px; top: 432px; width: 640px; height: 132px; font-size: 25px;">Un error no es un fracaso: es el computador diciéndote dónde mirar.</div>
+      <img class="uifcito" src="../assets/uifcito/alerta2.png" alt="UIFCITO con señal de alerta" style="right: 56px; top: 118px; width: 380px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Más adelante en la sesión vas a provocar errores a propósito en vivo (NameError, SyntaxError, TypeError). Aquí solo siembra la idea: el mensaje de error es una pista, no un regaño.</aside>
+  </section>
+
+  <!-- 12 · Por qué aprender -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">¿Por qué aprender a programar hoy?</h2>
+      <div class="grid2" style="margin-top: 26px; width: 840px; gap: 18px;">
+        <div class="card"><h3>Automatizar</h3><p>Las tareas repetitivas se hacen solas, sin errores de copiar y pegar.</p></div>
+        <div class="card"><h3>Analizar datos</h3><p>Trabajar con volúmenes que no caben cómodos en una hoja de cálculo.</p></div>
+        <div class="card"><h3>Reproducibilidad</h3><p>El mismo código produce el mismo resultado, hoy y en seis meses.</p></div>
+        <div class="card"><h3>Pensamiento computacional</h3><p>Descomponer problemas, reconocer patrones y abstraer.</p></div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/feliz.png" alt="UIFCITO feliz" style="right: 70px; top: 120px; height: 420px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Retoma lo que dijeron en la ronda de bienvenida: ¿cuál de estas cuatro razones encaja con lo que quieren automatizar o analizar en su carrera?</aside>
+  </section>
+
+  <!-- 13 · Python y R -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">¿Por qué Python y R?</h2>
+      <div class="lenguajes">
+        <div class="lenguaje">
+          <img src="../assets/img/python.png" alt="Logo de Python">
+          <div><h3>Python</h3>
+            <ul><li>Propósito general: datos, web, automatización.</li><li>Diseñado para ser legible.</li><li><b>Sesiones 1 a 4</b>, en Google Colab.</li></ul></div>
+        </div>
+        <div class="lenguaje">
+          <img src="../assets/img/r.png" alt="Logo de R">
+          <div><h3>R</h3>
+            <ul><li>Nació para la estadística.</li><li>Muy fuerte en análisis y gráficos.</li><li><b>Sesiones 5 a 8</b>: dplyr, ggplot2 y comparación.</li></ul></div>
+        </div>
+      </div>
+      <div class="comun"><b>En común:</b> gratuitos, con comunidades enormes y muy usados en análisis de datos.</div>
+      <p style="margin-top: 22px; font-size: 26px;">Ahora veamos cómo se escribe esto… <strong class="acento">¡en Colab!</strong></p>
+      <img class="uifcito" src="../assets/uifcito/presentando.png" alt="UIFCITO señalando" style="right: 80px; top: 432px; height: 170px; transform: scaleX(-1); animation: none;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Transición al live coding. No se trata de elegir un ganador: al final del curso (sesión 8) los van a comparar con el mismo problema.</aside>
+  </section>
+
+  <!-- 14 · Cierre -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Para llevar de esta sección</h2>
+      <ol class="ideas">
+        <li><span>Programar es dar <strong>instrucciones precisas</strong>, en orden.</span></li>
+        <li><span>Primero el <strong>algoritmo</strong>, después el código.</span></li>
+        <li><span>Equivocarse es parte de aprender: <strong>los errores son pistas</strong>.</span></li>
+      </ol>
+      <div class="dialogo" style="left: 64px; top: 408px; width: 680px; height: 150px; font-size: 26px;">¿Qué tarea de tu día a día te gustaría automatizar?</div>
+      <img class="uifcito" src="../assets/uifcito/pensando.png" alt="UIFCITO pensando" style="right: 90px; top: 80px; height: 440px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Cierre del bloque conceptual. Deja la pregunta abierta: la retomamos al final de la sesión, cuando ya hayan escrito su primer programa.</aside>
+  </section>
+
+  <!-- ===================== SECCIÓN 2 · GOOGLE COLAB ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>2</span></div>
+    <div class="textos">
+      <h2>Google Colab</h2>
+      <p>Nuestro cuaderno de trabajo en la nube</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Live coding (0:30–0:50).</b> Proyecta tu pantalla con Colab abierto. Si alguien no puede entrar, emparéjalo con un compañero mientras se resuelve.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">¿Qué es un notebook?</h2>
+      <p class="subtitulo">Un documento con dos tipos de celdas: texto y código</p>
+      <div style="display: grid; grid-template-columns: 640px 1fr; gap: 36px; margin-top: 22px;">
+        <div class="colab">
+          <div class="barra"><span class="punto"></span><span class="punto"></span><span class="punto"></span><b>Sesion01.ipynb</b>
+            <div class="acciones"><span>+ Código</span><span>+ Texto</span></div></div>
+          <div class="cuerpo">
+            <div class="celda"><div class="texto"><h4>Mi primer programa</h4><p>Celda de texto: notas, títulos, explicaciones.</p></div></div>
+            <div class="celda"><div class="play"></div><div class="entrada"><span class="f">print</span>(<span class="s">"Hola, mundo"</span>)</div><div class="salida">Hola, mundo</div></div>
+            <div class="celda"><div class="play"></div><div class="entrada"><span class="n">2</span> + <span class="n">3</span></div><div class="salida">5</div></div>
+          </div>
+        </div>
+        <ol class="pasos" style="margin-top: 0;">
+          <li style="width: auto; font-size: 21px;">Abre el enlace con tu cuenta de Google.</li>
+          <li style="width: auto; font-size: 21px;"><b>Archivo → Guardar una copia en Drive.</b></li>
+          <li style="width: auto; font-size: 21px;">Escribe en una celda de código.</li>
+          <li style="width: auto; font-size: 21px;">Ejecútala con <span class="tecla">Shift</span> + <span class="tecla">Enter</span></li>
+          <li style="width: auto; font-size: 21px;">La salida aparece justo debajo.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Haz que todos guarden una copia en su Drive antes de escribir nada; si no, pierden su trabajo al cerrar. Muestra la diferencia entre celda de texto y de código, y que una celda se puede volver a ejecutar.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Hola, mundo</h2>
+      <p class="subtitulo">La tradición de todo primer programa</p>
+      <div style="width: 720px; margin-top: 22px;">
+        <span class="etiqueta">Celda de código</span>
+<pre class="code"><span class="f">print</span>(<span class="s">"Hola, mundo"</span>)
+<span class="f">print</span>(<span class="s">"Me llamo Ana"</span>)
+<span class="f">print</span>(<span class="n">2</span> <span class="o">+</span> <span class="n">3</span>)</pre>
+        <span class="etiqueta" style="margin-top: 14px; background: var(--gris-azul);">Salida</span>
+<pre class="code" style="border-left-color: var(--gris-azul);">Hola, mundo
+Me llamo Ana
+5</pre>
+      </div>
+      <ul class="lista" style="position: absolute; left: 820px; top: 150px; width: 400px;">
+        <li><code class="inline">print()</code> muestra lo que va entre paréntesis.</li>
+        <li>El <strong>texto</strong> va entre comillas.</li>
+        <li>Los <strong>números</strong> no: Python los calcula.</li>
+      </ul>
+      <img class="uifcito" src="../assets/uifcito/explicando.png" alt="UIFCITO explicando" style="right: 90px; top: 370px; height: 200px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Escribe en vivo, despacio. Pregunta antes de ejecutar: “¿qué creen que va a salir?”. Muestra qué pasa con <code>print("2 + 3")</code> frente a <code>print(2 + 3)</code>.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Práctica en parejas</h2>
+      <p class="subtitulo">Con tu pareja de la semana</p>
+      <div class="actividad" style="width: 700px; margin-top: 24px;">
+        <span class="etiqueta">Reto</span>
+        <p>En una celda nueva, imprime tu <b>nombre</b>, tu <b>carrera</b> y tu <b>frase favorita</b>, cada uno en su propia línea.</p>
+      </div>
+<pre class="code" style="width: 700px; margin-top: 18px;"><span class="f">print</span>(<span class="s">"Ana"</span>)
+<span class="f">print</span>(<span class="s">"Economía"</span>)
+<span class="f">print</span>(<span class="s">"Hecho es mejor que perfecto"</span>)</pre>
+      <div style="display: flex; gap: 14px; margin-top: 20px; width: 700px;">
+        <div class="card" style="flex: 1; border-top-color: #2E9E55; padding: 14px 18px;"><h3 style="font-size: 22px;">Papel verde</h3><p style="font-size: 19px;">¡Terminé! Puedo ayudar.</p></div>
+        <div class="card" style="flex: 1; border-top-color: #D0342C; padding: 14px 18px;"><h3 style="font-size: 22px;">Papel rojo</h3><p style="font-size: 19px;">Estoy atascado: necesito ayuda.</p></div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/feliz.png" alt="UIFCITO feliz" style="right: 90px; top: 110px; height: 430px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas"><b>Práctica guiada (0:50–1:05).</b> Reparte los papelitos verde y rojo. Recorre el salón y atiende primero los rojos. Si una pareja termina rápido, pídele que pruebe <code>print("Hola", "Ana")</code> con coma.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content" style="display: grid; grid-template-columns: 1fr 380px; align-items: center;">
+      <div>
+        <h2 class="titulo">Pausa</h2>
+        <p class="subtitulo">Estírate y toma agua.</p>
+        <div class="reloj" id="reloj">10:00</div>
+        <div style="display: flex; gap: 10px; margin-top: 18px;">
+          <button class="boton" id="relojIniciar">Iniciar</button>
+          <button class="boton sec" id="relojReiniciar">Reiniciar</button>
+        </div>
+      </div>
+      <img src="../assets/uifcito/neutral.png" alt="UIFCITO" style="width: 340px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas"><b>Pausa (1:05–1:15).</b> Aprovecha para ayudar a quien no pudo entrar a Colab.</aside>
+  </section>
+
+  <!-- ===================== SECCIÓN 3 · VARIABLES ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>3</span></div>
+    <div class="textos">
+      <h2>Variables y tipos de datos</h2>
+      <p>Guardar información para usarla después</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Concepto + live coding (1:15–1:35).</b> Variables, tipos y operaciones.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">¿Qué es una variable?</h2>
+      <p style="margin-top: 12px; width: 800px;">Una <strong>caja con etiqueta</strong>: guarda un dato y lo puedes usar por su nombre.</p>
+      <div class="cajas">
+        <div class="caja"><div class="nombre">nombre</div><div class="valor">"Ana"</div></div>
+        <div class="caja"><div class="nombre">edad</div><div class="valor">20</div></div>
+        <div class="caja"><div class="nombre">estatura</div><div class="valor">1.65</div></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 330px 1fr; gap: 24px; align-items: center; margin-top: 26px; width: 820px;">
+<pre class="code"><span class="n">edad</span> <span class="o">=</span> <span class="n">20</span></pre>
+        <p style="font-size: 24px;">Se lee: <strong>“guarda 20 en edad”</strong>.<br>El <code class="inline">=</code> no es la igualdad de matemáticas.</p>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/explicando.png" alt="UIFCITO explicando" style="right: 70px; top: 110px; height: 420px; transform: scaleX(-1); animation: none;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Prueba en vivo <code>edad = edad + 1</code> y pregunta: “¿en matemáticas esto tiene sentido?”. En Python sí: toma la edad actual, súmale 1 y guárdalo de nuevo en <code>edad</code>.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Tipos de datos básicos</h2>
+      <p class="subtitulo">Cada dato tiene un tipo, y el tipo define qué puedes hacer con él</p>
+      <div class="tipos">
+        <div class="tipo"><code>str</code><h3>Texto</h3><p>Siempre entre comillas.</p><span class="ej">"Ana"</span></div>
+        <div class="tipo"><code>int</code><h3>Entero</h3><p>Números sin decimales.</p><span class="ej">20</span></div>
+        <div class="tipo"><code>float</code><h3>Decimal</h3><p>Con punto, no con coma.</p><span class="ej">1.65</span></div>
+        <div class="tipo"><code>bool</code><h3>Verdadero / falso</h3><p>Con mayúscula inicial.</p><span class="ej">True</span></div>
+      </div>
+      <div class="grid2" style="margin-top: 22px; grid-template-columns: 1.35fr 1fr;">
+<pre class="code"><span class="n">nombre</span> <span class="o">=</span> <span class="s">"Ana"</span>
+<span class="n">edad</span> <span class="o">=</span> <span class="n">20</span>
+<span class="f">print</span>(nombre, <span class="s">"tiene"</span>, edad, <span class="s">"años"</span>)
+<span class="f">print</span>(<span class="f">type</span>(<span class="n">1.65</span>))</pre>
+<pre class="code" style="border-left-color: var(--gris-azul);"><span class="c"># Salida</span>
+Ana tiene 20 años
+&lt;class 'float'&gt;</pre>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Insiste en dos trampas típicas: el decimal se escribe con punto (1.65, no 1,65) y <code>True</code>/<code>False</code> van con mayúscula. <code>type()</code> es la herramienta para salir de dudas.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">¿Cómo nombrar una variable?</h2>
+      <div style="display: grid; grid-template-columns: 600px 1fr; gap: 40px; margin-top: 18px;">
+        <table class="tabla">
+          <tr><th>Nombre</th><th>¿Sirve?</th></tr>
+          <tr><td>edad</td><td><span class="ok">Sí</span></td></tr>
+          <tr><td>nota_final</td><td><span class="ok">Sí</span> · usa guion bajo</td></tr>
+          <tr><td>edad2</td><td><span class="ok">Sí</span></td></tr>
+          <tr class="ojo"><td>2edad</td><td><span class="no">No</span> · empieza con número</td></tr>
+          <tr class="ojo"><td>nota final</td><td><span class="no">No</span> · tiene espacio</td></tr>
+          <tr class="ojo"><td>nota-final</td><td><span class="no">No</span> · Python ve una resta</td></tr>
+        </table>
+        <div>
+          <ul class="lista" style="margin-top: 36px;">
+            <li>Usa nombres que <strong>digan qué guardan</strong>.</li>
+            <li><code class="inline">Edad</code> y <code class="inline">edad</code> son <strong>variables distintas</strong>.</li>
+            <li>Evita tildes y la ñ en los nombres.</li>
+          </ul>
+          <img src="../assets/uifcito/neutral.png" alt="UIFCITO" style="height: 210px; margin: 30px 0 0 150px;">
+        </div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">No hace falta memorizar reglas: si el nombre no sirve, Python avisa con un error. Lo importante es elegir nombres claros: <code>total_compra</code> es mejor que <code>x</code>.</aside>
+  </section>
+
+  <!-- ===================== SECCIÓN 4 · OPERACIONES ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>4</span></div>
+    <div class="textos">
+      <h2>Operaciones</h2>
+      <p>El computador como calculadora</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas">Bloque corto: lo importante es que vean que las variables se pueden combinar en cálculos.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Operadores aritméticos</h2>
+      <div style="display: grid; grid-template-columns: 640px 1fr; gap: 40px; margin-top: 18px; align-items: start;">
+        <table class="tabla">
+          <tr><th>Símbolo</th><th>Operación</th><th>Ejemplo</th><th>Resultado</th></tr>
+          <tr><td>+</td><td>Suma</td><td><code>7 + 2</code></td><td>9</td></tr>
+          <tr><td>-</td><td>Resta</td><td><code>7 - 2</code></td><td>5</td></tr>
+          <tr><td>*</td><td>Multiplicación</td><td><code>7 * 2</code></td><td>14</td></tr>
+          <tr><td>/</td><td>División</td><td><code>7 / 2</code></td><td>3.5</td></tr>
+          <tr class="ojo"><td>//</td><td>División entera</td><td><code>7 // 2</code></td><td>3</td></tr>
+          <tr class="ojo"><td>%</td><td>Residuo</td><td><code>7 % 2</code></td><td>1</td></tr>
+          <tr class="ojo"><td>**</td><td>Potencia</td><td><code>7 ** 2</code></td><td>49</td></tr>
+        </table>
+        <div>
+          <p style="font-size: 23px; margin-top: 40px;">Los cuatro primeros ya los conoces.</p>
+          <p style="font-size: 23px; margin-top: 14px;">Los <strong>resaltados</strong> son los nuevos: <code class="inline">%</code> sirve, por ejemplo, para saber si un número es par.</p>
+          <img src="../assets/uifcito/presentando.png" alt="UIFCITO señalando" style="width: 230px; margin-top: 20px; transform: scaleX(-1);">
+        </div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Pregunta: si <code>7 % 2</code> da 1, ¿cuánto da <code>8 % 2</code>? Este truco del par/impar lo usan en la sesión 2 con condicionales.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Ejemplo: el total de una compra</h2>
+      <div style="width: 760px; margin-top: 24px;">
+<pre class="code"><span class="n">precio</span> <span class="o">=</span> <span class="n">12000</span>
+<span class="n">cantidad</span> <span class="o">=</span> <span class="n">3</span>
+<span class="n">total</span> <span class="o">=</span> precio <span class="o">*</span> cantidad
+<span class="f">print</span>(<span class="s">"Total a pagar:"</span>, total)</pre>
+<pre class="code" style="margin-top: 12px; border-left-color: var(--gris-azul);"><span class="c"># Salida</span>
+Total a pagar: 36000</pre>
+      </div>
+      <ul class="lista" style="width: 760px;">
+        <li>Las variables se combinan en cálculos y el resultado se guarda en otra variable.</li>
+        <li>Si cambias <code class="inline">precio</code> y vuelves a ejecutar, el total se actualiza solo.</li>
+      </ul>
+      <div class="dialogo" style="right: 64px; top: 120px; width: 380px; height: 200px; font-size: 25px;">¿Y si ahora hay que sumar el IVA del 19 %?</div>
+      <img class="uifcito" src="../assets/uifcito/pensando.png" alt="UIFCITO pensando" style="right: 120px; top: 330px; height: 250px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">No resuelvas lo del IVA: es el ejercicio 3. Deja la pregunta en el aire para que la retomen en la práctica.</aside>
+  </section>
+
+  <!-- ===================== SECCIÓN 5 · ERRORES ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>5</span></div>
+    <div class="textos">
+      <h2>Leer errores sin miedo</h2>
+      <p>El computador te está diciendo dónde mirar</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas">Provoca los errores a propósito, en vivo. Que vean que a ti también te pasa y que no se rompe nada.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Anatomía de un mensaje de error</h2>
+      <div style="display: grid; grid-template-columns: 720px 1fr; gap: 36px; margin-top: 24px; align-items: start;">
+<pre class="code" style="font-size: 19px;"><span class="err">NameError</span>      Traceback (most recent call last)<span class="marca">2</span>
+<span class="o">----&gt; 1</span> <span class="f">print</span>(Hola)<span class="marca">1</span>
+
+<span class="err">NameError</span>: name 'Hola' is not defined<span class="marca">3</span></pre>
+        <ol class="leyenda">
+          <li><span class="marca">1</span><span><strong>Dónde:</strong> la flecha marca la línea que falló.</span></li>
+          <li><span class="marca">2</span><span><strong>Qué tipo</strong> de error es.</span></li>
+          <li><span class="marca">3</span><span><strong>Por qué:</strong> la explicación, en la última línea.</span></li>
+        </ol>
+      </div>
+      <div class="dialogo" style="left: 64px; top: 330px; width: 620px; height: 150px; font-size: 25px;">Empieza siempre por la última línea: ahí está la pista principal.</div>
+      <img class="uifcito" src="../assets/uifcito/alerta2.png" alt="UIFCITO con señal de alerta" style="right: 90px; top: 300px; width: 300px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Muestra cómo leer el error de abajo hacia arriba. “Hola is not defined” significa que Python buscó una variable llamada Hola y no la encontró: faltaban las comillas.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Los tres errores más comunes</h2>
+      <div class="errores">
+        <div class="error"><h3>NameError</h3><div class="cuerpo">
+<pre>print(Hola)
+<span class="err">NameError: name 'Hola'
+is not defined</span></pre>
+          <p>Faltan las comillas: Python cree que <b>Hola</b> es una variable.</p>
+          <div class="arreglo"><pre>print("Hola")</pre></div></div></div>
+        <div class="error"><h3>SyntaxError</h3><div class="cuerpo">
+<pre>print("Hola"
+<span class="err">SyntaxError: '(' was
+never closed</span></pre>
+          <p>Algo está mal escrito: aquí falta cerrar el paréntesis.</p>
+          <div class="arreglo"><pre>print("Hola")</pre></div></div></div>
+        <div class="error"><h3>TypeError</h3><div class="cuerpo">
+<pre>edad = "20"
+edad + 1
+<span class="err">TypeError: can only
+concatenate str (not "int")
+to str</span></pre>
+          <p>No se puede sumar texto con número.</p>
+          <div class="arreglo"><pre>int(edad) + 1</pre></div></div></div>
+      </div>
+      <p style="margin-top: 24px; font-size: 24px;">Antes de arreglar: <strong>lee la última línea y adivina la causa.</strong> El recuadro verde es la versión corregida.</p>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Haz los tres en vivo, uno por uno. Antes de arreglarlos, pide al grupo que lea la última línea y proponga la solución. El recuadro verde es la versión corregida.</aside>
+  </section>
+
+  <!-- ===================== SECCIÓN 6 · EJERCICIOS ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>6</span></div>
+    <div class="textos">
+      <h2>¡A practicar!</h2>
+      <p>Ejercicios en tres niveles</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Práctica autónoma (1:35–1:50).</b></aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Ejercicios</h2>
+      <p class="subtitulo">Avanza hasta donde llegues</p>
+      <div class="niveles">
+        <div class="nivel-card"><header style="background: var(--uifce);">Básico <small>Todos</small></header>
+          <ol start="1">
+            <li>Crea variables con tu nombre, tu carrera y tu semestre, e imprímelas en una frase.</li>
+            <li>Calcula cuántos minutos tiene una semana.</li>
+          </ol></div>
+        <div class="nivel-card"><header style="background: var(--azul-2);">Intermedio</header>
+          <ol start="3">
+            <li>Una compra tiene 3 productos con precios distintos. Calcula el total y el total con IVA del 19 %.</li>
+            <li>Usa <code class="inline">type()</code> para verificar el tipo de cada variable que creaste.</li>
+          </ol></div>
+        <div class="nivel-card"><header style="background: var(--azul);">Reto</header>
+          <ol start="5">
+            <li>Convierte grados Celsius a Fahrenheit: <code class="inline">F = C * 9/5 + 32</code>. Muestra el resultado con un mensaje claro.</li>
+            <li>Usa <code class="inline">input()</code> para pedir el nombre del usuario y saludarlo. ¿Qué tipo de dato devuelve?</li>
+          </ol></div>
+      </div>
+      <div class="dialogo" style="left: 64px; top: 470px; width: 560px; height: 116px; font-size: 23px; padding: 26px 40px 30px 42px;">¿Terminaste? Ayuda a tu pareja o pasa al siguiente nivel.</div>
+      <img class="uifcito" src="../assets/uifcito/presentando.png" alt="UIFCITO señalando" style="left: 640px; top: 452px; height: 150px; transform: scaleX(-1); animation: none;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Todos hacen el básico. Fíjate en quién avanza rápido al reto: serán buenos apoyos en las próximas prácticas. Pista para el 6: <code>input()</code> siempre devuelve texto (<code>str</code>).</aside>
+  </section>
+
+  <!-- ===================== CIERRE DE LA SESIÓN ===================== -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Tres ideas clave de hoy</h2>
+      <ol class="ideas">
+        <li><span>Un programa es una lista de instrucciones que <strong>se ejecuta en orden</strong>.</span></li>
+        <li><span>Las variables <strong>guardan datos</strong>, y cada dato <strong>tiene un tipo</strong>.</span></li>
+        <li><span>Los errores son pistas: <strong>leerlos es parte de programar</strong>.</span></li>
+      </ol>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; width: 760px; margin-top: 4px;">
+        <div class="card" style="padding: 14px 20px;"><h3 style="font-size: 21px;">Tarea corta</h3><p style="font-size: 18px;">Terminar los ejercicios básicos e intermedios que no alcanzaron.</p></div>
+        <div class="card" style="padding: 14px 20px;"><h3 style="font-size: 21px;">Nivelación</h3><p style="font-size: 18px;">Notebook resuelto paso a paso con todos los ejemplos de hoy.</p></div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/feliz.png" alt="UIFCITO feliz" style="right: 90px; top: 100px; height: 430px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas"><b>Cierre (1:50–2:00).</b> Retoma la pregunta del inicio: ¿qué les gustaría automatizar? Adelanto de la sesión 2: los programas que toman decisiones.</aside>
+  </section>
+
+  <section class="slide final">
+    <div class="fondo"></div>
+    <img class="logo" src="../assets/img/logo_uifce_blanco.png" alt="UIFCE · Unidad de Informática">
+    <div class="textos">
+      <h2>¡Gracias!</h2>
+      <p>Próxima sesión: <b style="color: var(--gris-claro);">Condicionales</b>. ¿Y si el programa pudiera tomar decisiones?</p>
+      <div class="contacto"><i>Correo:</i> uniic_bog@unal.edu.co<br><i>Tel:</i> 3165000 &nbsp; <i>Ext:</i> 12301</div>
+    </div>
+    <img class="uifcito" src="../assets/uifcito/cierre.png" alt="UIFCITO despidiéndose" style="right: 110px; top: 70px; height: 470px;">
+    <div class="franja" role="img" aria-label="Facultad de Ciencias Económicas, Unidad de Informática, Sede Bogotá · Universidad Nacional de Colombia"></div>
+    <aside class="notas">Recuerda la tarea corta y comparte el enlace del notebook de nivelación.</aside>
+  </section>
+</main>
+</div>
+
+<div id="panelNotas"></div>
+<div class="controles">
+  <button id="prev" aria-label="Diapositiva anterior">←</button>
+  <button id="next" aria-label="Diapositiva siguiente">→</button>
+  <button id="btnNotas" title="Notas del monitor (N)">Notas</button>
+  <button id="btnFull" title="Pantalla completa (F)">⛶</button>
+</div>
+
+<script src="../assets/deck.js"></script>
+</body>
+</html>

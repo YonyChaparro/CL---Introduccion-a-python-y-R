@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 2: Condicionales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/uifce.css">
+</head>
+<body>
+<div class="viewport">
+<main class="deck" id="deck">
+  <div class="progreso" id="progreso"></div>
+
+  <!-- Portada -->
+  <section class="slide portada">
+    <div class="bloque-azul"></div>
+    <img class="uifcito" src="../assets/uifcito/saludo.png" alt="UIFCITO saludando" style="right: 330px; top: 46px; width: 380px;">
+    <div class="textos">
+      <div class="curso">Introducción a Python y R · Sesión 2</div>
+      <h1>Tomar decisiones</h1>
+      <div class="monitor">Nombre del monitor(a)</div>
+      <div class="rol">Estudiante Auxiliar</div>
+    </div>
+    <div class="panel">
+      <img class="logo" src="../assets/img/logo_uifce.png" alt="UIFCE · Unidad de Informática">
+      <div class="dato" style="top: 196px;"><b>Curso:</b><span>Introducción a Python y R</span></div>
+      <div class="dato" style="top: 300px;"><b>Sesión 2:</b><span>Condicionales y lógica</span></div>
+    </div>
+    <div class="contacto">
+      <i>Correo:</i> <a href="mailto:uniic_bog@unal.edu.co">uniic_bog@unal.edu.co</a><br>
+      <i>Tel:</i> 3165000 &nbsp; <i>Ext:</i> 12301
+    </div>
+    <div class="franja" role="img" aria-label="Facultad de Ciencias Económicas, Unidad de Informática, Sede Bogotá · Universidad Nacional de Colombia"></div>
+    <aside class="notas">Sesión 2: los programas empiezan a tomar decisiones. Ten listo el tablero: los diagramas de flujo ayudan mucho a quienes vienen de carreras no técnicas.</aside>
+  </section>
+
+  <!-- Agenda -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Contenido</h2>
+      <p class="subtitulo">Sesión 2 · Python en Google Colab</p>
+      <div class="agenda">
+        <div class="item"><div class="circulo">1</div><div><h3>Repaso activo</h3></div></div>
+        <div class="item"><div class="circulo">2</div><div><h3>Comparaciones</h3></div></div>
+        <div class="item"><div class="circulo">3</div><div><h3>if / else e indentación</h3></div></div>
+        <div class="item"><div class="circulo">4</div><div><h3>elif: varias opciones</h3></div></div>
+        <div class="item"><div class="circulo">5</div><div><h3>and, or, not</h3></div></div>
+        <div class="item"><div class="circulo">6</div><div><h3>¡A practicar!</h3></div></div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Mapa de la sesión. Pausa de 10 minutos a la 1:05, después de la práctica en parejas.</aside>
+  </section>
+
+  <!-- ===================== 1 · REPASO ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>1</span></div>
+    <div class="textos">
+      <h2>Repaso activo</h2>
+      <p>Lo que vimos en la sesión 1</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Repaso activo (0:00–0:15).</b> Que respondan ellos, no tú.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Tres preguntas rápidas</h2>
+      <p class="subtitulo">Piénsalo, respóndelo en voz alta y luego revisamos</p>
+      <div class="repaso" style="width: 860px;">
+        <div class="pregunta">
+          <div class="q">¿Qué tipo de dato es <code class="inline">"25"</code>?</div>
+          <div class="pista">Clic para ver la respuesta</div>
+          <div class="respuesta"><b>str</b> (texto). Las comillas lo convierten en texto, aunque parezca un número.</div>
+        </div>
+        <div class="pregunta">
+          <div class="q">¿Qué hace el <code class="inline">=</code>?</div>
+          <div class="pista">Clic para ver la respuesta</div>
+          <div class="respuesta"><b>Guarda</b> un valor en una variable. No es la igualdad de matemáticas.</div>
+        </div>
+        <div class="pregunta">
+          <div class="q">¿Qué error da <code class="inline">print(Hola)</code>?</div>
+          <div class="pista">Clic para ver la respuesta</div>
+          <div class="respuesta"><b>NameError</b>: faltan las comillas, así que Python busca una variable llamada Hola.</div>
+        </div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/pensando.png" alt="UIFCITO pensando" style="right: 70px; top: 130px; height: 400px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Haz clic en cada tarjeta para mostrar la respuesta solo después de escuchar al grupo. La pregunta 1 prepara el tema de hoy: <code>input()</code> devuelve texto y hay que convertirlo.</aside>
+  </section>
+
+  <!-- ===================== 2 · COMPARACIONES ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>2</span></div>
+    <div class="textos">
+      <h2>Comparaciones</h2>
+      <p>Preguntas que se responden con sí o no</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Concepto + live coding (0:15–0:45).</b> Comparaciones, primer <code>if</code> e indentación.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Una comparación da True o False</h2>
+      <div style="display: grid; grid-template-columns: 660px 1fr; gap: 40px; margin-top: 18px; align-items: start;">
+        <table class="tabla">
+          <tr><th>Símbolo</th><th>Pregunta</th><th>Con <code>nota = 3.5</code></th></tr>
+          <tr><td>==</td><td>¿Es igual?</td><td><code>nota == 5</code> → <span class="no">False</span></td></tr>
+          <tr><td>!=</td><td>¿Es distinto?</td><td><code>nota != 5</code> → <span class="ok">True</span></td></tr>
+          <tr><td>&gt;</td><td>¿Es mayor?</td><td><code>nota &gt; 4</code> → <span class="no">False</span></td></tr>
+          <tr><td>&lt;</td><td>¿Es menor?</td><td><code>nota &lt; 4</code> → <span class="ok">True</span></td></tr>
+          <tr><td>&gt;=</td><td>¿Mayor o igual?</td><td><code>nota &gt;= 3.0</code> → <span class="ok">True</span></td></tr>
+          <tr><td>&lt;=</td><td>¿Menor o igual?</td><td><code>nota &lt;= 3.5</code> → <span class="ok">True</span></td></tr>
+        </table>
+        <div>
+          <p style="font-size: 23px; margin-top: 30px;">El resultado es siempre un <strong>bool</strong>: <code class="inline">True</code> o <code class="inline">False</code>.</p>
+          <p style="font-size: 23px; margin-top: 14px;">Ojo: <code class="inline">&gt;=</code> se escribe en ese orden, nunca <code class="inline">=&gt;</code>.</p>
+          <img src="../assets/uifcito/explicando.png" alt="UIFCITO explicando" style="height: 210px; margin: 16px 0 0 90px;">
+        </div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Escríbelas en vivo con <code>print(nota &gt;= 3.0)</code>. Que el grupo prediga True o False antes de ejecutar cada una.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo"><code style="font-size: .85em;">=</code> guarda, <code style="font-size: .85em;">==</code> compara</h2>
+      <div class="versus" style="width: 820px;">
+        <div class="lado">
+          <h3><code>=</code> asigna</h3>
+          <p>“Guarda 3.5 en nota”</p>
+<pre class="code"><span class="n">nota</span> <span class="o">=</span> <span class="n">3.5</span></pre>
+        </div>
+        <div class="lado">
+          <h3><code>==</code> pregunta</h3>
+          <p>“¿nota es igual a 3.5?”</p>
+<pre class="code"><span class="f">print</span>(nota <span class="o">==</span> <span class="n">3.5</span>)  <span class="c"># True</span></pre>
+        </div>
+      </div>
+<pre class="code" style="width: 820px; margin-top: 26px;"><span class="n">nota</span> <span class="o">=</span> <span class="n">3.5</span>
+<span class="f">print</span>(nota <span class="o">&gt;=</span> <span class="n">3.0</span>)   <span class="c"># True</span>
+<span class="f">print</span>(nota <span class="o">==</span> <span class="n">5</span>)     <span class="c"># False</span></pre>
+      <img class="uifcito" src="../assets/uifcito/alerta1.png" alt="UIFCITO alerta" style="right: 56px; top: 150px; width: 330px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Es la confusión más común de la sesión. Si alguien escribe <code>if nota = 3:</code>, Python responde con un SyntaxError: aprovecha para mostrarlo.</aside>
+  </section>
+
+  <!-- ===================== 3 · IF / ELSE ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>3</span></div>
+    <div class="textos">
+      <h2>if / else</h2>
+      <p>Tomar un camino u otro</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas">Dibuja el diagrama de flujo en el tablero mientras lo explicas.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Un programa que decide</h2>
+      <div style="display: grid; grid-template-columns: 520px 1fr; gap: 50px; margin-top: 16px; align-items: center;">
+        <svg class="diagrama" viewBox="0 0 520 400" width="520" height="400" role="img" aria-label="Diagrama de flujo: si la nota es mayor o igual a 3.0 imprime Aprobó, si no imprime Reprobó">
+          <defs>
+            <marker id="fl1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#A5B7C5"/></marker>
+            <marker id="fl1a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#2A7FFF"/></marker>
+          </defs>
+          <rect class="inicio" x="185" y="8" width="150" height="46" rx="23"/><text class="claro" x="260" y="37" text-anchor="middle">nota = 2.8</text>
+          <path class="linea activo" d="M260 54V88" marker-end="url(#fl1a)"/>
+          <polygon class="rombo" points="260,92 375,150 260,208 145,150"/>
+          <text x="260" y="156" text-anchor="middle">nota &gt;= 3.0</text>
+          <path class="linea" d="M145 150H90V246" marker-end="url(#fl1)"/>
+          <text class="etq" x="112" y="140">Sí</text>
+          <path class="linea activo" d="M375 150H430V246" marker-end="url(#fl1a)"/>
+          <text class="etq" x="392" y="140" style="fill: var(--uifce);">No</text>
+          <rect class="caja-f" x="10" y="250" width="160" height="52" rx="10"/><text x="90" y="282" text-anchor="middle">"Aprobó"</text>
+          <rect class="caja-f activo" x="350" y="250" width="160" height="52" rx="10"/><text x="430" y="282" text-anchor="middle">"Reprobó"</text>
+          <path class="linea" d="M90 302V340H252"/>
+          <path class="linea activo" d="M430 302V340H268"/>
+          <path class="linea activo" d="M260 340V350" marker-end="url(#fl1a)"/>
+          <rect class="inicio" x="210" y="352" width="100" height="40" rx="20"/><text class="claro" x="260" y="378" text-anchor="middle">Fin</text>
+        </svg>
+        <div>
+<pre class="code"><span class="n">nota</span> <span class="o">=</span> <span class="n">2.8</span>
+<span class="k">if</span> nota <span class="o">&gt;=</span> <span class="n">3.0</span>:
+    <span class="f">print</span>(<span class="s">"Aprobó"</span>)
+<span class="k">else</span>:
+    <span class="f">print</span>(<span class="s">"Reprobó"</span>)</pre>
+          <p style="margin-top: 18px; font-size: 23px;">Como 2.8 no es mayor o igual a 3.0, la condición da <code class="inline">False</code> y el programa toma el camino del <strong>else</strong>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">El camino resaltado en azul es el que recorre el programa con nota = 2.8. Cambia el valor a 3.5 en vivo y pregunta qué camino toma ahora.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Anatomía de un if</h2>
+      <div style="display: grid; grid-template-columns: 560px 1fr; gap: 40px; margin-top: 26px; align-items: start;">
+<pre class="code" style="font-size: 26px; line-height: 1.7;"><span class="k">if</span><span class="marca">1</span> nota <span class="o">&gt;=</span> <span class="n">3.0</span><span class="marca">2</span>:<span class="marca">3</span>
+<span style="background: rgba(69,212,255,.18);">    </span><span class="f">print</span>(<span class="s">"Aprobó"</span>)<span class="marca">4</span>
+<span class="k">else</span>:
+<span style="background: rgba(69,212,255,.18);">    </span><span class="f">print</span>(<span class="s">"Reprobó"</span>)</pre>
+        <ol class="leyenda">
+          <li><span class="marca">1</span><span>La palabra <strong>if</strong> (“si”, en inglés).</span></li>
+          <li><span class="marca">2</span><span>La <strong>condición</strong>: algo que da True o False.</span></li>
+          <li><span class="marca">3</span><span>Los <strong>dos puntos</strong>. Se olvidan mucho.</span></li>
+          <li><span class="marca">4</span><span>La <strong>indentación</strong>: 4 espacios que marcan qué va dentro del if.</span></li>
+        </ol>
+      </div>
+      <div class="dialogo" style="left: 64px; top: 410px; width: 640px; height: 146px; font-size: 25px;">Lo que va dentro del if se corre solo si la condición es verdadera.</div>
+      <img class="uifcito" src="../assets/uifcito/presentando.png" alt="UIFCITO señalando" style="right: 120px; top: 380px; height: 200px; transform: scaleX(-1); animation: none;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Muestra el olvido de los dos puntos <i>antes</i> de que ocurra: es el error más frecuente de la sesión. En Colab, la tecla Tab inserta los 4 espacios.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">La indentación no es decoración</h2>
+      <div class="errores">
+        <div class="error"><h3>Sin indentación</h3><div class="cuerpo">
+<pre>if nota &gt;= 3.0:
+print("Aprobó")
+<span class="err">IndentationError:
+expected an indented
+block after 'if'</span></pre>
+          <p>Python no sabe qué va dentro del if.</p>
+          <div class="arreglo"><pre>if nota &gt;= 3.0:
+    print("Aprobó")</pre></div></div></div>
+        <div class="error"><h3>Sin dos puntos</h3><div class="cuerpo">
+<pre>if nota &gt;= 3.0
+    print("Aprobó")
+<span class="err">SyntaxError:
+expected ':'</span></pre>
+          <p>Al if le faltan los <b>:</b> al final.</p>
+          <div class="arreglo"><pre>if nota &gt;= 3.0:
+    print("Aprobó")</pre></div></div></div>
+        <div class="error"><h3>¿Dentro o fuera?</h3><div class="cuerpo">
+<pre>if nota &gt;= 3.0:
+    print("Aprobó")
+print("Fin")</pre>
+          <p>No da error: <b>"Fin"</b> está fuera del if, así que se imprime siempre.</p>
+          <p style="margin-top: auto;">La sangría define la <b>estructura</b> del programa.</p></div></div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Provoca el IndentationError en vivo. La tercera tarjeta es la más importante: no hay error, pero el resultado cambia según dónde quede la línea.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Práctica en parejas</h2>
+      <p class="subtitulo">¿Aprueba o reprueba?</p>
+      <div class="actividad" style="width: 700px; margin-top: 24px;">
+        <span class="etiqueta">Reto</span>
+        <p>Escribe un programa que diga si una nota <b>aprueba</b> (mayor o igual a 3.0) o <b>reprueba</b>. Completa los espacios:</p>
+      </div>
+<pre class="code" style="width: 700px; margin-top: 18px;"><span class="n">nota</span> <span class="o">=</span> <span class="n">3.2</span>
+<span class="k">if</span> <span class="o">______</span>:
+    <span class="f">print</span>(<span class="o">______</span>)
+<span class="k">else</span>:
+    <span class="f">print</span>(<span class="o">______</span>)</pre>
+      <p style="margin-top: 16px; font-size: 22px; width: 700px;"><strong>Bonus:</strong> pruébalo con 3.0 exacto. ¿Aprueba? ¿Por qué?</p>
+      <img class="uifcito" src="../assets/uifcito/feliz.png" alt="UIFCITO feliz" style="right: 90px; top: 110px; height: 430px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas"><b>Práctica guiada (0:45–1:05).</b> Usa los papelitos verde y rojo como en la sesión 1. El bonus revisa la diferencia entre <code>&gt;</code> y <code>&gt;=</code>.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content" style="display: grid; grid-template-columns: 1fr 380px; align-items: center;">
+      <div>
+        <h2 class="titulo">Pausa</h2>
+        <p class="subtitulo">Estírate y toma agua.</p>
+        <div class="reloj" id="reloj">10:00</div>
+        <div style="display: flex; gap: 10px; margin-top: 18px;">
+          <button class="boton" id="relojIniciar">Iniciar</button>
+          <button class="boton sec" id="relojReiniciar">Reiniciar</button>
+        </div>
+      </div>
+      <img src="../assets/uifcito/neutral.png" alt="UIFCITO" style="width: 340px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas"><b>Pausa (1:05–1:15).</b></aside>
+  </section>
+
+  <!-- ===================== 4 · ELIF ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>4</span></div>
+    <div class="textos">
+      <h2>elif</h2>
+      <p>Cuando hay más de dos caminos</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Concepto + live coding (1:15–1:30).</b> <code>elif</code> y condiciones combinadas.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Varias opciones con elif</h2>
+      <div style="display: grid; grid-template-columns: 560px 1fr; gap: 40px; margin-top: 12px; align-items: center;">
+        <svg class="diagrama" viewBox="0 0 560 430" width="560" height="430" role="img" aria-label="Diagrama de flujo: si la nota es mayor o igual a 4.5 imprime Excelente; si no, si es mayor o igual a 3.0 imprime Aprobó; si no, imprime Reprobó">
+          <defs>
+            <marker id="fl2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#A5B7C5"/></marker>
+            <marker id="fl2a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#2A7FFF"/></marker>
+          </defs>
+          <rect class="inicio" x="125" y="6" width="150" height="44" rx="22"/><text class="claro" x="200" y="34" text-anchor="middle">nota = 4.6</text>
+          <path class="linea activo" d="M200 50V76" marker-end="url(#fl2a)"/>
+          <polygon class="rombo" points="200,80 320,132 200,184 80,132"/>
+          <text x="200" y="138" text-anchor="middle">nota &gt;= 4.5</text>
+          <path class="linea activo" d="M320 132H376" marker-end="url(#fl2a)"/>
+          <text class="etq" x="334" y="122" style="fill: var(--uifce);">Sí</text>
+          <rect class="caja-f activo" x="380" y="107" width="170" height="50" rx="10"/><text x="465" y="138" text-anchor="middle">"Excelente"</text>
+          <path class="linea" d="M200 184V222" marker-end="url(#fl2)"/>
+          <text class="etq" x="210" y="208">No</text>
+          <polygon class="rombo" points="200,226 320,278 200,330 80,278"/>
+          <text x="200" y="284" text-anchor="middle">nota &gt;= 3.0</text>
+          <path class="linea" d="M320 278H376" marker-end="url(#fl2)"/>
+          <text class="etq" x="334" y="268">Sí</text>
+          <rect class="caja-f" x="380" y="253" width="170" height="50" rx="10"/><text x="465" y="284" text-anchor="middle">"Aprobó"</text>
+          <path class="linea" d="M200 330V366" marker-end="url(#fl2)"/>
+          <text class="etq" x="210" y="354">No</text>
+          <rect class="caja-f" x="115" y="370" width="170" height="50" rx="10"/><text x="200" y="401" text-anchor="middle">"Reprobó"</text>
+        </svg>
+        <div>
+<pre class="code" style="font-size: 21px;"><span class="n">nota</span> <span class="o">=</span> <span class="n">4.6</span>
+<span class="k">if</span> nota <span class="o">&gt;=</span> <span class="n">4.5</span>:
+    <span class="f">print</span>(<span class="s">"Excelente"</span>)
+<span class="k">elif</span> nota <span class="o">&gt;=</span> <span class="n">3.0</span>:
+    <span class="f">print</span>(<span class="s">"Aprobó"</span>)
+<span class="k">else</span>:
+    <span class="f">print</span>(<span class="s">"Reprobó"</span>)</pre>
+          <p style="margin-top: 16px; font-size: 22px;">Python revisa las condiciones <strong>en orden</strong> y se detiene en la <strong>primera verdadera</strong>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas"><code>elif</code> es la abreviatura de “else if”: “si no, entonces si…”. Puede haber tantos <code>elif</code> como se necesiten, pero un solo <code>else</code> al final.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">El orden importa</h2>
+      <p class="subtitulo">Con nota = 4.6, ¿qué imprime este programa?</p>
+<pre class="code" style="width: 680px; margin-top: 22px;"><span class="k">if</span> nota <span class="o">&gt;=</span> <span class="n">3.0</span>:
+    <span class="f">print</span>(<span class="s">"Aprobó"</span>)
+<span class="k">elif</span> nota <span class="o">&gt;=</span> <span class="n">4.5</span>:
+    <span class="f">print</span>(<span class="s">"Excelente"</span>)</pre>
+      <div class="pregunta" style="width: 680px; min-height: 0; margin-top: 20px;">
+        <div class="q" style="font-size: 23px;">¿“Aprobó” o “Excelente”?</div>
+        <div class="pista" style="margin-top: 6px;">Clic para ver la respuesta</div>
+        <div class="respuesta" style="margin-top: 10px;">Imprime <b>“Aprobó”</b>. La primera condición ya es verdadera, así que Python nunca llega a revisar el elif. Las condiciones más exigentes van primero.</div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/pensando.png" alt="UIFCITO pensando" style="right: 90px; top: 110px; height: 420px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Deja que voten antes de revelar. Es un error lógico: no hay mensaje de error, pero el resultado está mal. Esos son los más difíciles de encontrar.</aside>
+  </section>
+
+  <!-- ===================== 5 · AND / OR / NOT ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>5</span></div>
+    <div class="textos">
+      <h2>and, or, not</h2>
+      <p>Combinar condiciones</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas">Bloque corto. Usa ejemplos de la vida diaria antes del código.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Condiciones combinadas</h2>
+      <div class="tipos" style="grid-template-columns: repeat(3, 1fr); width: 860px;">
+        <div class="tipo"><code>and</code><h3>“y”</h3><p>True solo si <b>las dos</b> condiciones son verdaderas.</p></div>
+        <div class="tipo"><code>or</code><h3>“o”</h3><p>True si <b>al menos una</b> es verdadera.</p></div>
+        <div class="tipo"><code>not</code><h3>“no”</h3><p><b>Invierte</b> el valor: True pasa a False.</p></div>
+      </div>
+<pre class="code" style="width: 860px; margin-top: 22px;"><span class="n">edad</span> <span class="o">=</span> <span class="n">20</span>
+<span class="n">tiene_documento</span> <span class="o">=</span> <span class="k">True</span>
+<span class="k">if</span> edad <span class="o">&gt;=</span> <span class="n">18</span> <span class="k">and</span> tiene_documento:
+    <span class="f">print</span>(<span class="s">"Puede votar"</span>)</pre>
+      <img class="uifcito" src="../assets/uifcito/explicando.png" alt="UIFCITO explicando" style="right: 60px; top: 150px; height: 360px; transform: scaleX(-1); animation: none;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Pregunta: ¿qué pasa si cambiamos <code>and</code> por <code>or</code>? Con <code>or</code>, alguien de 15 años con documento podría votar.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">¿Puede votar?</h2>
+      <p class="subtitulo"><code>edad &gt;= 18 and tiene_documento</code></p>
+      <div style="display: grid; grid-template-columns: 760px 1fr; gap: 30px; margin-top: 18px; align-items: start;">
+        <table class="tabla texto">
+          <tr><th>Persona</th><th><code>edad &gt;= 18</code></th><th><code>tiene_documento</code></th><th><code>and</code></th><th><code>or</code></th></tr>
+          <tr><td>20 años, con documento</td><td><span class="ok">True</span></td><td><span class="ok">True</span></td><td><span class="ok">True</span></td><td><span class="ok">True</span></td></tr>
+          <tr><td>20 años, sin documento</td><td><span class="ok">True</span></td><td><span class="no">False</span></td><td><span class="no">False</span></td><td><span class="ok">True</span></td></tr>
+          <tr><td>15 años, con documento</td><td><span class="no">False</span></td><td><span class="ok">True</span></td><td><span class="no">False</span></td><td><span class="ok">True</span></td></tr>
+          <tr><td>15 años, sin documento</td><td><span class="no">False</span></td><td><span class="no">False</span></td><td><span class="no">False</span></td><td><span class="no">False</span></td></tr>
+        </table>
+        <img src="../assets/uifcito/feliz.png" alt="UIFCITO feliz" style="height: 260px; margin-top: 30px;">
+      </div>
+      <p style="margin-top: 14px; font-size: 23px; width: 760px;">Para votar se necesitan <strong>las dos cosas</strong>: por eso usamos <code class="inline">and</code>.</p>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Recorre la tabla fila por fila. Solo la primera persona puede votar con <code>and</code>; con <code>or</code> votarían tres de las cuatro.</aside>
+  </section>
+
+  <!-- ===================== 6 · PRÁCTICA ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>6</span></div>
+    <div class="textos">
+      <h2>¡A practicar!</h2>
+      <p>Pedir datos y tomar decisiones</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Práctica autónoma (1:30–1:50).</b> Antes, una herramienta que necesitan los ejercicios: <code>input()</code>.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Pedir datos al usuario</h2>
+      <p style="margin-top: 12px; width: 820px;"><code class="inline">input()</code> siempre devuelve <strong>texto</strong>. Para comparar con números hay que convertirlo con <code class="inline">int()</code> o <code class="inline">float()</code>.</p>
+      <div class="versus" style="width: 1150px;">
+        <div class="lado">
+          <span class="etiqueta" style="background: #B3261E;">Sin convertir</span>
+<pre class="code" style="font-size: 18px; border-left-color: #FF8A8A;"><span class="n">edad</span> <span class="o">=</span> <span class="f">input</span>(<span class="s">"¿Cuántos años tienes? "</span>)
+<span class="k">if</span> edad <span class="o">&gt;=</span> <span class="n">18</span>:
+    <span class="f">print</span>(<span class="s">"Eres mayor de edad"</span>)
+<span class="err">TypeError: '&gt;=' not supported between
+instances of 'str' and 'int'</span></pre>
+        </div>
+        <div class="lado">
+          <span class="etiqueta" style="background: #1E7B34;">Convirtiendo</span>
+<pre class="code" style="font-size: 18px; border-left-color: #6FD08C;"><span class="n">edad</span> <span class="o">=</span> <span class="f">int</span>(<span class="f">input</span>(<span class="s">"¿Cuántos años tienes? "</span>))
+<span class="k">if</span> edad <span class="o">&gt;=</span> <span class="n">18</span>:
+    <span class="f">print</span>(<span class="s">"Eres mayor de edad"</span>)</pre>
+        </div>
+      </div>
+      <p style="margin-top: 18px; font-size: 23px; width: 820px;">Usa <code class="inline">int()</code> para enteros y <code class="inline">float()</code> para decimales, como una nota de 3.5.</p>
+      <img class="uifcito" src="../assets/uifcito/alerta1.png" alt="UIFCITO alerta" style="right: 80px; top: 420px; height: 170px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Conecta con la pregunta 1 del repaso: <code>"25"</code> es texto. Muestra el TypeError en vivo y luego la versión con <code>int()</code>.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Ejercicios</h2>
+      <p class="subtitulo">Avanza hasta donde llegues</p>
+      <div class="niveles">
+        <div class="nivel-card"><header style="background: var(--uifce);">Básico <small>Todos</small></header>
+          <ol start="1">
+            <li>Pide un número y di si es positivo, negativo o cero.</li>
+            <li>Pide la nota de un estudiante y muestra “Aprobó” o “Reprobó”.</li>
+          </ol></div>
+        <div class="nivel-card"><header style="background: var(--azul-2);">Intermedio</header>
+          <ol start="3">
+            <li>Clasificador de IMC: pide peso y estatura, calcula <code class="inline">peso / estatura**2</code> y muestra la categoría.</li>
+            <li>Una tienda da 10 % de descuento si la compra supera $100.000 y 20 % si supera $200.000. Calcula el valor final.</li>
+          </ol></div>
+        <div class="nivel-card"><header style="background: var(--azul);">Reto</header>
+          <ol start="5">
+            <li>Pide un año y di si es bisiesto (divisible entre 4, excepto los divisibles entre 100 que no lo sean entre 400). Pista: usa <code class="inline">%</code>.</li>
+            <li>Mini “piedra, papel o tijera” entre dos jugadores que escriben su elección.</li>
+          </ol></div>
+      </div>
+      <div class="dialogo" style="left: 64px; top: 470px; width: 560px; height: 116px; font-size: 23px; padding: 26px 40px 30px 42px;">¿Atascado? Dibuja primero el diagrama de flujo.</div>
+      <img class="uifcito" src="../assets/uifcito/presentando.png" alt="UIFCITO señalando" style="left: 640px; top: 452px; height: 150px; transform: scaleX(-1); animation: none;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">En el ejercicio 4, el orden de las condiciones importa: primero la de $200.000. Para el 5, sugiere dibujar el diagrama de flujo antes de programar.</aside>
+  </section>
+
+  <!-- ===================== CIERRE ===================== -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Tres ideas clave de hoy</h2>
+      <ol class="ideas">
+        <li><span>Una condición siempre se evalúa como <strong>True</strong> o <strong>False</strong>.</span></li>
+        <li><span><strong>if / elif / else</strong> permite que el programa tome caminos distintos.</span></li>
+        <li><span>En Python la indentación no es decoración: <strong>define la estructura</strong>.</span></li>
+      </ol>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; width: 760px; margin-top: 4px;">
+        <div class="card" style="padding: 14px 20px;"><h3 style="font-size: 21px;">Tarea corta</h3><p style="font-size: 18px;">Ejercicios 1 a 4.</p></div>
+        <div class="card" style="padding: 14px 20px;"><h3 style="font-size: 21px;">Nivelación</h3><p style="font-size: 18px;">Notebook con los ejemplos resueltos y un diagrama de flujo de cada condicional.</p></div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/feliz.png" alt="UIFCITO feliz" style="right: 90px; top: 100px; height: 430px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas"><b>Cierre (1:50–2:00).</b> Adelanto de la sesión 3: listas, bucles y funciones.</aside>
+  </section>
+
+  <section class="slide final">
+    <div class="fondo"></div>
+    <img class="logo" src="../assets/img/logo_uifce_blanco.png" alt="UIFCE · Unidad de Informática">
+    <div class="textos">
+      <h2>¡Gracias!</h2>
+      <p>Próxima sesión: <b style="color: var(--gris-claro);">Listas, bucles y funciones</b>. ¿Y si quisiéramos repetir algo cien veces?</p>
+      <div class="contacto"><i>Correo:</i> uniic_bog@unal.edu.co<br><i>Tel:</i> 3165000 &nbsp; <i>Ext:</i> 12301</div>
+    </div>
+    <img class="uifcito" src="../assets/uifcito/cierre.png" alt="UIFCITO despidiéndose" style="right: 110px; top: 70px; height: 470px;">
+    <div class="franja" role="img" aria-label="Facultad de Ciencias Económicas, Unidad de Informática, Sede Bogotá · Universidad Nacional de Colombia"></div>
+    <aside class="notas">Recuerda la tarea corta (ejercicios 1 a 4) y comparte el notebook de nivelación.</aside>
+  </section>
+</main>
+</div>
+
+<div id="panelNotas"></div>
+<div class="controles">
+  <button id="prev" aria-label="Diapositiva anterior">←</button>
+  <button id="next" aria-label="Diapositiva siguiente">→</button>
+  <button id="btnNotas" title="Notas del monitor (N)">Notas</button>
+  <button id="btnFull" title="Pantalla completa (F)">⛶</button>
+</div>
+
+<script src="../assets/deck.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "presentaciones",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8765", "--directory", "/Users/mbp/Desktop/CL - Introduccion a python y R/presentaciones"],
+      "port": 8765
+    }
+  ]
+}

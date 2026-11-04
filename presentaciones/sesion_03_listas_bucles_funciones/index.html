@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 3: Listas, bucles y funciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/uifce.css">
+</head>
+<body>
+<div class="viewport">
+<main class="deck" id="deck">
+  <div class="progreso" id="progreso"></div>
+
+  <!-- Portada -->
+  <section class="slide portada">
+    <div class="bloque-azul"></div>
+    <img class="uifcito" src="../assets/uifcito/saludo.png" alt="UIFCITO saludando" style="right: 330px; top: 46px; width: 380px;">
+    <div class="textos">
+      <div class="curso">Introducción a Python y R · Sesión 3</div>
+      <h1>Repetir sin repetirse</h1>
+      <div class="monitor">Nombre del monitor(a): Yony Sebastián Chaparro Mesa</div>
+      <div class="rol">Estudiante Auxiliar</div>
+    </div>
+    <div class="panel">
+      <img class="logo" src="../assets/img/logo_uifce.png" alt="UIFCE · Unidad de Informática">
+      <div class="dato" style="top: 196px;"><b>Curso:</b><span>Introducción a Python y R</span></div>
+      <div class="dato" style="top: 300px;"><b>Sesión 3:</b><span>Listas, bucles y funciones</span></div>
+    </div>
+    <div class="contacto">
+      <i>Correo:</i> <a href="mailto:uniic_bog@unal.edu.co">uniic_bog@unal.edu.co</a><br>
+      <i>Tel:</i> 3165000 &nbsp; <i>Ext:</i> 12301
+    </div>
+    <div class="franja" role="img" aria-label="Facultad de Ciencias Económicas, Unidad de Informática, Sede Bogotá · Universidad Nacional de Colombia"></div>
+    <aside class="notas">Inicio de la semana 2: rota las parejas antes de empezar. Hoy los programas aprenden a manejar muchos datos a la vez y a repetir tareas.</aside>
+  </section>
+
+  <!-- Agenda -->
+
+  <!-- Bonos sesión 3: Ingrid Camelo, Berenice, Ana Villavicenmcio, Edgar Andrés, Estefany Ariza, Nelson Suarez, Julian Cañon, Nayarith Suarez -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Contenido</h2>
+      <p class="subtitulo">Sesión 3 · Python en Google Colab</p>
+      <div class="agenda">
+        <div class="item"><div class="circulo">1</div><div><h3>Repaso activo</h3></div></div>
+        <div class="item"><div class="circulo">2</div><div><h3>Listas</h3></div></div>
+        <div class="item"><div class="circulo">3</div><div><h3>El bucle for</h3></div></div>
+        <div class="item"><div class="circulo">4</div><div><h3>Acumuladores y range()</h3></div></div>
+        <div class="item"><div class="circulo">5</div><div><h3>Funciones</h3></div></div>
+        <div class="item"><div class="circulo">6</div><div><h3>¡A practicar!</h3></div></div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Mapa de la sesión. Pausa de 10 minutos a la 1:05, después de la práctica en parejas.</aside>
+  </section>
+
+  <!-- ===================== 1 · REPASO ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>1</span></div>
+    <div class="textos">
+      <h2>Repaso activo</h2>
+      <p>Lo que vimos en la sesión 2</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Repaso activo (0:00–0:15).</b> Un ejercicio corto de condicionales para calentar.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Calentamiento</h2>
+      <div class="actividad" style="width: 820px; margin-top: 22px;">
+        <span class="etiqueta">Reto</span>
+        <p>Escribe un programa que clasifique una nota: <b>“Excelente”</b> si es 4.5 o más, <b>“Aprobó”</b> si es 3.0 o más y <b>“Reprobó”</b> en otro caso.</p>
+      </div>
+      <div class="pregunta" style="width: 1150px; min-height: 0; margin-top: 20px;">
+        <div class="q" style="font-size: 23px;">Con <code class="inline">nota = 3.8</code>, ¿qué imprime tu programa?</div>
+        <div class="pista" style="margin-top: 6px;">Clic para ver una solución</div>
+        <div class="respuesta dos-col" style="margin-top: 10px; grid-template-columns: 430px 1fr; gap: 26px; align-items: center;">
+<pre class="code" style="font-size: 17px; margin: 0;">nota <span class="o">=</span> <span class="n">3.8</span>
+<span class="k">if</span> nota <span class="o">&gt;=</span> <span class="n">4.5</span>:
+    <span class="f">print</span>(<span class="s">"Excelente"</span>)
+<span class="k">elif</span> nota <span class="o">&gt;=</span> <span class="n">3.0</span>:
+    <span class="f">print</span>(<span class="s">"Aprobó"</span>)
+<span class="k">else</span>:
+    <span class="f">print</span>(<span class="s">"Reprobó"</span>)</pre>
+          <span style="font-size: 22px;">Imprime <b>“Aprobó”</b>: 3.8 no llega a 4.5, pero sí es mayor o igual a 3.0.</span></div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/pensando.png" alt="UIFCITO pensando" style="right: 100px; top: 70px; height: 200px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Dales 5 minutos. Recuerda el orden de las condiciones: la más exigente va primero. Pregunta al final: ¿y si tuviéramos las notas de 40 estudiantes? Esa pregunta abre el tema de hoy.</aside>
+  </section>
+
+  <!-- ===================== 2 · LISTAS ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>2</span></div>
+    <div class="textos">
+      <h2>Listas</h2>
+      <p>Muchos datos en una sola variable</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Concepto + live coding (0:15–0:40).</b> Crear listas, posiciones desde 0, <code>len()</code> y <code>append()</code>.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">¿Por qué necesitamos listas?</h2>
+      <div class="versus" style="width: 1000px;">
+        <div class="lado">
+          <h3>Una variable por dato</h3>
+          <p>Funciona con 4 notas… ¿y con 40?</p>
+<pre class="code">nota1 <span class="o">=</span> <span class="n">3.5</span>
+nota2 <span class="o">=</span> <span class="n">4.2</span>
+nota3 <span class="o">=</span> <span class="n">2.8</span>
+nota4 <span class="o">=</span> <span class="n">4.9</span></pre>
+        </div>
+        <div class="lado">
+          <h3>Una lista</h3>
+          <p>Todos los datos juntos, en orden.</p>
+<pre class="code">notas <span class="o">=</span> [<span class="n">3.5</span>, <span class="n">4.2</span>, <span class="n">2.8</span>, <span class="n">4.9</span>]</pre>
+        </div>
+      </div>
+      <p style="margin-top: 26px; width: 1000px;">Una <strong>lista</strong> guarda <strong>varios valores en orden</strong> dentro de una sola variable.</p>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Pregunta cómo calcularían el promedio de 40 notas con 40 variables. La lista resuelve el problema de guardar; el bucle, que viene después, resuelve el de recorrer.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Crear una lista</h2>
+      <p class="subtitulo">Corchetes <code class="inline">[ ]</code> y elementos separados por comas</p>
+<pre class="code" style="width: 760px; margin-top: 22px; font-size: 23px;">notas <span class="o">=</span> [<span class="n">3.5</span>, <span class="n">4.2</span>, <span class="n">2.8</span>, <span class="n">4.9</span>]
+ciudades <span class="o">=</span> [<span class="s">"Bogotá"</span>, <span class="s">"Medellín"</span>, <span class="s">"Cali"</span>]
+vacia <span class="o">=</span> []
+
+<span class="f">print</span>(ciudades)
+<span class="c"># ['Bogotá', 'Medellín', 'Cali']</span></pre>
+      <ul class="lista" style="width: 760px;">
+        <li>Puede guardar números, textos o cualquier otro tipo de dato.</li>
+        <li>Una lista también puede empezar <strong>vacía</strong> e ir creciendo.</li>
+      </ul>
+      <img class="uifcito" src="../assets/uifcito/explicando.png" alt="UIFCITO explicando" style="right: 70px; top: 110px; height: 400px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Escribe las tres listas en vivo y ejecútalas. Haz notar que <code>print()</code> muestra la lista completa, con corchetes y comillas.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Las posiciones empiezan en 0</h2>
+      <p class="subtitulo">Cada elemento tiene una posición (índice)</p>
+      <div class="casillas">
+        <div class="casilla on"><div class="v">3.5</div><div class="i">0<small>primero</small></div></div>
+        <div class="casilla"><div class="v">4.2</div><div class="i">1</div></div>
+        <div class="casilla"><div class="v">2.8</div><div class="i">2</div></div>
+        <div class="casilla"><div class="v">4.9</div><div class="i">3<small>último</small></div></div>
+      </div>
+<pre class="code" style="width: 600px; margin-top: 24px;"><span class="f">print</span>(notas[<span class="n">0</span>])   <span class="c"># 3.5</span>
+<span class="f">print</span>(notas[<span class="n">3</span>])   <span class="c"># 4.9</span></pre>
+      <div class="dialogo" style="left: 720px; top: 150px; width: 480px; height: 150px; font-size: 24px;">En Python se cuenta desde 0. En R, desde 1: lo veremos en la sesión 5.</div>
+      <img class="uifcito" src="../assets/uifcito/alerta1.png" alt="UIFCITO alerta" style="right: 120px; top: 320px; height: 250px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Es el detalle más importante de las listas. Una lista de 4 elementos tiene posiciones de 0 a 3. Pregunta qué pasa con <code>notas[4]</code> y pruébalo: da <code>IndexError</code>.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Contar y agregar</h2>
+      <div class="versus" style="width: 1150px;">
+        <div class="lado">
+          <h3><code>len()</code> cuenta</h3>
+          <p>Cuántos elementos tiene la lista.</p>
+<pre class="code">notas <span class="o">=</span> [<span class="n">3.5</span>, <span class="n">4.2</span>, <span class="n">2.8</span>, <span class="n">4.9</span>]
+<span class="f">print</span>(<span class="f">len</span>(notas))   <span class="c"># 4</span></pre>
+        </div>
+        <div class="lado">
+          <h3><code>.append()</code> agrega</h3>
+          <p>Pone un elemento nuevo al final.</p>
+<pre class="code">notas.<span class="f">append</span>(<span class="n">3.0</span>)
+<span class="f">print</span>(notas)
+<span class="c"># [3.5, 4.2, 2.8, 4.9, 3.0]</span>
+<span class="f">print</span>(<span class="f">len</span>(notas))   <span class="c"># 5</span></pre>
+        </div>
+      </div>
+      <p style="margin-top: 22px; width: 1000px;"><code class="inline">append</code> se escribe <strong>después</strong> de la lista, con un punto: es una acción que la lista sabe hacer sobre sí misma.</p>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">La diferencia de escritura entre <code>len(notas)</code> y <code>notas.append()</code> confunde. No hace falta hablar de métodos: basta con decir que <code>append</code> es algo que “la lista hace”.</aside>
+  </section>
+
+  <!-- ===================== 3 · FOR ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>3</span></div>
+    <div class="textos">
+      <h2>El bucle for</h2>
+      <p>Repetir una acción para cada elemento</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Concepto + live coding (0:40–0:55).</b> El <code>for</code> sobre listas, acumuladores y <code>range()</code>.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Anatomía de un for</h2>
+      <div style="display: grid; grid-template-columns: 560px 1fr; gap: 40px; margin-top: 26px; align-items: start;">
+        <div>
+<pre class="code" style="font-size: 25px; line-height: 1.7;"><span class="k">for</span><span class="marca">1</span> nota<span class="marca">2</span> <span class="k">in</span> notas<span class="marca">3</span>:<span class="marca">4</span>
+<span style="background: rgba(69,212,255,.18);">    </span><span class="f">print</span>(<span class="s">"Nota:"</span>, nota)</pre>
+<pre class="code" style="font-size: 20px; margin-top: 16px;"><span class="c"># Salida</span>
+Nota: 3.5
+Nota: 4.2
+Nota: 2.8
+Nota: 4.9</pre>
+        </div>
+        <ol class="leyenda">
+          <li><span class="marca">1</span><span>La palabra <strong>for</strong> (“para cada”).</span></li>
+          <li><span class="marca">2</span><span>Una <strong>variable</strong> que toma cada valor, uno a la vez. El nombre lo eliges tú.</span></li>
+          <li><span class="marca">3</span><span>La <strong>lista</strong> que se recorre, después de <strong>in</strong>.</span></li>
+          <li><span class="marca">4</span><span>Los <strong>dos puntos</strong> y, debajo, el bloque <strong>indentado</strong> que se repite.</span></li>
+        </ol>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Léelo en voz alta: “para cada nota en notas, imprime la nota”. Los dos puntos y la indentación funcionan igual que en el <code>if</code> de la sesión 2.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">¿Cómo se ejecuta un for?</h2>
+      <div style="display: grid; grid-template-columns: 520px 1fr; gap: 46px; margin-top: 14px; align-items: center;">
+        <svg class="diagrama" viewBox="0 0 520 400" width="520" height="400" role="img" aria-label="Diagrama de flujo del for: mientras queden notas, toma la siguiente e imprímela; cuando no quedan, el programa sigue">
+          <defs>
+            <marker id="fl3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#A5B7C5"/></marker>
+            <marker id="fl3a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#2A7FFF"/></marker>
+          </defs>
+          <rect class="inicio" x="150" y="8" width="220" height="46" rx="23"/><text class="claro" x="260" y="37" text-anchor="middle">for nota in notas</text>
+          <path class="linea activo" d="M260 54V88" marker-end="url(#fl3a)"/>
+          <polygon class="rombo" points="260,92 390,150 260,208 130,150"/>
+          <text x="260" y="156" text-anchor="middle">¿Quedan notas?</text>
+          <path class="linea activo" d="M260 208V246" marker-end="url(#fl3a)"/>
+          <text class="etq" x="270" y="234" style="fill: var(--uifce);">Sí</text>
+          <rect class="caja-f activo" x="160" y="250" width="200" height="52" rx="10"/><text x="260" y="282" text-anchor="middle">nota = siguiente</text>
+          <path class="linea activo" d="M260 302V326" marker-end="url(#fl3a)"/>
+          <rect class="caja-f activo" x="160" y="330" width="200" height="52" rx="10"/><text x="260" y="362" text-anchor="middle">print(nota)</text>
+          <path class="linea activo" d="M160 356H60V150H126" marker-end="url(#fl3a)"/>
+          <path class="linea" d="M390 150H460V246" marker-end="url(#fl3)"/>
+          <text class="etq" x="402" y="140">No</text>
+          <rect class="inicio" x="405" y="250" width="110" height="44" rx="22"/><text class="claro" x="460" y="277" text-anchor="middle">Sigue</text>
+        </svg>
+        <table class="tabla">
+          <tr><th>Vuelta</th><th><code>nota</code></th><th>Imprime</th></tr>
+          <tr><td>1</td><td><code>3.5</code></td><td>Nota: 3.5</td></tr>
+          <tr><td>2</td><td><code>4.2</code></td><td>Nota: 4.2</td></tr>
+          <tr><td>3</td><td><code>2.8</code></td><td>Nota: 2.8</td></tr>
+          <tr><td>4</td><td><code>4.9</code></td><td>Nota: 4.9</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">El camino azul es el que se repite. En cada vuelta, la variable <code>nota</code> cambia de valor. Cuando ya no quedan elementos, el programa sigue con la siguiente línea después del bloque.</aside>
+  </section>
+
+  <!-- ===================== 4 · ACUMULADORES Y RANGE ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>4</span></div>
+    <div class="textos">
+      <h2>Acumuladores y range()</h2>
+      <p>Sumar, contar y repetir</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas">Es el tema que más cuesta del curso. Ve despacio y haz la ejecución a mano en el tablero.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">El acumulador: sumar en cada vuelta</h2>
+      <div style="display: grid; grid-template-columns: 560px 1fr; gap: 40px; margin-top: 18px; align-items: start;">
+        <div>
+<pre class="code" style="font-size: 21px;">suma <span class="o">=</span> <span class="n">0</span>                  <span class="c"># empieza en 0</span>
+<span class="k">for</span> nota <span class="k">in</span> notas:
+    suma <span class="o">=</span> suma <span class="o">+</span> nota     <span class="c"># acumula</span>
+
+promedio <span class="o">=</span> suma <span class="o">/</span> <span class="f">len</span>(notas)
+<span class="f">print</span>(<span class="s">"Promedio:"</span>, promedio)
+<span class="c"># Promedio: 3.85</span></pre>
+          <p style="margin-top: 16px; font-size: 22px;">El acumulador debe tener un valor <strong>antes</strong> del for.</p>
+        </div>
+        <table class="tabla">
+          <tr><th>Vuelta</th><th><code>nota</code></th><th><code>suma</code> después</th></tr>
+          <tr><td>—</td><td>—</td><td><code>0</code></td></tr>
+          <tr><td>1</td><td><code>3.5</code></td><td><code>0 + 3.5 = 3.5</code></td></tr>
+          <tr><td>2</td><td><code>4.2</code></td><td><code>3.5 + 4.2 = 7.7</code></td></tr>
+          <tr><td>3</td><td><code>2.8</code></td><td><code>7.7 + 2.8 = 10.5</code></td></tr>
+          <tr class="ojo"><td>4</td><td><code>4.9</code></td><td><code>10.5 + 4.9 = 15.4</code></td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Haz esta tabla en el tablero, vuelta por vuelta, antes de mostrar la de la diapositiva. Es la forma más efectiva de entender los acumuladores. Al final, 15.4 / 4 = 3.85.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Bucle + condicional: contar</h2>
+      <p class="subtitulo">¿Cuántos estudiantes aprobaron?</p>
+      <div style="display: grid; grid-template-columns: 620px 1fr; gap: 40px; margin-top: 18px; align-items: start;">
+<pre class="code" style="font-size: 22px;">aprobados <span class="o">=</span> <span class="n">0</span>
+<span class="k">for</span> nota <span class="k">in</span> notas:
+    <span class="k">if</span> nota <span class="o">&gt;=</span> <span class="n">3.0</span>:
+        aprobados <span class="o">=</span> aprobados <span class="o">+</span> <span class="n">1</span>
+
+<span class="f">print</span>(<span class="s">"Aprobaron:"</span>, aprobados)
+<span class="c"># Aprobaron: 3</span></pre>
+        <div>
+          <ul class="lista" style="margin-top: 0;">
+            <li>El <code class="inline">if</code> va <strong>dentro</strong> del for: se revisa en cada vuelta.</li>
+            <li>El contador suma <strong>1</strong>, no la nota.</li>
+            <li>Dos niveles de indentación: 4 y 8 espacios.</li>
+          </ul>
+        </div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/presentando.png" alt="UIFCITO señalando" style="right: 90px; top: 380px; height: 200px; transform: scaleX(-1); animation: none;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Aquí se juntan las sesiones 2 y 3. De las notas 3.5, 4.2, 2.8 y 4.9, solo 2.8 reprueba: aprobaron 3. Diferencia clave: el acumulador suma la nota; el contador suma 1.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Práctica en parejas</h2>
+      <p class="subtitulo">El promedio de mis notas</p>
+      <div class="actividad" style="width: 700px; margin-top: 24px;">
+        <span class="etiqueta">Reto</span>
+        <p>Completa el programa para calcular el <b>promedio</b> de la lista. Luego agrega una nota más con <code class="inline">append()</code> y vuelve a ejecutarlo.</p>
+      </div>
+<pre class="code" style="width: 700px; margin-top: 18px;">notas <span class="o">=</span> [<span class="n">4.0</span>, <span class="n">3.5</span>, <span class="n">4.5</span>, <span class="n">3.0</span>]
+suma <span class="o">=</span> <span class="o">______</span>
+<span class="k">for</span> nota <span class="k">in</span> notas:
+    suma <span class="o">=</span> <span class="o">______</span>
+<span class="f">print</span>(<span class="s">"Promedio:"</span>, suma <span class="o">/</span> <span class="o">______</span>)</pre>
+      <img class="uifcito" src="../assets/uifcito/feliz.png" alt="UIFCITO feliz" style="right: 90px; top: 110px; height: 430px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas"><b>Práctica guiada (0:55–1:05).</b> Usa los papelitos verde y rojo. Solución: <code>0</code>, <code>suma + nota</code> y <code>len(notas)</code>; el promedio es 3.75. Si usan <code>4</code> en vez de <code>len(notas)</code>, el resultado falla al agregar una nota: esa es la lección.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content" style="display: grid; grid-template-columns: 1fr 380px; align-items: center;">
+      <div>
+        <h2 class="titulo">Pausa</h2>
+        <p class="subtitulo">Estírate y toma agua.</p>
+        <div class="reloj" id="reloj">10:00</div>
+        <div style="display: flex; gap: 10px; margin-top: 18px;">
+          <button class="boton" id="relojIniciar">Iniciar</button>
+          <button class="boton sec" id="relojReiniciar">Reiniciar</button>
+        </div>
+      </div>
+      <img src="../assets/uifcito/neutral.png" alt="UIFCITO" style="width: 340px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas"><b>Pausa (1:05–1:15).</b></aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">range(): repetir n veces</h2>
+      <div style="display: grid; grid-template-columns: 560px 1fr; gap: 40px; margin-top: 22px; align-items: start;">
+        <div>
+<pre class="code" style="font-size: 22px;"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="n">5</span>):
+    <span class="f">print</span>(<span class="s">"Repetición"</span>, i)</pre>
+<pre class="code" style="font-size: 20px; margin-top: 14px;"><span class="c"># Salida</span>
+Repetición 0
+Repetición 1
+Repetición 2
+Repetición 3
+Repetición 4</pre>
+        </div>
+        <div>
+          <table class="tabla">
+            <tr><th>Código</th><th>Números que genera</th></tr>
+            <tr><td>range(5)</td><td><code>0, 1, 2, 3, 4</code></td></tr>
+            <tr><td>range(1, 6)</td><td><code>1, 2, 3, 4, 5</code></td></tr>
+          </table>
+          <p style="margin-top: 18px; font-size: 22px;"><code class="inline">range(5)</code> da <strong>5 números</strong>, pero empieza en 0 y <strong>no incluye el 5</strong>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Se usa cuando sabemos cuántas veces repetir, aunque no haya una lista. Conecta con las posiciones: <code>range(len(notas))</code> da justo las posiciones 0, 1, 2, 3 de la lista.</aside>
+  </section>
+
+  <!-- ===================== 5 · FUNCIONES ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>5</span></div>
+    <div class="textos">
+      <h2>Funciones</h2>
+      <p>Una receta con nombre</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Concepto + live coding (1:15–1:35).</b> <code>def</code>, parámetros y <code>return</code>. Si el grupo va lento, este bloque puede pasar al inicio de la sesión 4.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">¿Por qué crear funciones?</h2>
+      <div class="dialogo" style="left: 64px; top: 128px; width: 600px; height: 150px;">Si calculas el promedio de tres listas, ¿copias el mismo código tres veces?</div>
+      <img class="uifcito" src="../assets/uifcito/pensando.png" alt="UIFCITO pensando" style="left: 690px; top: 92px; height: 210px;">
+      <div class="grid4" style="position: absolute; left: 64px; right: 64px; top: 330px; grid-template-columns: repeat(3, 1fr);">
+        <div class="card"><h3>Se escribe una vez</h3><p>La solución queda guardada con un nombre.</p></div>
+        <div class="card"><h3>Se usa muchas veces</h3><p>Con datos distintos cada vez.</p></div>
+        <div class="card"><h3>Se corrige en un lugar</h3><p>Si hay un error, se arregla una sola vez.</p></div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Ya usaron funciones sin crearlas: <code>print()</code>, <code>len()</code>, <code>type()</code>. Hoy van a crear las suyas. Retoma la analogía de la receta de la sesión 1: ahora la receta tiene nombre.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Anatomía de una función</h2>
+      <div style="display: grid; grid-template-columns: 640px 1fr; gap: 36px; margin-top: 22px; align-items: start;">
+<pre class="code" style="font-size: 22px; line-height: 1.65;"><span class="k">def</span><span class="marca">1</span> <span class="f">calcular_promedio</span><span class="marca">2</span>(lista)<span class="marca">3</span>:
+    suma <span class="o">=</span> <span class="n">0</span>
+    <span class="k">for</span> valor <span class="k">in</span> lista:
+        suma <span class="o">=</span> suma <span class="o">+</span> valor
+    <span class="k">return</span><span class="marca">4</span> suma <span class="o">/</span> <span class="f">len</span>(lista)
+
+<span class="f">print</span>(<span class="f">calcular_promedio</span>([<span class="n">3.5</span>, <span class="n">4.0</span>, <span class="n">4.5</span>]))<span class="marca">5</span>
+<span class="c"># 4.0</span></pre>
+        <ol class="leyenda">
+          <li><span class="marca">1</span><span><strong>def</strong> (“definir”) avisa que vamos a crear una función.</span></li>
+          <li><span class="marca">2</span><span>El <strong>nombre</strong>: con las mismas reglas de las variables.</span></li>
+          <li><span class="marca">3</span><span>El <strong>parámetro</strong>: el dato que recibe.</span></li>
+          <li><span class="marca">4</span><span><strong>return</strong> devuelve el resultado.</span></li>
+          <li><span class="marca">5</span><span>La <strong>llamada</strong>: aquí se ejecuta de verdad.</span></li>
+        </ol>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Escribe la función en vivo, ejecútala y muestra que no pasa nada: definir no es ejecutar. Solo cuando la llamamos aparece el 4.0. Luego llámala con otra lista para mostrar la reutilización.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo"><code style="font-size: .85em;">print</code> muestra, <code style="font-size: .85em;">return</code> devuelve</h2>
+      <div class="versus" style="width: 1150px;">
+        <div class="lado">
+          <h3><code>print</code> muestra</h3>
+          <p>El resultado aparece en pantalla, pero no se puede guardar.</p>
+<pre class="code"><span class="k">def</span> <span class="f">saludar</span>(nombre):
+    <span class="f">print</span>(<span class="s">"Hola,"</span>, nombre)
+
+r <span class="o">=</span> <span class="f">saludar</span>(<span class="s">"Ana"</span>)   <span class="c"># Hola, Ana</span>
+<span class="f">print</span>(r)              <span class="c"># None</span></pre>
+        </div>
+        <div class="lado">
+          <h3><code>return</code> devuelve</h3>
+          <p>El resultado se puede guardar y usar en otros cálculos.</p>
+<pre class="code"><span class="k">def</span> <span class="f">aplicar_iva</span>(precio):
+    <span class="k">return</span> precio <span class="o">*</span> <span class="n">1.19</span>
+
+total <span class="o">=</span> <span class="f">aplicar_iva</span>(<span class="n">10000</span>)
+<span class="f">print</span>(total)          <span class="c"># 11900.0</span></pre>
+        </div>
+      </div>
+      <p style="margin-top: 20px; width: 1000px;">Si la función no tiene <code class="inline">return</code>, devuelve <code class="inline">None</code>: “nada”.</p>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Es la confusión más común con funciones. Pregunta: ¿cómo calculo el total de una compra con <code>saludar</code>? No se puede, porque no devuelve nada. Con <code>aplicar_iva</code> sí: el resultado se guarda en <code>total</code>.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Adelanto: diccionarios</h2>
+      <p class="subtitulo">Datos con nombre, como una fila de una tabla</p>
+<pre class="code" style="width: 720px; margin-top: 24px; font-size: 23px;">estudiante <span class="o">=</span> {<span class="s">"nombre"</span>: <span class="s">"Ana"</span>, <span class="s">"edad"</span>: <span class="n">20</span>}
+<span class="f">print</span>(estudiante[<span class="s">"nombre"</span>])   <span class="c"># Ana</span></pre>
+      <table class="tabla texto" style="width: 520px; margin-top: 26px;">
+        <tr><th>nombre</th><th>edad</th></tr>
+        <tr><td>Ana</td><td>20</td></tr>
+      </table>
+      <p style="margin-top: 20px; width: 720px;">En la lista buscamos por <strong>posición</strong>; en el diccionario, por <strong>nombre</strong>. La próxima clase trabajamos con tablas completas.</p>
+      <img class="uifcito" src="../assets/uifcito/presentando.png" alt="UIFCITO presentando" style="right: 70px; top: 110px; height: 400px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Opcional: solo como adelanto, sin ejercicios. La idea a dejar es la de una “fila” con nombres de columna, que es lo que veremos con pandas en la sesión 4.</aside>
+  </section>
+
+  <!-- ===================== 6 · PRÁCTICA ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>6</span></div>
+    <div class="textos">
+      <h2>¡A practicar!</h2>
+      <p>Listas, bucles y funciones juntos</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Práctica autónoma (1:35–1:52).</b> Antes, los tres errores que más van a ver hoy.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Errores frecuentes de hoy</h2>
+      <div class="errores">
+        <div class="error revelable"><h3>IndexError</h3><div class="cuerpo">
+<pre>notas = [3.5, 4.2, 2.8, 4.9]
+notas[4]
+<span class="err">IndexError: list index
+out of range</span></pre>
+          <div class="pista">Clic para ver la causa y la solución</div>
+          <div class="respuesta">
+          <p>La posición no existe: con 4 elementos, la última es la 3.</p>
+          <div class="arreglo"><pre>notas[3]</pre></div></div></div></div>
+        <div class="error revelable"><h3>NameError</h3><div class="cuerpo">
+<pre>for n in notas:
+    total = total + n
+<span class="err">NameError: name 'total'
+is not defined</span></pre>
+          <div class="pista">Clic para ver la causa y la solución</div>
+          <div class="respuesta">
+          <p>Al acumulador le falta su valor inicial.</p>
+          <div class="arreglo"><pre>total = 0
+for n in notas:
+    total = total + n</pre></div></div></div></div>
+        <div class="error revelable"><h3>SyntaxError</h3><div class="cuerpo">
+<pre>for n in notas
+    print(n)
+<span class="err">SyntaxError:
+expected ':'</span></pre>
+          <div class="pista">Clic para ver la causa y la solución</div>
+          <div class="respuesta">
+          <p>Al for le faltan los <b>:</b>, igual que al if.</p>
+          <div class="arreglo"><pre>for n in notas:
+    print(n)</pre></div></div></div></div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Muestra solo el error y pregunta al grupo qué lo causa antes de hacer clic en cada tarjeta para revelar la causa y la solución. El NameError del acumulador es el más frecuente de la sesión. Recuerda la regla: el acumulador se crea antes del for, nunca dentro.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Ejercicios</h2>
+      <p class="subtitulo">Avanza hasta donde llegues</p>
+      <div class="niveles">
+        <div class="nivel-card"><header style="background: var(--uifce);">Básico <small>Todos</small></header>
+          <ol start="1">
+            <li>Crea una lista con 5 ciudades de Colombia e imprime cada una con un bucle.</li>
+            <li>Dada una lista de precios, calcula el total de la compra.</li>
+          </ol></div>
+        <div class="nivel-card"><header style="background: var(--azul-2);">Intermedio</header>
+          <ol start="3">
+            <li>Cuenta cuántas notas de una lista son mayores o iguales a 3.0.</li>
+            <li>Escribe una función <code class="inline">aplicar_iva(precio)</code> que devuelva el precio con IVA del 19&nbsp;% y úsala sobre una lista de precios.</li>
+          </ol></div>
+        <div class="nivel-card"><header style="background: var(--azul);">Reto</header>
+          <ol start="5">
+            <li>Encuentra la nota más alta de una lista <b>sin</b> usar <code class="inline">max()</code>.</li>
+            <li>Escribe una función que reciba una frase y devuelva cuántas palabras tiene. Pista: <code class="inline">frase.split()</code>.</li>
+          </ol></div>
+      </div>
+      <div class="dialogo" style="left: 64px; top: 470px; width: 560px; height: 116px; font-size: 23px; padding: 26px 40px 30px 42px;">¿Atascado? Haz la tabla de vueltas a mano.</div>
+      <img class="uifcito" src="../assets/uifcito/presentando.png" alt="UIFCITO señalando" style="left: 640px; top: 452px; height: 150px; transform: scaleX(-1); animation: none;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Para el ejercicio 5, sugiere guardar la primera nota como “la más alta hasta ahora” y compararla con las demás dentro del for. En el 6, <code>split()</code> devuelve una lista: basta con usar <code>len()</code>.</aside>
+  </section>
+
+  <!-- ===================== CIERRE ===================== -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Tres ideas clave de hoy</h2>
+      <ol class="ideas">
+        <li><span>Las <strong>listas</strong> guardan varios datos en orden; en Python la primera posición es <strong>0</strong>.</span></li>
+        <li><span>El <strong>for</strong> repite una acción para cada elemento.</span></li>
+        <li><span>Las <strong>funciones</strong> empaquetan una solución para reutilizarla.</span></li>
+      </ol>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; width: 790px; margin-top: 4px;">
+        <div class="card" style="padding: 14px 18px;"><h3 style="font-size: 21px;">Tarea corta</h3><p style="font-size: 18px;">Ejercicios 1 a 4.</p></div>
+        <div class="card" style="padding: 14px 18px;"><h3 style="font-size: 21px;">Nivelación</h3><p style="font-size: 18px;">Notebook resuelto sobre bucles y acumuladores.</p></div>
+        <div class="card" style="padding: 14px 18px;"><h3 style="font-size: 21px;">Próxima clase</h3><p style="font-size: 18px;">Usaremos un archivo CSV que compartiremos por enlace.</p></div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/feliz.png" alt="UIFCITO feliz" style="right: 60px; top: 120px; height: 340px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas"><b>Cierre (1:52–2:00).</b> Adelanto: la próxima clase trabajamos con datos reales en pandas. Avisa que compartirás el enlace al archivo CSV.</aside>
+  </section>
+
+  <section class="slide final">
+    <div class="fondo"></div>
+    <img class="logo" src="../assets/img/logo_uifce_blanco.png" alt="UIFCE · Unidad de Informática">
+    <div class="textos">
+      <h2>¡Gracias!</h2>
+      <p>Próxima sesión: <b style="color: var(--gris-claro);">Primer contacto con datos reales: pandas</b>. ¿Y si la lista tuviera miles de filas?</p>
+      <div class="contacto"><i>Correo:</i> uniic_bog@unal.edu.co<br><i>Tel:</i> 3165000 &nbsp; <i>Ext:</i> 12301</div>
+    </div>
+    <img class="uifcito" src="../assets/uifcito/cierre.png" alt="UIFCITO despidiéndose" style="right: 110px; top: 70px; height: 470px;">
+    <div class="franja" role="img" aria-label="Facultad de Ciencias Económicas, Unidad de Informática, Sede Bogotá · Universidad Nacional de Colombia"></div>
+    <aside class="notas">Recuerda la tarea corta (ejercicios 1 a 4) y comparte el notebook de nivelación.</aside>
+  </section>
+</main>
+</div>
+
+<div id="panelNotas"></div>
+<div class="controles">
+  <button id="prev" aria-label="Diapositiva anterior">←</button>
+  <button id="next" aria-label="Diapositiva siguiente">→</button>
+  <button id="btnNotas" title="Notas del monitor (N)">Notas</button>
+  <button id="btnFull" title="Pantalla completa (F)">⛶</button>
+</div>
+
+<script src="../assets/deck.js"></script>
+</body>
+</html>

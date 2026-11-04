@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía de repaso · Sesión 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Regular.otf"); font-weight: 400; }
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Italic.otf"); font-weight: 400; font-style: italic; }
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Bold.otf"); font-weight: 700; }
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Extrabold.otf"); font-weight: 800; }
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Extrablack.otf"); font-weight: 900; }
+  :root {
+    --azul: #073763; --azul-2: #0B5394; --azul-osc: #162848; --gris-claro: #EDEFF3; --gris-azul: #5F7D95;
+    --hielo: #CFE7FF; --uifce: #2A7FFF; --amarillo: #F2C81B; --verde: #1E7B34; --rojo: #B3261E;
+  }
+  @page { size: letter; margin: 18mm 18mm 20mm; }
+  @page :first { margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Ancizar Sans", system-ui, sans-serif; font-size: 11.5pt; line-height: 1.45; color: var(--azul-osc); background: #fff;
+         font-variant-ligatures: none; font-feature-settings: "calt" 0, "liga" 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  code, pre { font-family: "Fira Code", Menlo, monospace; font-variant-ligatures: none; font-feature-settings: "calt" 0, "liga" 0; }
+
+  /* Portada */
+  .portada { height: 279.4mm; position: relative; overflow: hidden; break-after: page; }
+  .portada .azul { position: absolute; inset: 0 0 auto 0; height: 168mm; background: var(--azul); }
+  .portada .azul::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 5mm; background: var(--amarillo); }
+  .portada .textos { position: absolute; left: 20mm; right: 20mm; top: 40mm; color: #fff; }
+  .portada .kicker { font-weight: 800; font-size: 12pt; letter-spacing: .14em; text-transform: uppercase; color: var(--hielo); }
+  .portada h1 { font-weight: 900; font-size: 40pt; line-height: 1.02; margin: 6mm 0 5mm; }
+  .portada .sub { font-size: 16pt; color: #fff; opacity: .92; max-width: 140mm; }
+  .portada .uifcito { position: absolute; right: 16mm; top: 112mm; height: 92mm; }
+  .portada .datos { position: absolute; left: 20mm; top: 184mm; right: 110mm; font-size: 11.5pt; }
+  .portada .datos b { display: block; font-size: 9pt; letter-spacing: .1em; text-transform: uppercase; color: var(--gris-azul); margin-top: 4mm; }
+  .portada .logo { position: absolute; left: 20mm; bottom: 18mm; height: 15mm; }
+  .portada .pie { position: absolute; right: 20mm; bottom: 18mm; text-align: right; font-size: 9.5pt; color: var(--gris-azul); }
+
+  /* Contenido */
+  h2 { font-weight: 900; font-size: 21pt; color: var(--azul); margin: 0 0 3mm; line-height: 1.1; break-after: avoid; }
+  h2 .n { display: inline-grid; place-items: center; width: 10mm; height: 10mm; border-radius: 50%; background: var(--azul); color: #fff; font-size: 14pt; margin-right: 3mm; vertical-align: 2px; }
+  h3 { font-weight: 800; font-size: 13.5pt; color: var(--azul-2); margin: 5mm 0 1.5mm; break-after: avoid; }
+  section.tema { margin-top: 9mm; }
+  section.tema.nueva { break-before: page; margin-top: 0; }
+  h2 + p, h3 + p, h3 + pre { break-before: avoid; }
+  pre:has(+ pre.salida) { break-after: avoid; }
+  pre.salida { break-before: avoid; }
+  p { margin: 0 0 2.5mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 6mm; }
+  li { margin-bottom: 1.2mm; }
+  strong { color: var(--azul); }
+  code { font-size: 9.8pt; background: var(--gris-claro); color: var(--azul); padding: .2mm 1.2mm; border-radius: 1.2mm; }
+  pre { margin: 2mm 0 3.5mm; padding: 3mm 4mm; background: #0E1E33; color: #E8F1FF; border-radius: 2.5mm; font-size: 9.6pt; line-height: 1.5; white-space: pre-wrap; break-inside: avoid; }
+  pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+  pre .c { color: #8FA8C2; } pre .s { color: #FFD866; } pre .k { color: #6CC7FF; } pre .e { color: #FF8A80; }
+  pre.salida { background: var(--gris-claro); color: var(--azul-osc); border-left: 1.5mm solid var(--gris-azul); }
+  pre.salida::before { content: "Salida"; display: block; font-family: "Ancizar Sans"; font-weight: 800; font-size: 8pt; letter-spacing: .1em; text-transform: uppercase; color: var(--gris-azul); }
+  pre.error { background: #FDECEA; color: #5B1A14; border-left: 1.5mm solid var(--rojo); }
+
+  .def { background: var(--hielo); border-left: 1.8mm solid var(--azul-2); border-radius: 0 2.5mm 2.5mm 0; padding: 3mm 4.5mm; margin: 2.5mm 0 3.5mm; break-inside: avoid; }
+  .def b.t { display: block; font-weight: 800; font-size: 8.5pt; letter-spacing: .1em; text-transform: uppercase; color: var(--azul-2); margin-bottom: .5mm; }
+  .ojo { background: #FFF7D6; border-left: 1.8mm solid var(--amarillo); border-radius: 0 2.5mm 2.5mm 0; padding: 3mm 4.5mm; margin: 2.5mm 0 3.5mm; break-inside: avoid; }
+  .ojo b.t { display: block; font-weight: 800; font-size: 8.5pt; letter-spacing: .1em; text-transform: uppercase; color: #8A6A00; margin-bottom: .5mm; }
+
+  table { width: 100%; border-collapse: separate; border-spacing: 0 1.2mm; margin: 1mm 0 3mm; break-inside: avoid; font-size: 10.5pt; }
+  th { text-align: left; font-weight: 800; font-size: 8pt; letter-spacing: .1em; text-transform: uppercase; color: var(--gris-azul); padding: 0 3mm; }
+  td { background: var(--gris-claro); padding: 1.6mm 3mm; vertical-align: top; }
+  td:first-child { border-radius: 2mm 0 0 2mm; } td:last-child { border-radius: 0 2mm 2mm 0; }
+  td code { background: #fff; }
+  .si { color: var(--verde); font-weight: 800; } .no { color: var(--rojo); font-weight: 800; }
+
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .dos > div { break-inside: avoid; }
+  .ideas { counter-reset: i; list-style: none; padding: 0; }
+  .ideas li { counter-increment: i; display: grid; grid-template-columns: 11mm 1fr; align-items: center; gap: 3mm; background: var(--gris-claro); border-radius: 2.5mm; padding: 3mm; font-size: 12.5pt; margin-bottom: 2.5mm; }
+  .ideas li::before { content: counter(i); display: grid; place-items: center; width: 11mm; height: 11mm; border-radius: 50%; background: var(--amarillo); color: var(--azul); font-weight: 900; font-size: 15pt; }
+  .ej { break-inside: avoid; margin-bottom: 3.5mm; }
+  .nivel { display: inline-block; font-weight: 800; font-size: 8pt; letter-spacing: .1em; text-transform: uppercase; padding: .6mm 2.4mm; border-radius: 10mm; background: var(--azul); color: #fff; margin-right: 2mm; }
+  .nivel.int { background: var(--azul-2); } .nivel.reto { background: var(--amarillo); color: var(--azul); }
+  .lineas { border-bottom: .3mm dashed #B9C6D3; height: 7mm; }
+  .glosario td:first-child { font-weight: 800; color: var(--azul); white-space: nowrap; width: 32mm; }
+  th code { text-transform: none; letter-spacing: 0; background: none; padding: 0; font-size: 8.5pt; color: var(--gris-azul); }
+  p:has(+ pre), p:has(+ table), p:has(+ .dos), p:has(+ .fig), p:has(+ ul), p:has(+ ol), .def:has(+ table) { break-after: avoid; }
+  pre:has(+ pre.error) { break-after: avoid; } pre.error { break-before: avoid; }
+  .ideas, ul, ol { break-inside: avoid; }
+  .def:has(+ pre) { break-after: avoid; }
+  td code.b { display: block; white-space: pre; background: #fff; padding: .8mm 1.5mm; font-size: 9pt; line-height: 1.4; }
+  .posiciones td, .posiciones th { text-align: center; } .posiciones td:first-child, .posiciones th:first-child { text-align: left; }
+  pre.plantilla { margin-bottom: 3.5mm; }
+  .fig { display: grid; grid-template-columns: 82mm 1fr; gap: 6mm; align-items: center; margin: 2mm 0 3mm; break-inside: avoid; }
+  .fig pre.salida { margin-bottom: 2.5mm; }
+  .diagrama { display: block; width: 100%; height: auto; }
+  .diagrama text { font-family: "Fira Code", Menlo, monospace; font-size: 18px; fill: var(--azul); }
+  .diagrama .etq { font-family: "Ancizar Sans", sans-serif; font-weight: 900; font-size: 18px; }
+  .diagrama .caja-f { fill: var(--gris-claro); stroke: var(--gris-azul); stroke-width: 2; }
+  .diagrama .rombo { fill: var(--hielo); stroke: var(--azul-2); stroke-width: 3; }
+  .diagrama .inicio { fill: var(--azul); }
+  .diagrama text.claro { fill: var(--gris-claro); }
+  .diagrama .linea { stroke: #A5B7C5; stroke-width: 3; fill: none; }
+  .diagrama .activo { stroke: var(--uifce); stroke-width: 4; }
+  .diagrama .caja-f.activo { fill: var(--hielo); }
+</style>
+</head>
+<body>
+
+<!-- ================= PORTADA ================= -->
+<div class="portada">
+  <div class="azul"></div>
+  <div class="textos">
+    <div class="kicker">Guía de repaso · Sesión 2</div>
+    <h1>Tomar decisiones:<br>condicionales y lógica</h1>
+    <div class="sub">Definiciones, ejemplos y ejercicios para repasar lo que vimos en clase.</div>
+  </div>
+  <img class="uifcito" src="../presentaciones/assets/uifcito/saludo.png" alt="">
+  <div class="datos">
+    <b>Curso libre</b>Introducción a la Programación en Python y R
+    <b>Semestre</b>2026-2
+    <b>Estudiante auxiliar</b>Yony Sebastián Chaparro Mesa
+    <b>Material del curso</b>Moodle FCE
+  </div>
+  <img class="logo" src="../presentaciones/assets/img/logo_uifce.png" alt="UIFCE">
+  <div class="pie">Unidad de Informática · Facultad de Ciencias Económicas<br>Universidad Nacional de Colombia, Sede Bogotá<br>uniic_bog@unal.edu.co</div>
+</div>
+
+<!-- ================= CÓMO USAR ================= -->
+<section>
+  <h2>Cómo usar esta guía</h2>
+  <p>Esta guía resume la segunda sesión del curso. Cada tema tiene <strong>definiciones</strong> (recuadros azules), <strong>ejemplos de código</strong> con su salida y <strong>advertencias</strong> sobre los errores más comunes (recuadros amarillos).</p>
+  <p>La mejor forma de repasar es con Google Colab abierto: <strong>escribe tú mismo cada ejemplo</strong>, ejecútalo y compara tu salida con la de la guía. Después cambia un valor y, antes de ejecutar, intenta adivinar qué camino tomará el programa.</p>
+  <table>
+    <tr><th>Tema</th><th>Qué deberías poder hacer al terminar</th></tr>
+    <tr><td>1. Comparaciones</td><td>Escribir comparaciones y predecir si dan <code>True</code> o <code>False</code>.</td></tr>
+    <tr><td>2. <code>if</code> y <code>else</code></td><td>Hacer que un programa elija entre dos caminos.</td></tr>
+    <tr><td>3. Indentación</td><td>Saber qué instrucciones quedan dentro de un <code>if</code> y cuáles quedan fuera.</td></tr>
+    <tr><td>4. <code>elif</code></td><td>Manejar más de dos opciones y ordenar bien las condiciones.</td></tr>
+    <tr><td>5. <code>and</code>, <code>or</code>, <code>not</code></td><td>Combinar varias condiciones en una sola.</td></tr>
+    <tr><td>6. <code>input()</code> y decisiones</td><td>Pedir un dato, convertirlo a número y decidir con él.</td></tr>
+    <tr><td>7. Errores</td><td>Reconocer y corregir los errores más frecuentes de los condicionales.</td></tr>
+  </table>
+  <p>Al final encontrarás un <strong>resumen</strong>, un <strong>glosario</strong>, <strong>ejercicios</strong> para practicar y sus <strong>soluciones</strong>.</p>
+
+  <!-- ================= 1 ================= -->
+  <section class="tema">
+  <h2><span class="n">1</span>Comparaciones</h2>
+  <p>Hasta ahora, nuestros programas hacían siempre lo mismo, de arriba hacia abajo. Para que un programa pueda decidir, primero necesita hacerse preguntas que se respondan con sí o no.</p>
+  <div class="def"><b class="t">Definición</b>Una <strong>comparación</strong> es una pregunta sobre dos valores. Su resultado siempre es un <code>bool</code>: <code>True</code> (verdadero) o <code>False</code> (falso).</div>
+<pre><code>nota = 3.5
+<span class="k">print</span>(nota &gt;= 3.0)
+<span class="k">print</span>(nota == 5)</code></pre>
+<pre class="salida"><code>True
+False</code></pre>
+  </section>
+</section>
+
+<section>
+  <h3>Los seis operadores de comparación</h3>
+  <table class="v-expr" data-pre="nota = 3.5">
+    <tr><th>Símbolo</th><th>Pregunta</th><th>Con <code>nota = 3.5</code></th><th>Resultado</th></tr>
+    <tr><td><code>==</code></td><td>¿Es igual?</td><td><code>nota == 5</code></td><td class="no">False</td></tr>
+    <tr><td><code>!=</code></td><td>¿Es distinto?</td><td><code>nota != 5</code></td><td class="si">True</td></tr>
+    <tr><td><code>&gt;</code></td><td>¿Es mayor?</td><td><code>nota &gt; 4</code></td><td class="no">False</td></tr>
+    <tr><td><code>&lt;</code></td><td>¿Es menor?</td><td><code>nota &lt; 4</code></td><td class="si">True</td></tr>
+    <tr><td><code>&gt;=</code></td><td>¿Es mayor o igual?</td><td><code>nota &gt;= 3.0</code></td><td class="si">True</td></tr>
+    <tr><td><code>&lt;=</code></td><td>¿Es menor o igual?</td><td><code>nota &lt;= 3.5</code></td><td class="si">True</td></tr>
+  </table>
+  <ul>
+    <li><code>&gt;=</code> y <code>&lt;=</code> se escriben en ese orden: <code>=&gt;</code> no existe en Python.</li>
+    <li><code>True</code> y <code>False</code> llevan mayúscula inicial y no van entre comillas.</li>
+  </ul>
+
+  <h3><code>=</code> guarda, <code>==</code> compara</h3>
+  <p>Es la confusión más común de esta sesión. Un solo <code>=</code> <strong>guarda</strong> un valor en una variable. Dos signos <code>==</code> <strong>preguntan</strong> si dos valores son iguales.</p>
+  <div class="dos">
+    <div><b><code>=</code> asigna</b>: “guarda 3.5 en nota”
+<pre><code>nota = 3.5
+<span class="k">print</span>(nota)</code></pre>
+<pre class="salida"><code>3.5</code></pre></div>
+    <div><b><code>==</code> pregunta</b>: “¿nota es igual a 3.5?”
+<pre><code>nota = 3.5
+<span class="k">print</span>(nota == 3.5)</code></pre>
+<pre class="salida"><code>True</code></pre></div>
+  </div>
+
+  <h3>También se puede comparar texto</h3>
+<pre><code><span class="k">print</span>(<span class="s">"Ana"</span> == <span class="s">"Ana"</span>)
+<span class="k">print</span>(<span class="s">"Ana"</span> == <span class="s">"ana"</span>)   <span class="c"># distingue mayúsculas y minúsculas</span>
+<span class="k">print</span>(<span class="s">"5"</span> == 5)         <span class="c"># texto y número no son iguales</span></code></pre>
+<pre class="salida"><code>True
+False
+False</code></pre>
+</section>
+
+<!-- ================= 2 ================= -->
+<section class="tema">
+  <h2><span class="n">2</span>Tomar un camino u otro: <code style="font-size:18pt">if</code> y <code style="font-size:18pt">else</code></h2>
+  <div class="def"><b class="t">Definición</b>Un <strong>condicional</strong> es una instrucción que ejecuta un bloque de código <strong>solo si se cumple una condición</strong>. Una <strong>condición</strong> es cualquier expresión que da <code>True</code> o <code>False</code>.</div>
+  <p>Con <code>if</code> (“si”) y <code>else</code> (“si no”) el programa elige entre dos caminos. Un <strong>diagrama de flujo</strong> dibuja esos caminos. El camino resaltado en azul es el que toma el programa con <code>nota = 2.8</code>:</p>
+  <div class="fig">
+    <svg class="diagrama" viewBox="0 0 520 400" role="img" aria-label="Diagrama de flujo: si la nota es mayor o igual a 3.0 imprime Aprobó, si no imprime Reprobó">
+      <defs>
+        <marker id="fl1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#A5B7C5"/></marker>
+        <marker id="fl1a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#2A7FFF"/></marker>
+      </defs>
+      <rect class="inicio" x="185" y="8" width="150" height="46" rx="23"/><text class="claro" x="260" y="37" text-anchor="middle">nota = 2.8</text>
+      <path class="linea activo" d="M260 54V88" marker-end="url(#fl1a)"/>
+      <polygon class="rombo" points="260,92 375,150 260,208 145,150"/>
+      <text x="260" y="156" text-anchor="middle">nota &gt;= 3.0</text>
+      <path class="linea" d="M145 150H90V246" marker-end="url(#fl1)"/>
+      <text class="etq" x="112" y="140">Sí</text>
+      <path class="linea activo" d="M375 150H430V246" marker-end="url(#fl1a)"/>
+      <text class="etq" x="392" y="140" style="fill: var(--uifce);">No</text>
+      <rect class="caja-f" x="10" y="250" width="160" height="52" rx="10"/><text x="90" y="282" text-anchor="middle">"Aprobó"</text>
+      <rect class="caja-f activo" x="350" y="250" width="160" height="52" rx="10"/><text x="430" y="282" text-anchor="middle">"Reprobó"</text>
+      <path class="linea" d="M90 302V340H252"/>
+      <path class="linea activo" d="M430 302V340H268"/>
+      <path class="linea activo" d="M260 340V350" marker-end="url(#fl1a)"/>
+      <rect class="inicio" x="210" y="352" width="100" height="40" rx="20"/><text class="claro" x="260" y="378" text-anchor="middle">Fin</text>
+    </svg>
+    <div>
+<pre><code>nota = 2.8
+<span class="k">if</span> nota &gt;= 3.0:
+    <span class="k">print</span>(<span class="s">"Aprobó"</span>)
+<span class="k">else</span>:
+    <span class="k">print</span>(<span class="s">"Reprobó"</span>)</code></pre>
+<pre class="salida"><code>Reprobó</code></pre>
+      <p>Como 2.8 no es mayor o igual a 3.0, la condición da <code>False</code> y el programa toma el camino del <code>else</code>.</p>
+    </div>
+  </div>
+
+  <h3>Anatomía de un <code>if</code></h3>
+  <ol>
+    <li>La palabra <code>if</code>.</li>
+    <li>La <strong>condición</strong>: algo que da <code>True</code> o <code>False</code>.</li>
+    <li>Los <strong>dos puntos</strong> <code>:</code> al final de la línea. Se olvidan mucho.</li>
+    <li>La <strong>indentación</strong>: 4 espacios que marcan qué va dentro del <code>if</code>.</li>
+  </ol>
+  <p>El <code>else</code> no lleva condición, pero sí lleva dos puntos. Además, es opcional: si no lo escribes y la condición da <code>False</code>, el programa simplemente sigue con lo que viene después.</p>
+<pre><code>nota = 4.0
+<span class="k">if</span> nota &gt;= 3.0:
+    <span class="k">print</span>(<span class="s">"Aprobó"</span>)
+<span class="k">print</span>(<span class="s">"Fin"</span>)</code></pre>
+<pre class="salida"><code>Aprobó
+Fin</code></pre>
+  <div class="ojo"><b class="t">Consejo</b>Prueba el programa con <code>nota = 3.0</code> exacto. Con <code>&gt;=</code> aprueba; con <code>&gt;</code> reprueba. Un solo símbolo cambia el resultado, así que elige el operador con cuidado.</div>
+</section>
+
+<!-- ================= 3 ================= -->
+<section class="tema">
+  <h2><span class="n">3</span>La indentación no es decoración</h2>
+  <div class="def"><b class="t">Definición</b>La <strong>indentación</strong> (o sangría) son los espacios al inicio de una línea. En Python <strong>define la estructura del programa</strong>: las líneas con la misma indentación debajo del <code>if</code> forman un <strong>bloque</strong>, y ese bloque solo se ejecuta si la condición se cumple.</div>
+  <p>Se usan 4 espacios. En Colab, la tecla <strong>Tab</strong> los inserta por ti, y después de escribir los dos puntos y presionar Enter, la indentación aparece sola.</p>
+  <h3>¿Dentro o fuera?</h3>
+  <p>Estos dos programas solo se diferencian en la indentación de la última línea, y no hacen lo mismo:</p>
+  <div class="dos">
+    <div><b>“Fin” dentro del <code>if</code></b>
+<pre><code>nota = 2.0
+<span class="k">if</span> nota &gt;= 3.0:
+    <span class="k">print</span>(<span class="s">"Aprobó"</span>)
+    <span class="k">print</span>(<span class="s">"Fin"</span>)</code></pre>
+<pre class="salida"><code>(no imprime nada)</code></pre></div>
+    <div><b>“Fin” fuera del <code>if</code></b>
+<pre><code>nota = 2.0
+<span class="k">if</span> nota &gt;= 3.0:
+    <span class="k">print</span>(<span class="s">"Aprobó"</span>)
+<span class="k">print</span>(<span class="s">"Fin"</span>)</code></pre>
+<pre class="salida"><code>Fin</code></pre></div>
+  </div>
+  <p>Ninguno da error. La condición es <code>False</code> en los dos casos, pero a la derecha <code>"Fin"</code> está fuera del bloque, así que se imprime siempre.</p>
+  <h3>Si falta la indentación</h3>
+<pre><code>nota = 3.5
+<span class="k">if</span> nota &gt;= 3.0:
+<span class="k">print</span>(<span class="s">"Aprobó"</span>)</code></pre>
+<pre class="error"><code>IndentationError: expected an indented block after 'if' statement on line 2</code></pre>
+  <p>Python espera un bloque indentado después de los dos puntos, y no lo encuentra.</p>
+</section>
+
+<!-- ================= 4 ================= -->
+<section class="tema">
+  <h2><span class="n">4</span>Varias opciones con <code style="font-size:18pt">elif</code></h2>
+  <div class="def"><b class="t">Definición</b><code>elif</code> es la abreviatura de “else if” (“si no, entonces si…”). Permite revisar otra condición cuando la anterior no se cumplió. Python revisa las condiciones <strong>en orden</strong> y <strong>se detiene en la primera verdadera</strong>.</div>
+  <div class="fig">
+    <svg class="diagrama" viewBox="0 0 560 430" role="img" aria-label="Diagrama de flujo: si la nota es mayor o igual a 4.5 imprime Excelente; si no, si es mayor o igual a 3.0 imprime Aprobó; si no, imprime Reprobó">
+      <defs>
+        <marker id="fl2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#A5B7C5"/></marker>
+        <marker id="fl2a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#2A7FFF"/></marker>
+      </defs>
+      <rect class="inicio" x="125" y="6" width="150" height="44" rx="22"/><text class="claro" x="200" y="34" text-anchor="middle">nota = 4.6</text>
+      <path class="linea activo" d="M200 50V76" marker-end="url(#fl2a)"/>
+      <polygon class="rombo" points="200,80 320,132 200,184 80,132"/>
+      <text x="200" y="138" text-anchor="middle">nota &gt;= 4.5</text>
+      <path class="linea activo" d="M320 132H376" marker-end="url(#fl2a)"/>
+      <text class="etq" x="334" y="122" style="fill: var(--uifce);">Sí</text>
+      <rect class="caja-f activo" x="380" y="107" width="170" height="50" rx="10"/><text x="465" y="138" text-anchor="middle">"Excelente"</text>
+      <path class="linea" d="M200 184V222" marker-end="url(#fl2)"/>
+      <text class="etq" x="210" y="208">No</text>
+      <polygon class="rombo" points="200,226 320,278 200,330 80,278"/>
+      <text x="200" y="284" text-anchor="middle">nota &gt;= 3.0</text>
+      <path class="linea" d="M320 278H376" marker-end="url(#fl2)"/>
+      <text class="etq" x="334" y="268">Sí</text>
+      <rect class="caja-f" x="380" y="253" width="170" height="50" rx="10"/><text x="465" y="284" text-anchor="middle">"Aprobó"</text>
+      <path class="linea" d="M200 330V366" marker-end="url(#fl2)"/>
+      <text class="etq" x="210" y="354">No</text>
+      <rect class="caja-f" x="115" y="370" width="170" height="50" rx="10"/><text x="200" y="401" text-anchor="middle">"Reprobó"</text>
+    </svg>
+    <div>
+<pre><code>nota = 4.6
+<span class="k">if</span> nota &gt;= 4.5:
+    <span class="k">print</span>(<span class="s">"Excelente"</span>)
+<span class="k">elif</span> nota &gt;= 3.0:
+    <span class="k">print</span>(<span class="s">"Aprobó"</span>)
+<span class="k">else</span>:
+    <span class="k">print</span>(<span class="s">"Reprobó"</span>)</code></pre>
+<pre class="salida"><code>Excelente</code></pre>
+    </div>
+  </div>
+  <ul>
+    <li>Empieza con <strong>un</strong> <code>if</code>.</li>
+    <li>Puede tener <strong>tantos</strong> <code>elif</code> como necesites, cada uno con su condición.</li>
+    <li>Termina, si quieres, con <strong>un solo</strong> <code>else</code>, sin condición.</li>
+    <li>Solo se ejecuta <strong>un</strong> camino.</li>
+  </ul>
+  <h3>Cómo lo recorre Python</h3>
+  <p>Este es el recorrido del mismo programa con <code>nota = 3.4</code>:</p>
+  <table>
+    <tr><th>Paso</th><th>Línea</th><th>Resultado</th><th>Qué hace Python</th></tr>
+    <tr><td>1</td><td><code>if nota &gt;= 4.5:</code></td><td class="no">False</td><td>Salta su bloque y sigue a la siguiente condición.</td></tr>
+    <tr><td>2</td><td><code>elif nota &gt;= 3.0:</code></td><td class="si">True</td><td>Imprime <code>Aprobó</code> y se detiene.</td></tr>
+    <tr><td>3</td><td><code>else:</code></td><td>—</td><td>Ni siquiera lo revisa.</td></tr>
+  </table>
+  <h3>El orden importa</h3>
+  <p>Con <code>nota = 4.6</code>, ¿qué imprime este programa?</p>
+<pre><code>nota = 4.6
+<span class="k">if</span> nota &gt;= 3.0:
+    <span class="k">print</span>(<span class="s">"Aprobó"</span>)
+<span class="k">elif</span> nota &gt;= 4.5:
+    <span class="k">print</span>(<span class="s">"Excelente"</span>)</code></pre>
+<pre class="salida"><code>Aprobó</code></pre>
+  <div class="ojo"><b class="t">Ojo</b>Esto es un <strong>error lógico</strong>: no aparece ningún mensaje de error, pero el resultado está mal. La primera condición ya es verdadera, así que Python nunca llega a revisar el <code>elif</code>. Por eso las condiciones <strong>más exigentes van primero</strong>.</div>
+  <h3><code>elif</code> no es lo mismo que otro <code>if</code></h3>
+  <p>Con varios <code>if</code> seguidos, Python revisa <strong>todos</strong>, y puede ejecutarse más de un camino:</p>
+  <div class="dos">
+    <div><b>Con <code>elif</code>: un solo camino</b>
+<pre><code>nota = 4.6
+<span class="k">if</span> nota &gt;= 4.5:
+    <span class="k">print</span>(<span class="s">"Excelente"</span>)
+<span class="k">elif</span> nota &gt;= 3.0:
+    <span class="k">print</span>(<span class="s">"Aprobó"</span>)</code></pre>
+<pre class="salida"><code>Excelente</code></pre></div>
+    <div><b>Con dos <code>if</code>: se revisan ambos</b>
+<pre><code>nota = 4.6
+<span class="k">if</span> nota &gt;= 4.5:
+    <span class="k">print</span>(<span class="s">"Excelente"</span>)
+<span class="k">if</span> nota &gt;= 3.0:
+    <span class="k">print</span>(<span class="s">"Aprobó"</span>)</code></pre>
+<pre class="salida"><code>Excelente
+Aprobó</code></pre></div>
+  </div>
+</section>
+
+<!-- ================= 5 ================= -->
+<section class="tema">
+  <h2><span class="n">5</span>Combinar condiciones: <code style="font-size:18pt">and</code>, <code style="font-size:18pt">or</code>, <code style="font-size:18pt">not</code></h2>
+  <div class="def"><b class="t">Definición</b>Los <strong>operadores lógicos</strong> combinan o invierten condiciones. El resultado también es <code>True</code> o <code>False</code>.</div>
+  <table class="v-expr" data-pre="edad = 20&#10;tiene_documento = False">
+    <tr><th>Operador</th><th>Se lee</th><th>Da <code>True</code> cuando…</th><th>Con <code>edad = 20</code> y <code>tiene_documento = False</code></th><th>Resultado</th></tr>
+    <tr><td><code>and</code></td><td>“y”</td><td>Las <strong>dos</strong> condiciones son verdaderas.</td><td><code>edad &gt;= 18 and tiene_documento</code></td><td class="no">False</td></tr>
+    <tr><td><code>or</code></td><td>“o”</td><td><strong>Al menos una</strong> es verdadera.</td><td><code>edad &gt;= 18 or tiene_documento</code></td><td class="si">True</td></tr>
+    <tr><td><code>not</code></td><td>“no”</td><td>La condición es <strong>falsa</strong>: invierte el valor.</td><td><code>not tiene_documento</code></td><td class="si">True</td></tr>
+  </table>
+  <h3>Ejemplo: ¿puede votar?</h3>
+<pre><code>edad = 20
+tiene_documento = True
+<span class="k">if</span> edad &gt;= 18 <span class="k">and</span> tiene_documento:
+    <span class="k">print</span>(<span class="s">"Puede votar"</span>)
+<span class="k">else</span>:
+    <span class="k">print</span>(<span class="s">"No puede votar"</span>)</code></pre>
+<pre class="salida"><code>Puede votar</code></pre>
+  <p>Para votar se necesitan <strong>las dos cosas</strong>, por eso usamos <code>and</code>. Si usáramos <code>or</code>, alguien de 15 años con documento podría votar:</p>
+  <table>
+    <tr><th>Persona</th><th><code>edad &gt;= 18</code></th><th><code>tiene_documento</code></th><th><code>and</code></th><th><code>or</code></th></tr>
+    <tr><td>20 años, con documento</td><td class="si">True</td><td class="si">True</td><td class="si">True</td><td class="si">True</td></tr>
+    <tr><td>20 años, sin documento</td><td class="si">True</td><td class="no">False</td><td class="no">False</td><td class="si">True</td></tr>
+    <tr><td>15 años, con documento</td><td class="no">False</td><td class="si">True</td><td class="no">False</td><td class="si">True</td></tr>
+    <tr><td>15 años, sin documento</td><td class="no">False</td><td class="no">False</td><td class="no">False</td><td class="no">False</td></tr>
+  </table>
+  <h3>Invertir con <code>not</code></h3>
+<pre><code>tiene_documento = False
+<span class="k">if</span> <span class="k">not</span> tiene_documento:
+    <span class="k">print</span>(<span class="s">"Recuerda traer tu documento"</span>)</code></pre>
+<pre class="salida"><code>Recuerda traer tu documento</code></pre>
+  <div class="ojo"><b class="t">Ojo</b>Cada lado de <code>and</code> y <code>or</code> debe ser una <strong>condición completa</strong>. <code>edad &gt;= 18 and &lt;= 25</code> da <code>SyntaxError</code>: se escribe <code>edad &gt;= 18 and edad &lt;= 25</code>. Y <code>dia == "sábado" or "domingo"</code> no da error, pero siempre se cumple: se escribe <code>dia == "sábado" or dia == "domingo"</code>.</div>
+</section>
+
+<!-- ================= 6 ================= -->
+<section class="tema">
+  <h2><span class="n">6</span>Decidir con datos del usuario: <code style="font-size:18pt">input()</code></h2>
+  <p>En la sesión 1 vimos que <code>input()</code> <strong>siempre devuelve texto</strong>. Para comparar con números, primero hay que convertir ese texto.</p>
+  <h3>Sin convertir: error</h3>
+<pre><code>edad = <span class="k">input</span>(<span class="s">"¿Cuántos años tienes? "</span>)
+<span class="k">if</span> edad &gt;= 18:
+    <span class="k">print</span>(<span class="s">"Eres mayor de edad"</span>)</code></pre>
+<pre class="error"><code>TypeError: '&gt;=' not supported between instances of 'str' and 'int'</code></pre>
+  <p>El mensaje dice que no se puede usar <code>&gt;=</code> entre un texto (<code>str</code>) y un entero (<code>int</code>).</p>
+  <h3>Convirtiendo: funciona</h3>
+<pre><code>edad = <span class="k">int</span>(<span class="k">input</span>(<span class="s">"¿Cuántos años tienes? "</span>))
+<span class="k">if</span> edad &gt;= 18:
+    <span class="k">print</span>(<span class="s">"Eres mayor de edad"</span>)</code></pre>
+<pre class="salida"><code>¿Cuántos años tienes? 20
+Eres mayor de edad</code></pre>
+  <p>Usa <code>int()</code> para enteros y <code>float()</code> para decimales, como una nota de 3.5:</p>
+<pre><code>nota = <span class="k">float</span>(<span class="k">input</span>(<span class="s">"¿Cuál es tu nota? "</span>))
+<span class="k">if</span> nota &gt;= 4.5:
+    <span class="k">print</span>(<span class="s">"Excelente"</span>)
+<span class="k">elif</span> nota &gt;= 3.0:
+    <span class="k">print</span>(<span class="s">"Aprobó"</span>)
+<span class="k">else</span>:
+    <span class="k">print</span>(<span class="s">"Reprobó"</span>)</code></pre>
+<pre class="salida"><code>¿Cuál es tu nota? 3.5
+Aprobó</code></pre>
+  <div class="ojo"><b class="t">Ojo</b>Si el usuario escribe <code>3.5</code> y usas <code>int(input(...))</code>, Python responde con <code>ValueError</code>, porque ese texto no es un entero. Para notas, usa <code>float()</code>.</div>
+</section>
+
+<!-- ================= 7 ================= -->
+<section class="tema">
+  <h2><span class="n">7</span>Errores frecuentes</h2>
+  <p>Recuerda lo que vimos en la sesión 1: empieza por la <strong>última línea</strong> del mensaje, que es donde está la pista principal.</p>
+  <table class="v-error">
+    <tr><th>Error y qué significa</th><th>Código con error</th><th>Corrección</th></tr>
+    <tr><td><code>SyntaxError</code><br>Faltan los dos puntos: <code>expected ':'</code>.</td><td><code class="b">nota = 3.5
+if nota &gt;= 3.0
+    print("Aprobó")</code></td><td><code class="b">nota = 3.5
+if nota &gt;= 3.0:
+    print("Aprobó")</code></td></tr>
+    <tr><td><code>SyntaxError</code><br>Usaste <code>=</code>, que guarda, en lugar de <code>==</code>, que compara.</td><td><code class="b">nota = 3.5
+if nota = 3.5:
+    print("Igual")</code></td><td><code class="b">nota = 3.5
+if nota == 3.5:
+    print("Igual")</code></td></tr>
+    <tr><td><code>IndentationError</code><br>Falta la sangría del bloque.</td><td><code class="b">nota = 3.5
+if nota &gt;= 3.0:
+print("Aprobó")</code></td><td><code class="b">nota = 3.5
+if nota &gt;= 3.0:
+    print("Aprobó")</code></td></tr>
+    <tr><td><code>TypeError</code><br>Se está comparando texto con un número.</td><td><code class="b">edad = input("Edad: ")
+if edad &gt;= 18:
+    print("Mayor")</code></td><td><code class="b">edad = int(input("Edad: "))
+if edad &gt;= 18:
+    print("Mayor")</code></td></tr>
+  </table>
+  <h3>Otros errores que vas a encontrar</h3>
+  <ul>
+    <li><code>else if nota &gt;= 3.0:</code> → <code>SyntaxError</code>: en Python se escribe <code>elif</code>.</li>
+    <li><code>else nota &lt; 3.0:</code> → <code>SyntaxError</code>: el <code>else</code> no lleva condición.</li>
+    <li><code>If nota &gt;= 3.0:</code> → <code>SyntaxError</code>: Python distingue mayúsculas; se escribe <code>if</code>.</li>
+    <li><code>print(true)</code> → <code>NameError</code>: se escribe <code>True</code>, con mayúscula.</li>
+    <li><strong>Sin mensaje de error:</strong> condiciones en mal orden o <code>and</code> en lugar de <code>or</code>. El programa corre, pero el resultado está mal. Por eso conviene probarlo con varios valores.</li>
+  </ul>
+  <p style="font-size:10pt;color:var(--gris-azul)">Según la versión de Python, el texto de algunos mensajes puede cambiar un poco, pero el tipo de error es el mismo.</p>
+
+  <!-- ================= RESUMEN ================= -->
+  <section class="tema sigue">
+  <h2>Tres ideas clave</h2>
+  <ul class="ideas">
+    <li>Una condición siempre se evalúa como True o False.</li>
+    <li>if / elif / else permite que el programa tome caminos distintos.</li>
+    <li>En Python la indentación no es decoración: define la estructura.</li>
+  </ul>
+  </section>
+</section>
+
+<!-- ================= GLOSARIO ================= -->
+<section class="tema nueva">
+  <h2>Glosario</h2>
+  <table class="glosario">
+    <tr><td>Bloque</td><td>Grupo de líneas con la misma indentación que se ejecutan juntas.</td></tr>
+    <tr><td>Booleano</td><td>Tipo de dato <code>bool</code>. Solo tiene dos valores: <code>True</code> y <code>False</code>.</td></tr>
+    <tr><td>Comparación</td><td>Pregunta sobre dos valores que da <code>True</code> o <code>False</code>, como <code>nota &gt;= 3.0</code>.</td></tr>
+    <tr><td>Condición</td><td>Expresión que da <code>True</code> o <code>False</code> y decide qué camino toma el programa.</td></tr>
+    <tr><td>Condicional</td><td>Instrucción que ejecuta un bloque solo si se cumple una condición.</td></tr>
+    <tr><td>Convertir</td><td>Cambiar un dato de un tipo a otro, por ejemplo con <code>int()</code> o <code>float()</code>.</td></tr>
+    <tr><td>Diagrama de flujo</td><td>Dibujo de los pasos y los caminos que puede tomar un programa.</td></tr>
+    <tr><td><code>elif</code></td><td>“Si no, entonces si…”. Revisa otra condición cuando la anterior no se cumplió.</td></tr>
+    <tr><td><code>else</code></td><td>“Si no”. Se ejecuta cuando ninguna condición anterior se cumplió.</td></tr>
+    <tr><td>Error lógico</td><td>El programa corre sin mensajes de error, pero el resultado está mal.</td></tr>
+    <tr><td><code>if</code></td><td>“Si”. Ejecuta su bloque cuando la condición es verdadera.</td></tr>
+    <tr><td>Indentación</td><td>Espacios al inicio de una línea. En Python define qué va dentro de cada bloque.</td></tr>
+    <tr><td>Operador de comparación</td><td>Símbolo que compara dos valores: <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>.</td></tr>
+    <tr><td>Operador lógico</td><td>Palabra que combina o invierte condiciones: <code>and</code>, <code>or</code>, <code>not</code>.</td></tr>
+  </table>
+</section>
+
+<!-- ================= EJERCICIOS ================= -->
+<section class="tema nueva">
+  <h2>Ejercicios</h2>
+  <p>Resuélvelos en Colab antes de mirar las soluciones. Avanza hasta donde llegues.</p>
+  <h3>Ponte a prueba: ¿qué imprime cada línea?</h3>
+  <p>Escribe tu respuesta <strong>antes</strong> de ejecutar el código.</p>
+  <table>
+    <tr><th>Código</th><th style="width:55%">Tu respuesta</th></tr>
+    <tr><td><code>print(5 == 5.0)</code></td><td></td></tr>
+    <tr><td><code>print("5" == 5)</code></td><td></td></tr>
+    <tr><td><code>print(3 &gt; 3)</code></td><td></td></tr>
+    <tr><td><code>print(3 &gt;= 3)</code></td><td></td></tr>
+    <tr><td><code>print(not 4 &gt; 2)</code></td><td></td></tr>
+    <tr><td><code>print(2 &gt; 1 and 1 &gt; 2)</code></td><td></td></tr>
+    <tr><td><code>print(2 &gt; 1 or 1 &gt; 2)</code></td><td></td></tr>
+  </table>
+  <h3>¿Qué camino toma?</h3>
+  <p>Sigue el programa con el dedo, línea por línea, y escribe lo que imprime.</p>
+  <table>
+    <tr><th>Código</th><th style="width:45%">Tu respuesta</th></tr>
+    <tr><td><code class="b">nota = 3.0
+if nota &gt; 3.0:
+    print("Aprobó")
+else:
+    print("Reprobó")</code></td><td></td></tr>
+    <tr><td><code class="b">x = 7
+if x &gt; 5:
+    print("A")
+elif x &gt; 3:
+    print("B")
+else:
+    print("C")</code></td><td></td></tr>
+    <tr><td><code class="b">n = 4
+if n % 2 == 0:
+    print("Par")
+print("Fin")</code></td><td></td></tr>
+  </table>
+  <h3>Encuentra el error</h3>
+  <p>Di qué tipo de error produce cada programa y corrígelo.</p>
+  <table>
+    <tr><th>Código</th><th style="width:50%">Error y corrección</th></tr>
+    <tr><td><code class="b">nota = 4.0
+if nota &gt;= 3.0
+    print("Aprobó")</code></td><td></td></tr>
+    <tr><td><code class="b">nota = 4.0
+if nota = 4.0:
+    print("Cuatro")</code></td><td></td></tr>
+    <tr><td><code class="b">edad = 20
+if edad &gt;= 18:
+print("Mayor")</code></td><td></td></tr>
+    <tr><td><code class="b">nota = 4.0
+if nota &gt;= 4.5:
+    print("Excelente")
+else if nota &gt;= 3.0:
+    print("Aprobó")</code></td><td></td></tr>
+  </table>
+  <h3>Ejercicios de la clase</h3>
+  <div class="ej"><span class="nivel">Básico</span><b>1.</b> Pide un número y di si es positivo, negativo o cero.</div>
+  <div class="ej"><span class="nivel">Básico</span><b>2.</b> Pide la nota de un estudiante y muestra “Aprobó” o “Reprobó”.</div>
+  <div class="ej"><span class="nivel int">Intermedio</span><b>3.</b> Clasificador de IMC: pide peso y estatura, calcula <code>peso / estatura**2</code> y muestra la categoría. Usa las categorías de la OMS: bajo peso (menos de 18.5), normal (de 18.5 a menos de 25), sobrepeso (de 25 a menos de 30) y obesidad (30 o más).</div>
+  <div class="ej"><span class="nivel int">Intermedio</span><b>4.</b> Una tienda da 10&nbsp;% de descuento si la compra supera $100.000 y 20&nbsp;% si supera $200.000. Calcula el valor final.</div>
+  <div class="ej"><span class="nivel reto">Reto</span><b>5.</b> Pide un año y di si es bisiesto (divisible entre 4, excepto los divisibles entre 100 que no lo sean entre 400). Pista: usa <code>%</code>.</div>
+  <div class="ej"><span class="nivel reto">Reto</span><b>6.</b> Mini “piedra, papel o tijera” entre dos jugadores que escriben su elección.</div>
+  <div class="ojo"><b class="t">Consejo</b>¿Te atascaste? Dibuja primero el <strong>diagrama de flujo</strong> en papel y programa después. En el ejercicio 4, piensa qué condición debe ir primero.</div>
+</section>
+
+<!-- ================= SOLUCIONES ================= -->
+<section class="tema nueva">
+  <h2>Soluciones</h2>
+  <p>Hay muchas formas correctas de resolver cada ejercicio. Si tu código es distinto pero da el resultado correcto, también está bien.</p>
+  <h3>Ponte a prueba</h3>
+  <table class="v-salida">
+    <tr><th>Código</th><th>Salida</th><th>Por qué</th></tr>
+    <tr><td><code>print(5 == 5.0)</code></td><td><code>True</code></td><td>Tienen el mismo valor, aunque uno sea <code>int</code> y el otro <code>float</code>.</td></tr>
+    <tr><td><code>print("5" == 5)</code></td><td><code>False</code></td><td>Uno es texto y el otro es número.</td></tr>
+    <tr><td><code>print(3 &gt; 3)</code></td><td><code>False</code></td><td>3 no es mayor que 3.</td></tr>
+    <tr><td><code>print(3 &gt;= 3)</code></td><td><code>True</code></td><td>3 sí es igual a 3.</td></tr>
+    <tr><td><code>print(not 4 &gt; 2)</code></td><td><code>False</code></td><td><code>4 &gt; 2</code> es <code>True</code> y <code>not</code> lo invierte.</td></tr>
+    <tr><td><code>print(2 &gt; 1 and 1 &gt; 2)</code></td><td><code>False</code></td><td><code>and</code> necesita las dos, y la segunda es falsa.</td></tr>
+    <tr><td><code>print(2 &gt; 1 or 1 &gt; 2)</code></td><td><code>True</code></td><td><code>or</code> necesita al menos una, y la primera es verdadera.</td></tr>
+  </table>
+  <h3>¿Qué camino toma?</h3>
+  <table class="v-salida">
+    <tr><th>Código</th><th>Salida</th><th>Por qué</th></tr>
+    <tr><td><code class="b">nota = 3.0
+if nota &gt; 3.0:
+    print("Aprobó")
+else:
+    print("Reprobó")</code></td><td><code class="b">Reprobó</code></td><td>Con <code>&gt;</code>, 3.0 no cumple la condición. Con <code>&gt;=</code> sí la cumpliría.</td></tr>
+    <tr><td><code class="b">x = 7
+if x &gt; 5:
+    print("A")
+elif x &gt; 3:
+    print("B")
+else:
+    print("C")</code></td><td><code class="b">A</code></td><td>Las dos primeras condiciones son verdaderas, pero Python se detiene en la primera.</td></tr>
+    <tr><td><code class="b">n = 4
+if n % 2 == 0:
+    print("Par")
+print("Fin")</code></td><td><code class="b">Par
+Fin</code></td><td>4 es par, y <code>"Fin"</code> está fuera del <code>if</code>: se imprime siempre.</td></tr>
+  </table>
+  <h3>Encuentra el error</h3>
+  <table class="v-error">
+    <tr><th>Código</th><th>Error</th><th>Corrección</th></tr>
+    <tr><td><code class="b">nota = 4.0
+if nota &gt;= 3.0
+    print("Aprobó")</code></td><td><code>SyntaxError</code>: faltan los dos puntos.</td><td><code class="b">nota = 4.0
+if nota &gt;= 3.0:
+    print("Aprobó")</code></td></tr>
+    <tr><td><code class="b">nota = 4.0
+if nota = 4.0:
+    print("Cuatro")</code></td><td><code>SyntaxError</code>: para comparar se usa <code>==</code>.</td><td><code class="b">nota = 4.0
+if nota == 4.0:
+    print("Cuatro")</code></td></tr>
+    <tr><td><code class="b">edad = 20
+if edad &gt;= 18:
+print("Mayor")</code></td><td><code>IndentationError</code>: falta la sangría.</td><td><code class="b">edad = 20
+if edad &gt;= 18:
+    print("Mayor")</code></td></tr>
+    <tr><td><code class="b">nota = 4.0
+if nota &gt;= 4.5:
+    print("Excelente")
+else if nota &gt;= 3.0:
+    print("Aprobó")</code></td><td><code>SyntaxError</code>: en Python se escribe <code>elif</code>.</td><td><code class="b">nota = 4.0
+if nota &gt;= 4.5:
+    print("Excelente")
+elif nota &gt;= 3.0:
+    print("Aprobó")</code></td></tr>
+  </table>
+  <p style="margin-top:8mm"><strong>Próxima sesión: listas, bucles y funciones.</strong> ¿Y si quisiéramos repetir algo cien veces? Trae tus dudas de esta guía a la clase o escríbelas en el Moodle FCE.</p>
+</section>
+
+</body>
+</html>

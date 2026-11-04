@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía de repaso · Sesión 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Regular.otf"); font-weight: 400; }
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Italic.otf"); font-weight: 400; font-style: italic; }
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Bold.otf"); font-weight: 700; }
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Extrabold.otf"); font-weight: 800; }
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Extrablack.otf"); font-weight: 900; }
+  :root {
+    --azul: #073763; --azul-2: #0B5394; --azul-osc: #162848; --gris-claro: #EDEFF3; --gris-azul: #5F7D95;
+    --hielo: #CFE7FF; --uifce: #2A7FFF; --amarillo: #F2C81B; --verde: #1E7B34; --rojo: #B3261E;
+  }
+  @page { size: letter; margin: 18mm 18mm 20mm; }
+  @page :first { margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Ancizar Sans", system-ui, sans-serif; font-size: 11.5pt; line-height: 1.45; color: var(--azul-osc); background: #fff;
+         font-variant-ligatures: none; font-feature-settings: "calt" 0, "liga" 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  code, pre { font-family: "Fira Code", Menlo, monospace; font-variant-ligatures: none; font-feature-settings: "calt" 0, "liga" 0; }
+
+  /* Portada */
+  .portada { height: 279.4mm; position: relative; overflow: hidden; break-after: page; }
+  .portada .azul { position: absolute; inset: 0 0 auto 0; height: 168mm; background: var(--azul); }
+  .portada .azul::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 5mm; background: var(--amarillo); }
+  .portada .textos { position: absolute; left: 20mm; right: 20mm; top: 40mm; color: #fff; }
+  .portada .kicker { font-weight: 800; font-size: 12pt; letter-spacing: .14em; text-transform: uppercase; color: var(--hielo); }
+  .portada h1 { font-weight: 900; font-size: 40pt; line-height: 1.02; margin: 6mm 0 5mm; }
+  .portada .sub { font-size: 16pt; color: #fff; opacity: .92; max-width: 140mm; }
+  .portada .uifcito { position: absolute; right: 16mm; top: 112mm; height: 92mm; }
+  .portada .datos { position: absolute; left: 20mm; top: 184mm; right: 110mm; font-size: 11.5pt; }
+  .portada .datos b { display: block; font-size: 9pt; letter-spacing: .1em; text-transform: uppercase; color: var(--gris-azul); margin-top: 4mm; }
+  .portada .logo { position: absolute; left: 20mm; bottom: 18mm; height: 15mm; }
+  .portada .pie { position: absolute; right: 20mm; bottom: 18mm; text-align: right; font-size: 9.5pt; color: var(--gris-azul); }
+
+  /* Contenido */
+  h2 { font-weight: 900; font-size: 21pt; color: var(--azul); margin: 0 0 3mm; line-height: 1.1; break-after: avoid; }
+  h2 .n { display: inline-grid; place-items: center; width: 10mm; height: 10mm; border-radius: 50%; background: var(--azul); color: #fff; font-size: 14pt; margin-right: 3mm; vertical-align: 2px; }
+  h3 { font-weight: 800; font-size: 13.5pt; color: var(--azul-2); margin: 5mm 0 1.5mm; break-after: avoid; }
+  section.tema { margin-top: 9mm; }
+  section.tema.nueva { break-before: page; margin-top: 0; }
+  h2 + p, h3 + p, h3 + pre { break-before: avoid; }
+  pre:has(+ pre.salida) { break-after: avoid; }
+  pre.salida { break-before: avoid; }
+  p { margin: 0 0 2.5mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 6mm; }
+  li { margin-bottom: 1.2mm; }
+  strong { color: var(--azul); }
+  code { font-size: 9.8pt; background: var(--gris-claro); color: var(--azul); padding: .2mm 1.2mm; border-radius: 1.2mm; }
+  pre { margin: 2mm 0 3.5mm; padding: 3mm 4mm; background: #0E1E33; color: #E8F1FF; border-radius: 2.5mm; font-size: 9.6pt; line-height: 1.5; white-space: pre-wrap; break-inside: avoid; }
+  pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+  pre .c { color: #8FA8C2; } pre .s { color: #FFD866; } pre .k { color: #6CC7FF; } pre .e { color: #FF8A80; }
+  pre.salida { background: var(--gris-claro); color: var(--azul-osc); border-left: 1.5mm solid var(--gris-azul); }
+  pre.salida::before { content: "Salida"; display: block; font-family: "Ancizar Sans"; font-weight: 800; font-size: 8pt; letter-spacing: .1em; text-transform: uppercase; color: var(--gris-azul); }
+  pre.error { background: #FDECEA; color: #5B1A14; border-left: 1.5mm solid var(--rojo); }
+
+  .def { background: var(--hielo); border-left: 1.8mm solid var(--azul-2); border-radius: 0 2.5mm 2.5mm 0; padding: 3mm 4.5mm; margin: 2.5mm 0 3.5mm; break-inside: avoid; }
+  .def b.t { display: block; font-weight: 800; font-size: 8.5pt; letter-spacing: .1em; text-transform: uppercase; color: var(--azul-2); margin-bottom: .5mm; }
+  .ojo { background: #FFF7D6; border-left: 1.8mm solid var(--amarillo); border-radius: 0 2.5mm 2.5mm 0; padding: 3mm 4.5mm; margin: 2.5mm 0 3.5mm; break-inside: avoid; }
+  .ojo b.t { display: block; font-weight: 800; font-size: 8.5pt; letter-spacing: .1em; text-transform: uppercase; color: #8A6A00; margin-bottom: .5mm; }
+
+  table { width: 100%; border-collapse: separate; border-spacing: 0 1.2mm; margin: 1mm 0 3mm; break-inside: avoid; font-size: 10.5pt; }
+  th { text-align: left; font-weight: 800; font-size: 8pt; letter-spacing: .1em; text-transform: uppercase; color: var(--gris-azul); padding: 0 3mm; }
+  td { background: var(--gris-claro); padding: 1.6mm 3mm; vertical-align: top; }
+  td:first-child { border-radius: 2mm 0 0 2mm; } td:last-child { border-radius: 0 2mm 2mm 0; }
+  td code { background: #fff; }
+  .si { color: var(--verde); font-weight: 800; } .no { color: var(--rojo); font-weight: 800; }
+
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .dos > div { break-inside: avoid; }
+  .ideas { counter-reset: i; list-style: none; padding: 0; }
+  .ideas li { counter-increment: i; display: grid; grid-template-columns: 11mm 1fr; align-items: center; gap: 3mm; background: var(--gris-claro); border-radius: 2.5mm; padding: 3mm; font-size: 12.5pt; margin-bottom: 2.5mm; }
+  .ideas li::before { content: counter(i); display: grid; place-items: center; width: 11mm; height: 11mm; border-radius: 50%; background: var(--amarillo); color: var(--azul); font-weight: 900; font-size: 15pt; }
+  .ej { break-inside: avoid; margin-bottom: 3.5mm; }
+  .nivel { display: inline-block; font-weight: 800; font-size: 8pt; letter-spacing: .1em; text-transform: uppercase; padding: .6mm 2.4mm; border-radius: 10mm; background: var(--azul); color: #fff; margin-right: 2mm; }
+  .nivel.int { background: var(--azul-2); } .nivel.reto { background: var(--amarillo); color: var(--azul); }
+  .lineas { border-bottom: .3mm dashed #B9C6D3; height: 7mm; }
+  .glosario td:first-child { font-weight: 800; color: var(--azul); white-space: nowrap; width: 32mm; }
+  th code { text-transform: none; letter-spacing: 0; background: none; padding: 0; font-size: 8.5pt; color: var(--gris-azul); }
+  p:has(+ pre), p:has(+ table), p:has(+ .dos), p:has(+ .fig), p:has(+ ul), p:has(+ ol), .def:has(+ table) { break-after: avoid; }
+  pre:has(+ pre.error) { break-after: avoid; } pre.error { break-before: avoid; }
+  .ideas, ul, ol { break-inside: avoid; }
+  .def:has(+ pre) { break-after: avoid; }
+  td code.b { display: block; white-space: pre; background: #fff; padding: .8mm 1.5mm; font-size: 9pt; line-height: 1.4; }
+  .posiciones td, .posiciones th { text-align: center; } .posiciones td:first-child, .posiciones th:first-child { text-align: left; }
+  pre.plantilla { margin-bottom: 3.5mm; }
+  .fig { display: grid; grid-template-columns: 82mm 1fr; gap: 6mm; align-items: center; margin: 2mm 0 3mm; break-inside: avoid; }
+  .fig pre.salida { margin-bottom: 2.5mm; }
+  .diagrama { display: block; width: 100%; height: auto; }
+  .diagrama text { font-family: "Fira Code", Menlo, monospace; font-size: 18px; fill: var(--azul); }
+  .diagrama .etq { font-family: "Ancizar Sans", sans-serif; font-weight: 900; font-size: 18px; }
+  .diagrama .caja-f { fill: var(--gris-claro); stroke: var(--gris-azul); stroke-width: 2; }
+  .diagrama .rombo { fill: var(--hielo); stroke: var(--azul-2); stroke-width: 3; }
+  .diagrama .inicio { fill: var(--azul); }
+  .diagrama text.claro { fill: var(--gris-claro); }
+  .diagrama .linea { stroke: #A5B7C5; stroke-width: 3; fill: none; }
+  .diagrama .activo { stroke: var(--uifce); stroke-width: 4; }
+  .diagrama .caja-f.activo { fill: var(--hielo); }
+</style>
+</head>
+<body>
+
+<!-- ================= PORTADA ================= -->
+<div class="portada">
+  <div class="azul"></div>
+  <div class="textos">
+    <div class="kicker">Guía de repaso · Sesión 3</div>
+    <h1>Repetir sin repetirse:<br>listas, bucles y funciones</h1>
+    <div class="sub">Definiciones, ejemplos y ejercicios para repasar lo que vimos en clase.</div>
+  </div>
+  <img class="uifcito" src="../presentaciones/assets/uifcito/saludo.png" alt="">
+  <div class="datos">
+    <b>Curso libre</b>Introducción a la Programación en Python y R
+    <b>Semestre</b>2026-2
+    <b>Estudiante auxiliar</b>Yony Sebastián Chaparro Mesa
+    <b>Material del curso</b>Moodle FCE
+  </div>
+  <img class="logo" src="../presentaciones/assets/img/logo_uifce.png" alt="UIFCE">
+  <div class="pie">Unidad de Informática · Facultad de Ciencias Económicas<br>Universidad Nacional de Colombia, Sede Bogotá<br>uniic_bog@unal.edu.co</div>
+</div>
+
+<!-- ================= CÓMO USAR ================= -->
+<section>
+  <h2>Cómo usar esta guía</h2>
+  <p>Esta guía resume la tercera sesión del curso. Cada tema tiene <strong>definiciones</strong> (recuadros azules), <strong>ejemplos de código</strong> con su salida y <strong>advertencias</strong> sobre los errores más comunes (recuadros amarillos).</p>
+  <p>La mejor forma de repasar es con Google Colab abierto: <strong>escribe tú mismo cada ejemplo</strong>, ejecútalo y compara tu salida con la de la guía. Para los bucles, ayuda mucho seguir el programa en papel, vuelta por vuelta.</p>
+  <table>
+    <tr><th>Tema</th><th>Qué deberías poder hacer al terminar</th></tr>
+    <tr><td>1. Listas</td><td>Crear una lista para guardar varios datos en una sola variable.</td></tr>
+    <tr><td>2. Posiciones</td><td>Acceder a un elemento por su posición, contando desde 0.</td></tr>
+    <tr><td>3. <code>len()</code> y <code>append()</code></td><td>Contar los elementos de una lista y agregar otros nuevos.</td></tr>
+    <tr><td>4. Bucle <code>for</code></td><td>Repetir una acción para cada elemento de una lista.</td></tr>
+    <tr><td>5. Acumuladores y contadores</td><td>Sumar y contar dentro de un bucle, y combinarlo con un <code>if</code>.</td></tr>
+    <tr><td>6. <code>range()</code></td><td>Repetir una acción un número determinado de veces.</td></tr>
+    <tr><td>7. Funciones</td><td>Crear y llamar funciones con <code>def</code> y <code>return</code>.</td></tr>
+    <tr><td>8. Errores</td><td>Reconocer y corregir los errores más frecuentes de listas, bucles y funciones.</td></tr>
+  </table>
+  <p>Al final encontrarás un <strong>resumen</strong>, un <strong>glosario</strong>, <strong>ejercicios</strong> para practicar y sus <strong>soluciones</strong>.</p>
+
+  <!-- ================= 1 ================= -->
+  <section class="tema">
+  <h2><span class="n">1</span>Listas</h2>
+  <p>Con lo que sabemos hasta ahora, cada dato necesita su propia variable. Funciona con 4 notas, pero ¿y con 40? La solución es guardarlas todas juntas.</p>
+  <div class="def"><b class="t">Definición</b>Una <strong>lista</strong> guarda <strong>varios valores en orden</strong> dentro de una sola variable. Cada valor de la lista se llama <strong>elemento</strong>.</div>
+  <div class="dos">
+    <div><b>Una variable por dato</b>
+<pre><code>nota1 = 3.5
+nota2 = 4.2
+nota3 = 2.8
+nota4 = 4.9</code></pre></div>
+    <div><b>Una lista</b>
+<pre><code>notas = [3.5, 4.2, 2.8, 4.9]</code></pre></div>
+  </div>
+  </section>
+</section>
+
+<section>
+  <h3>Crear una lista</h3>
+  <p>Se escribe con <strong>corchetes</strong> <code>[ ]</code> y los elementos van separados por <strong>comas</strong>.</p>
+<pre><code>notas = [3.5, 4.2, 2.8, 4.9]
+ciudades = [<span class="s">"Bogotá"</span>, <span class="s">"Medellín"</span>, <span class="s">"Cali"</span>]
+vacia = []
+
+<span class="k">print</span>(ciudades)
+<span class="k">print</span>(vacia)</code></pre>
+<pre class="salida"><code>['Bogotá', 'Medellín', 'Cali']
+[]</code></pre>
+  <ul>
+    <li>Puede guardar números, textos o cualquier otro tipo de dato.</li>
+    <li>También puede empezar <strong>vacía</strong> e ir creciendo.</li>
+    <li><code>print()</code> muestra la lista completa, con corchetes y comillas.</li>
+  </ul>
+</section>
+
+<!-- ================= 2 ================= -->
+<section class="tema">
+  <h2><span class="n">2</span>Las posiciones empiezan en 0</h2>
+  <div class="def"><b class="t">Definición</b>Cada elemento tiene una <strong>posición</strong> (o <strong>índice</strong>). Para leerlo se escribe el nombre de la lista y la posición entre corchetes: <code>notas[0]</code>. El primer elemento está en la posición <strong>0</strong>.</div>
+  <table class="posiciones">
+    <tr><th>Posición</th><th>0 (primero)</th><th>1</th><th>2</th><th>3 (último)</th></tr>
+    <tr><td>Valor en <code>notas</code></td><td><code>3.5</code></td><td><code>4.2</code></td><td><code>2.8</code></td><td><code>4.9</code></td></tr>
+  </table>
+<pre><code>notas = [3.5, 4.2, 2.8, 4.9]
+<span class="k">print</span>(notas[0])
+<span class="k">print</span>(notas[3])</code></pre>
+<pre class="salida"><code>3.5
+4.9</code></pre>
+  <p>Una lista de 4 elementos tiene posiciones de 0 a 3. La posición 4 no existe:</p>
+<pre><code>notas = [3.5, 4.2, 2.8, 4.9]
+<span class="k">print</span>(notas[4])</code></pre>
+<pre class="error"><code>IndexError: list index out of range</code></pre>
+  <div class="ojo"><b class="t">Ojo</b>En Python se cuenta desde <strong>0</strong>. En R se cuenta desde <strong>1</strong>: lo veremos en la sesión 5. Es un detalle pequeño que causa muchos errores.</div>
+</section>
+
+<!-- ================= 3 ================= -->
+<section class="tema">
+  <h2><span class="n">3</span>Contar y agregar: <code style="font-size:18pt">len()</code> y <code style="font-size:18pt">append()</code></h2>
+  <div class="dos">
+    <div><b><code>len()</code> cuenta</b>: cuántos elementos tiene la lista.
+<pre><code>notas = [3.5, 4.2, 2.8, 4.9]
+<span class="k">print</span>(<span class="k">len</span>(notas))</code></pre>
+<pre class="salida"><code>4</code></pre></div>
+    <div><b><code>.append()</code> agrega</b>: pone un elemento al final.
+<pre><code>notas = [3.5, 4.2, 2.8, 4.9]
+notas.append(3.0)
+<span class="k">print</span>(notas)
+<span class="k">print</span>(<span class="k">len</span>(notas))</code></pre>
+<pre class="salida"><code>[3.5, 4.2, 2.8, 4.9, 3.0]
+5</code></pre></div>
+  </div>
+  <p>Fíjate en cómo se escribe cada una: <code>len(notas)</code> lleva la lista entre paréntesis, mientras que <code>append</code> se escribe <strong>después</strong> de la lista, con un punto: es una acción que la lista sabe hacer sobre sí misma.</p>
+</section>
+
+<!-- ================= 4 ================= -->
+<section class="tema">
+  <h2><span class="n">4</span>El bucle <code style="font-size:18pt">for</code></h2>
+  <div class="def"><b class="t">Definición</b>Un <strong>bucle</strong> repite un bloque de código. El bucle <code>for</code> lo repite <strong>una vez por cada elemento</strong> de una lista. Cada repetición se llama <strong>vuelta</strong> (o iteración).</div>
+<pre><code>notas = [3.5, 4.2, 2.8, 4.9]
+<span class="k">for</span> nota <span class="k">in</span> notas:
+    <span class="k">print</span>(<span class="s">"Nota:"</span>, nota)</code></pre>
+<pre class="salida"><code>Nota: 3.5
+Nota: 4.2
+Nota: 2.8
+Nota: 4.9</code></pre>
+  <p>Se lee casi como en español: <strong>“para cada nota en notas, imprime la nota”</strong>.</p>
+  <h3>Anatomía de un <code>for</code></h3>
+  <ol>
+    <li>La palabra <code>for</code> (“para cada”).</li>
+    <li>Una <strong>variable</strong> que toma cada valor, uno a la vez. El nombre lo eliges tú.</li>
+    <li>La <strong>lista</strong> que se recorre, después de <code>in</code>.</li>
+    <li>Los <strong>dos puntos</strong> y, debajo, el bloque <strong>indentado</strong> que se repite. Funcionan igual que en el <code>if</code>.</li>
+  </ol>
+  <h3>¿Cómo se ejecuta?</h3>
+  <p>En cada vuelta, la variable <code>nota</code> cambia de valor. Cuando ya no quedan elementos, el programa sigue con la línea que hay después del bloque.</p>
+  <div class="fig">
+    <svg class="diagrama" viewBox="0 0 520 400" role="img" aria-label="Diagrama de flujo del for: mientras queden notas, toma la siguiente e imprímela; cuando no quedan, el programa sigue">
+      <defs>
+        <marker id="fl3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#A5B7C5"/></marker>
+        <marker id="fl3a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#2A7FFF"/></marker>
+      </defs>
+      <rect class="inicio" x="150" y="8" width="220" height="46" rx="23"/><text class="claro" x="260" y="37" text-anchor="middle">for nota in notas</text>
+      <path class="linea activo" d="M260 54V88" marker-end="url(#fl3a)"/>
+      <polygon class="rombo" points="260,92 390,150 260,208 130,150"/>
+      <text x="260" y="156" text-anchor="middle">¿Quedan notas?</text>
+      <path class="linea activo" d="M260 208V246" marker-end="url(#fl3a)"/>
+      <text class="etq" x="280" y="232" style="fill: var(--uifce);">Sí</text>
+      <rect class="caja-f activo" x="160" y="250" width="200" height="52" rx="10"/><text x="260" y="282" text-anchor="middle">nota = siguiente</text>
+      <path class="linea activo" d="M260 302V326" marker-end="url(#fl3a)"/>
+      <rect class="caja-f activo" x="160" y="330" width="200" height="52" rx="10"/><text x="260" y="362" text-anchor="middle">print(nota)</text>
+      <path class="linea activo" d="M160 356H60V150H126" marker-end="url(#fl3a)"/>
+      <path class="linea" d="M390 150H460V246" marker-end="url(#fl3)"/>
+      <text class="etq" x="402" y="140">No</text>
+      <rect class="inicio" x="405" y="250" width="110" height="44" rx="22"/><text class="claro" x="460" y="277" text-anchor="middle">Sigue</text>
+    </svg>
+    <table>
+      <tr><th>Vuelta</th><th><code>nota</code></th><th>Imprime</th></tr>
+      <tr><td>1</td><td><code>3.5</code></td><td>Nota: 3.5</td></tr>
+      <tr><td>2</td><td><code>4.2</code></td><td>Nota: 4.2</td></tr>
+      <tr><td>3</td><td><code>2.8</code></td><td>Nota: 2.8</td></tr>
+      <tr><td>4</td><td><code>4.9</code></td><td>Nota: 4.9</td></tr>
+    </table>
+  </div>
+  <h3>¿Dentro o fuera del bucle?</h3>
+  <p>Igual que en el <code>if</code>, la indentación decide qué se repite:</p>
+  <div class="dos">
+    <div><b>Dentro: se repite</b>
+<pre><code><span class="k">for</span> n <span class="k">in</span> [1, 2]:
+    <span class="k">print</span>(n)
+    <span class="k">print</span>(<span class="s">"Listo"</span>)</code></pre>
+<pre class="salida"><code>1
+Listo
+2
+Listo</code></pre></div>
+    <div><b>Fuera: se ejecuta una vez, al final</b>
+<pre><code><span class="k">for</span> n <span class="k">in</span> [1, 2]:
+    <span class="k">print</span>(n)
+<span class="k">print</span>(<span class="s">"Listo"</span>)</code></pre>
+<pre class="salida"><code>1
+2
+Listo</code></pre></div>
+  </div>
+</section>
+
+<!-- ================= 5 ================= -->
+<section class="tema">
+  <h2><span class="n">5</span>Acumuladores y contadores</h2>
+  <div class="def"><b class="t">Definición</b>Un <strong>acumulador</strong> es una variable que va guardando un total: en cada vuelta del bucle le sumamos algo.</div>
+  <p>Tiene tres pasos: <strong>crear</strong> el acumulador antes del <code>for</code>, <strong>actualizarlo</strong> dentro y <strong>usarlo</strong> después.</p>
+<pre><code>notas = [3.5, 4.2, 2.8, 4.9]
+suma = 0                      <span class="c"># 1. empieza en 0, antes del for</span>
+<span class="k">for</span> nota <span class="k">in</span> notas:
+    suma = suma + nota        <span class="c"># 2. acumula en cada vuelta</span>
+
+promedio = suma / <span class="k">len</span>(notas)  <span class="c"># 3. se usa al final</span>
+<span class="k">print</span>(<span class="s">"Promedio:"</span>, promedio)</code></pre>
+<pre class="salida"><code>Promedio: 3.85</code></pre>
+  <h3>Ejecución a mano</h3>
+  <p>Este es el tema que más cuesta del curso, y la mejor forma de entenderlo es hacer esta tabla en papel, vuelta por vuelta:</p>
+  <table>
+    <tr><th>Vuelta</th><th><code>nota</code></th><th><code>suma</code> antes</th><th>Operación</th><th><code>suma</code> después</th></tr>
+    <tr><td>Inicio</td><td>—</td><td>—</td><td><code>suma = 0</code></td><td><code>0</code></td></tr>
+    <tr><td>1</td><td><code>3.5</code></td><td><code>0</code></td><td><code>0 + 3.5</code></td><td><code>3.5</code></td></tr>
+    <tr><td>2</td><td><code>4.2</code></td><td><code>3.5</code></td><td><code>3.5 + 4.2</code></td><td><code>7.7</code></td></tr>
+    <tr><td>3</td><td><code>2.8</code></td><td><code>7.7</code></td><td><code>7.7 + 2.8</code></td><td><code>10.5</code></td></tr>
+    <tr><td>4</td><td><code>4.9</code></td><td><code>10.5</code></td><td><code>10.5 + 4.9</code></td><td><code>15.4</code></td></tr>
+  </table>
+  <p>Al final, <code>15.4 / 4</code> da <code>3.85</code>. Puedes verlo en Colab agregando un <code>print()</code> dentro del bucle:</p>
+<pre><code>notas = [3.5, 4.2, 2.8, 4.9]
+suma = 0
+<span class="k">for</span> nota <span class="k">in</span> notas:
+    suma = suma + nota
+    <span class="k">print</span>(<span class="s">"suma vale"</span>, suma)</code></pre>
+<pre class="salida"><code>suma vale 3.5
+suma vale 7.7
+suma vale 10.5
+suma vale 15.4</code></pre>
+  <div class="ojo"><b class="t">Ojo</b>El acumulador se crea <strong>antes</strong> del <code>for</code>, nunca dentro. Si escribes <code>suma = 0</code> dentro del bucle, vuelve a cero en cada vuelta y al final solo queda el último valor. Y usa <code>len(notas)</code> en lugar de escribir <code>4</code>: así el programa sigue funcionando cuando agregues una nota.</div>
+  <h3>Bucle + condicional: contar</h3>
+  <p>Aquí se juntan las sesiones 2 y 3. ¿Cuántos estudiantes aprobaron?</p>
+<pre><code>notas = [3.5, 4.2, 2.8, 4.9]
+aprobados = 0
+<span class="k">for</span> nota <span class="k">in</span> notas:
+    <span class="k">if</span> nota &gt;= 3.0:
+        aprobados = aprobados + 1
+
+<span class="k">print</span>(<span class="s">"Aprobaron:"</span>, aprobados)</code></pre>
+<pre class="salida"><code>Aprobaron: 3</code></pre>
+  <ul>
+    <li>El <code>if</code> va <strong>dentro</strong> del <code>for</code>: se revisa en cada vuelta.</li>
+    <li>Hay dos niveles de indentación: 4 y 8 espacios.</li>
+    <li>Un <strong>contador</strong> suma <strong>1</strong>; un acumulador suma <strong>el valor</strong>.</li>
+  </ul>
+</section>
+
+<!-- ================= 6 ================= -->
+<section class="tema">
+  <h2><span class="n">6</span>Repetir n veces con <code style="font-size:18pt">range()</code></h2>
+  <div class="def"><b class="t">Definición</b><code>range()</code> genera una secuencia de números. Con un <code>for</code>, sirve para repetir algo un número de veces, aunque no tengamos una lista.</div>
+<pre><code><span class="k">for</span> i <span class="k">in</span> <span class="k">range</span>(5):
+    <span class="k">print</span>(<span class="s">"Repetición"</span>, i)</code></pre>
+<pre class="salida"><code>Repetición 0
+Repetición 1
+Repetición 2
+Repetición 3
+Repetición 4</code></pre>
+  <table>
+    <tr><th>Código</th><th>Números que genera</th><th>Para recordar</th></tr>
+    <tr><td><code>range(5)</code></td><td><code>0, 1, 2, 3, 4</code></td><td>Da 5 números, pero empieza en 0.</td></tr>
+    <tr><td><code>range(1, 6)</code></td><td><code>1, 2, 3, 4, 5</code></td><td>Empieza en el primero y no incluye el último.</td></tr>
+  </table>
+  <div class="ojo"><b class="t">Ojo</b><code>range(5)</code> <strong>no incluye el 5</strong>. Si quieres contar de 1 a 5, escribe <code>range(1, 6)</code>.</div>
+  <h3>Recorrer las posiciones de una lista</h3>
+  <p><code>range(len(notas))</code> da justo las posiciones de la lista. Sirve cuando necesitas saber en qué posición vas:</p>
+<pre><code>notas = [3.5, 4.2, 2.8]
+<span class="k">for</span> i <span class="k">in</span> <span class="k">range</span>(<span class="k">len</span>(notas)):
+    <span class="k">print</span>(<span class="s">"Posición"</span>, i, <span class="s">"tiene"</span>, notas[i])</code></pre>
+<pre class="salida"><code>Posición 0 tiene 3.5
+Posición 1 tiene 4.2
+Posición 2 tiene 2.8</code></pre>
+</section>
+
+<!-- ================= 7 ================= -->
+<section class="tema">
+  <h2><span class="n">7</span>Funciones</h2>
+  <p>Ya usaste funciones sin crearlas: <code>print()</code>, <code>len()</code>, <code>type()</code>. Ahora vas a crear las tuyas. Si calculas el promedio de tres listas, ¿copias el mismo código tres veces?</p>
+  <div class="def"><b class="t">Definición</b>Una <strong>función</strong> es como una receta con nombre: un bloque de código que se escribe una vez y se puede usar muchas veces.</div>
+  <ul>
+    <li><strong>Se escribe una vez:</strong> la solución queda guardada con un nombre.</li>
+    <li><strong>Se usa muchas veces:</strong> con datos distintos cada vez.</li>
+    <li><strong>Se corrige en un lugar:</strong> si hay un error, se arregla una sola vez.</li>
+  </ul>
+  <h3>Anatomía de una función</h3>
+<pre><code><span class="k">def</span> calcular_promedio(lista):
+    suma = 0
+    <span class="k">for</span> valor <span class="k">in</span> lista:
+        suma = suma + valor
+    <span class="k">return</span> suma / <span class="k">len</span>(lista)
+
+<span class="k">print</span>(calcular_promedio([3.5, 4.0, 4.5]))
+<span class="k">print</span>(calcular_promedio([2.0, 3.0]))</code></pre>
+<pre class="salida"><code>4.0
+2.5</code></pre>
+  <table>
+    <tr><th>Parte</th><th>En el ejemplo</th><th>Qué hace</th></tr>
+    <tr><td><code>def</code></td><td><code>def</code></td><td>“Definir”: avisa que vamos a crear una función.</td></tr>
+    <tr><td>Nombre</td><td><code>calcular_promedio</code></td><td>Sigue las mismas reglas que los nombres de variables.</td></tr>
+    <tr><td>Parámetro</td><td><code>lista</code></td><td>El dato que la función recibe.</td></tr>
+    <tr><td><code>return</code></td><td><code>return suma / len(lista)</code></td><td>Devuelve el resultado a quien llamó la función.</td></tr>
+    <tr><td>Llamada</td><td><code>calcular_promedio([3.5, 4.0, 4.5])</code></td><td>Aquí se ejecuta de verdad. El valor que le pasamos se llama <strong>argumento</strong>.</td></tr>
+  </table>
+  <div class="ojo"><b class="t">Ojo</b><strong>Definir no es ejecutar.</strong> Si escribes el <code>def</code> y ejecutas la celda, no pasa nada visible: Python solo guarda la receta. El código corre cuando <strong>llamas</strong> a la función.</div>
+  <h3><code>print</code> muestra, <code>return</code> devuelve</h3>
+  <p>Es la confusión más común con las funciones. <code>print</code> pone el resultado en pantalla, pero no lo entrega. <code>return</code> lo entrega para que puedas guardarlo y usarlo en otros cálculos.</p>
+  <div class="dos">
+    <div><b><code>print</code> muestra</b>
+<pre><code><span class="k">def</span> saludar(nombre):
+    <span class="k">print</span>(<span class="s">"Hola,"</span>, nombre)
+
+r = saludar(<span class="s">"Ana"</span>)
+<span class="k">print</span>(r)</code></pre>
+<pre class="salida"><code>Hola, Ana
+None</code></pre></div>
+    <div><b><code>return</code> devuelve</b>
+<pre><code><span class="k">def</span> aplicar_iva(precio):
+    <span class="k">return</span> precio * 1.19
+
+total = aplicar_iva(10000)
+<span class="k">print</span>(total)</code></pre>
+<pre class="salida"><code>11900.0</code></pre></div>
+  </div>
+  <p>Si la función no tiene <code>return</code>, devuelve <code>None</code>, que significa “nada”.</p>
+  <h3>Todo junto: lista, bucle, condicional y función</h3>
+<pre><code><span class="k">def</span> contar_aprobados(notas):
+    aprobados = 0
+    <span class="k">for</span> nota <span class="k">in</span> notas:
+        <span class="k">if</span> nota &gt;= 3.0:
+            aprobados = aprobados + 1
+    <span class="k">return</span> aprobados
+
+<span class="k">print</span>(contar_aprobados([3.5, 4.2, 2.8, 4.9]))
+<span class="k">print</span>(contar_aprobados([1.0, 2.5]))</code></pre>
+<pre class="salida"><code>3
+0</code></pre>
+  <h3>Adelanto: diccionarios</h3>
+  <p>En una lista buscamos por <strong>posición</strong>; en un <strong>diccionario</strong>, por <strong>nombre</strong>. Es la idea de una fila de una tabla con nombres de columna, y la retomaremos en la próxima sesión. Por ahora, solo tienes que reconocerlo.</p>
+<pre><code>estudiante = {<span class="s">"nombre"</span>: <span class="s">"Ana"</span>, <span class="s">"edad"</span>: 20}
+<span class="k">print</span>(estudiante[<span class="s">"nombre"</span>])</code></pre>
+<pre class="salida"><code>Ana</code></pre>
+</section>
+
+<!-- ================= 8 ================= -->
+<section class="tema">
+  <h2><span class="n">8</span>Errores frecuentes</h2>
+  <table class="v-error">
+    <tr><th>Error</th><th>Código con error</th><th>Qué significa</th><th>Corrección</th></tr>
+    <tr><td><code>IndexError</code></td><td><code class="b">notas = [3.5, 4.2]
+print(notas[2])</code></td><td>Esa posición no existe. Con 2 elementos, la última es la 1.</td><td><code class="b">notas = [3.5, 4.2]
+print(notas[1])</code></td></tr>
+    <tr><td><code>NameError</code></td><td><code class="b">for n in [1, 2]:
+    total = total + n</code></td><td>Al acumulador le falta su valor inicial.</td><td><code class="b">total = 0
+for n in [1, 2]:
+    total = total + n</code></td></tr>
+    <tr><td><code>SyntaxError</code></td><td><code class="b">for n in [1, 2]
+    print(n)</code></td><td>Al <code>for</code> le faltan los dos puntos, igual que al <code>if</code>.</td><td><code class="b">for n in [1, 2]:
+    print(n)</code></td></tr>
+    <tr><td><code>TypeError</code></td><td><code class="b">for i in 5:
+    print(i)</code></td><td>Un número no se puede recorrer: falta <code>range()</code>.</td><td><code class="b">for i in range(5):
+    print(i)</code></td></tr>
+    <tr><td><code>TypeError</code></td><td><code class="b">def doble(x):
+    return x * 2
+
+print(doble())</code></td><td>Llamaste la función sin el dato que necesita.</td><td><code class="b">def doble(x):
+    return x * 2
+
+print(doble(4))</code></td></tr>
+  </table>
+  <h3>Errores sin mensaje</h3>
+  <p>Estos no muestran ningún error, pero el resultado está mal:</p>
+  <ul>
+    <li><strong><code>suma = 0</code> dentro del <code>for</code>:</strong> el acumulador se reinicia en cada vuelta.</li>
+    <li><strong><code>print</code> en lugar de <code>return</code>:</strong> ves el resultado, pero la función devuelve <code>None</code> y no puedes usarlo.</li>
+    <li><strong><code>notas = notas.append(3.0)</code>:</strong> <code>append</code> cambia la lista y devuelve <code>None</code>, así que pierdes tu lista. Basta con <code>notas.append(3.0)</code>.</li>
+  </ul>
+  <p style="font-size:10pt;color:var(--gris-azul)">Según la versión de Python, el texto de algunos mensajes puede cambiar un poco, pero el tipo de error es el mismo.</p>
+
+  <!-- ================= RESUMEN ================= -->
+  <section class="tema sigue">
+  <h2>Tres ideas clave</h2>
+  <ul class="ideas">
+    <li>Las listas guardan varios datos en orden; en Python la primera posición es 0.</li>
+    <li>El for repite una acción para cada elemento.</li>
+    <li>Las funciones empaquetan una solución para reutilizarla.</li>
+  </ul>
+  </section>
+</section>
+
+<!-- ================= GLOSARIO ================= -->
+<section class="tema nueva">
+  <h2>Glosario</h2>
+  <table class="glosario">
+    <tr><td>Acumulador</td><td>Variable que va guardando un total; en cada vuelta se le suma algo.</td></tr>
+    <tr><td><code>append()</code></td><td>Agrega un elemento al final de una lista.</td></tr>
+    <tr><td>Argumento</td><td>Valor que se le pasa a una función al llamarla.</td></tr>
+    <tr><td>Bucle</td><td>Instrucción que repite un bloque de código.</td></tr>
+    <tr><td>Contador</td><td>Variable a la que se le suma 1 cada vez que ocurre algo.</td></tr>
+    <tr><td><code>def</code></td><td>Palabra con la que se crea una función.</td></tr>
+    <tr><td>Diccionario</td><td>Colección de datos a los que se accede por nombre, no por posición.</td></tr>
+    <tr><td>Elemento</td><td>Cada uno de los valores guardados en una lista.</td></tr>
+    <tr><td><code>for</code></td><td>Bucle que repite un bloque una vez por cada elemento.</td></tr>
+    <tr><td>Función</td><td>Bloque de código con nombre que se escribe una vez y se usa muchas veces.</td></tr>
+    <tr><td>Índice</td><td>Posición de un elemento dentro de una lista. Empieza en 0.</td></tr>
+    <tr><td><code>len()</code></td><td>Dice cuántos elementos tiene una lista.</td></tr>
+    <tr><td>Lista</td><td>Colección ordenada de valores dentro de una sola variable.</td></tr>
+    <tr><td>Llamar</td><td>Ejecutar una función escribiendo su nombre y sus paréntesis.</td></tr>
+    <tr><td><code>None</code></td><td>Valor que significa “nada”. Es lo que devuelve una función sin <code>return</code>.</td></tr>
+    <tr><td>Parámetro</td><td>Nombre que recibe, dentro de la función, el dato que le pasan.</td></tr>
+    <tr><td><code>range()</code></td><td>Genera una secuencia de números para repetir algo varias veces.</td></tr>
+    <tr><td><code>return</code></td><td>Termina la función y entrega un resultado.</td></tr>
+    <tr><td>Vuelta</td><td>Cada repetición de un bucle. También se llama iteración.</td></tr>
+  </table>
+</section>
+
+<!-- ================= EJERCICIOS ================= -->
+<section class="tema nueva">
+  <h2>Ejercicios</h2>
+  <p>Resuélvelos en Colab antes de mirar las soluciones. Avanza hasta donde llegues.</p>
+  <h3>Ponte a prueba: ¿qué imprime cada programa?</h3>
+  <p>Escribe tu respuesta <strong>antes</strong> de ejecutar el código.</p>
+  <table>
+    <tr><th>Código</th><th style="width:45%">Tu respuesta</th></tr>
+    <tr><td><code class="b">notas = [2.0, 3.5, 4.0]
+print(notas[1])</code></td><td></td></tr>
+    <tr><td><code class="b">notas = [2.0, 3.5, 4.0]
+notas.append(5.0)
+print(len(notas))</code></td><td></td></tr>
+    <tr><td><code class="b">for i in range(3):
+    print(i)</code></td><td></td></tr>
+    <tr><td><code class="b">suma = 0
+for n in [1, 2, 3]:
+    suma = suma + n
+print(suma)</code></td><td></td></tr>
+    <tr><td><code class="b">def doble(x):
+    return x * 2
+
+print(doble(4))</code></td><td></td></tr>
+    <tr><td><code class="b">def doble(x):
+    print(x * 2)
+
+r = doble(4)
+print(r)</code></td><td></td></tr>
+  </table>
+  <h3>Encuentra el error</h3>
+  <p>Di qué tipo de error produce cada programa y corrígelo.</p>
+  <table>
+    <tr><th>Código</th><th style="width:50%">Error y corrección</th></tr>
+    <tr><td><code class="b">ciudades = ["Bogotá", "Cali"]
+print(ciudades[2])</code></td><td></td></tr>
+    <tr><td><code class="b">for ciudad in ["Bogotá", "Cali"]
+    print(ciudad)</code></td><td></td></tr>
+    <tr><td><code class="b">for n in [1, 2]:
+print(n)</code></td><td></td></tr>
+  </table>
+  <h3>Completa el código: el promedio de mis notas</h3>
+  <p>Llena los espacios para calcular el promedio de la lista. Luego agrega una nota más con <code>append()</code> y vuelve a ejecutarlo.</p>
+<pre class="plantilla"><code>notas = [4.0, 3.5, 4.5, 3.0]
+suma = ______
+<span class="k">for</span> nota <span class="k">in</span> notas:
+    suma = ______
+<span class="k">print</span>(<span class="s">"Promedio:"</span>, suma / ______)</code></pre>
+  <h3>Ejecución a mano</h3>
+  <p>Completa la tabla sin ejecutar el código. ¿Cuánto vale <code>suma</code> al terminar cada vuelta?</p>
+<pre class="plantilla"><code>suma = 0
+<span class="k">for</span> nota <span class="k">in</span> [2.0, 4.0, 3.0]:
+    suma = suma + nota</code></pre>
+  <table>
+    <tr><th>Vuelta</th><th><code>nota</code></th><th><code>suma</code> antes</th><th><code>suma</code> después</th></tr>
+    <tr><td>1</td><td></td><td></td><td></td></tr>
+    <tr><td>2</td><td></td><td></td><td></td></tr>
+    <tr><td>3</td><td></td><td></td><td></td></tr>
+  </table>
+  <h3>Ejercicios de la clase</h3>
+  <div class="ej"><span class="nivel">Básico</span><b>1.</b> Crea una lista con 5 ciudades de Colombia e imprime cada una con un bucle.</div>
+  <div class="ej"><span class="nivel">Básico</span><b>2.</b> Dada una lista de precios, calcula el total de la compra.</div>
+  <div class="ej"><span class="nivel int">Intermedio</span><b>3.</b> Cuenta cuántas notas de una lista son mayores o iguales a 3.0.</div>
+  <div class="ej"><span class="nivel int">Intermedio</span><b>4.</b> Escribe una función <code>aplicar_iva(precio)</code> que devuelva el precio con IVA del 19&nbsp;% y úsala sobre una lista de precios.</div>
+  <div class="ej"><span class="nivel reto">Reto</span><b>5.</b> Encuentra la nota más alta de una lista <strong>sin</strong> usar <code>max()</code>.</div>
+  <div class="ej"><span class="nivel reto">Reto</span><b>6.</b> Escribe una función que reciba una frase y devuelva cuántas palabras tiene. Pista: <code>frase.split()</code>.</div>
+  <div class="ojo"><b class="t">Consejo</b>¿Te atascaste? Haz la <strong>tabla de vueltas</strong> a mano. Para el ejercicio 5, guarda la primera nota como “la más alta hasta ahora” y compárala con las demás dentro del <code>for</code>.</div>
+</section>
+
+<!-- ================= SOLUCIONES ================= -->
+<section class="tema nueva">
+  <h2>Soluciones</h2>
+  <p>Hay muchas formas correctas de resolver cada ejercicio. Si tu código es distinto pero da el resultado correcto, también está bien.</p>
+  <h3>Ponte a prueba</h3>
+  <table class="v-salida">
+    <tr><th>Código</th><th>Salida</th><th>Por qué</th></tr>
+    <tr><td><code class="b">notas = [2.0, 3.5, 4.0]
+print(notas[1])</code></td><td><code class="b">3.5</code></td><td>La posición 1 es el <strong>segundo</strong> elemento.</td></tr>
+    <tr><td><code class="b">notas = [2.0, 3.5, 4.0]
+notas.append(5.0)
+print(len(notas))</code></td><td><code class="b">4</code></td><td>Tenía 3 elementos y se agregó uno.</td></tr>
+    <tr><td><code class="b">for i in range(3):
+    print(i)</code></td><td><code class="b">0
+1
+2</code></td><td>Empieza en 0 y no incluye el 3.</td></tr>
+    <tr><td><code class="b">suma = 0
+for n in [1, 2, 3]:
+    suma = suma + n
+print(suma)</code></td><td><code class="b">6</code></td><td>0 + 1 + 2 + 3. El <code>print</code> está fuera del bucle: se ejecuta una vez.</td></tr>
+    <tr><td><code class="b">def doble(x):
+    return x * 2
+
+print(doble(4))</code></td><td><code class="b">8</code></td><td>La función devuelve 8 y <code>print</code> lo muestra.</td></tr>
+    <tr><td><code class="b">def doble(x):
+    print(x * 2)
+
+r = doble(4)
+print(r)</code></td><td><code class="b">8
+None</code></td><td>La función muestra 8, pero no tiene <code>return</code>: devuelve <code>None</code>.</td></tr>
+  </table>
+  <h3>Encuentra el error</h3>
+  <table class="v-error">
+    <tr><th>Código</th><th>Error</th><th>Corrección</th></tr>
+    <tr><td><code class="b">ciudades = ["Bogotá", "Cali"]
+print(ciudades[2])</code></td><td><code>IndexError</code>: las posiciones son 0 y 1.</td><td><code class="b">ciudades = ["Bogotá", "Cali"]
+print(ciudades[1])</code></td></tr>
+    <tr><td><code class="b">for ciudad in ["Bogotá", "Cali"]
+    print(ciudad)</code></td><td><code>SyntaxError</code>: faltan los dos puntos.</td><td><code class="b">for ciudad in ["Bogotá", "Cali"]:
+    print(ciudad)</code></td></tr>
+    <tr><td><code class="b">for n in [1, 2]:
+print(n)</code></td><td><code>IndentationError</code>: falta la sangría.</td><td><code class="b">for n in [1, 2]:
+    print(n)</code></td></tr>
+  </table>
+  <h3>Completa el código</h3>
+<pre><code>notas = [4.0, 3.5, 4.5, 3.0]
+suma = 0
+<span class="k">for</span> nota <span class="k">in</span> notas:
+    suma = suma + nota
+<span class="k">print</span>(<span class="s">"Promedio:"</span>, suma / <span class="k">len</span>(notas))</code></pre>
+<pre class="salida"><code>Promedio: 3.75</code></pre>
+  <p>Si escribiste <code>4</code> en lugar de <code>len(notas)</code>, el resultado es correcto al principio, pero falla cuando agregas una nota.</p>
+  <h3>Ejecución a mano</h3>
+  <table>
+    <tr><th>Vuelta</th><th><code>nota</code></th><th><code>suma</code> antes</th><th><code>suma</code> después</th></tr>
+    <tr><td>1</td><td><code>2.0</code></td><td><code>0</code></td><td><code>2.0</code></td></tr>
+    <tr><td>2</td><td><code>4.0</code></td><td><code>2.0</code></td><td><code>6.0</code></td></tr>
+    <tr><td>3</td><td><code>3.0</code></td><td><code>6.0</code></td><td><code>9.0</code></td></tr>
+  </table>
+  <p style="margin-top:8mm"><strong>Próxima sesión: primer contacto con datos reales, con pandas.</strong> ¿Y si la lista tuviera miles de filas? Usaremos un archivo CSV que se compartirá por enlace. Trae tus dudas de esta guía a la clase o escríbelas en el Moodle FCE.</p>
+</section>
+
+</body>
+</html>
