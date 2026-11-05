@@ -451,6 +451,31 @@
   .casilla .i { text-align: center; font-family: var(--mono); font-size: 22px; font-weight: 600; color: var(--uifce); margin-top: 8px; }
   .casilla .i small { display: block; font-family: var(--font); font-size: 15px; color: var(--gris-azul); font-weight: 700; }
 
+  /* ---------- Tablas de datos y escala de riesgo (sesión 4) ---------- */
+  table.df { border-collapse: collapse; font-family: var(--mono); font-size: 18px; color: var(--azul-noche); white-space: nowrap; background: #fff; }
+  .df th { font-weight: 600; text-align: right; padding: 6px 12px; color: var(--azul); border-bottom: 2px solid var(--gris-azul); }
+  .df td { text-align: right; padding: 5px 12px; border-bottom: 1px solid var(--gris-claro); }
+  .df th.txt, .df td.txt { text-align: left; }
+  .df th.i, .df td.i { color: var(--gris-azul); font-weight: 600; }
+  .df td.nan { color: #B3261E; font-weight: 600; }
+  .df td.si { color: #1E7B34; font-weight: 600; }
+  .df td.no { color: #B3261E; font-weight: 600; }
+  .df .fila-on td { background: #FFF3BF; }
+  .df .col-on, .df th.col-on { background: var(--hielo); }
+  .df .fila-on td.col-on { background: var(--amarillo); }
+  .df tr.destacable.foco td { background: var(--celeste); }
+  .escala { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-top: 16px; }
+  .escala > div { padding: 12px 14px; min-height: 92px; color: var(--azul-noche); }
+  .escala > div:first-child { border-radius: 12px 0 0 12px; }
+  .escala > div:last-child { border-radius: 0 12px 12px 0; }
+  .escala b { display: block; font-weight: 900; font-size: 21px; line-height: 1.1; }
+  .escala span { display: block; font-family: var(--mono); font-size: 18px; margin-top: 6px; }
+  .escala .r1 { background: var(--hielo); } .escala .r2 { background: #8FC1F2; } .escala .r3 { background: #4F93D8; }
+  .escala .r4 { background: var(--azul-2); color: #fff; } .escala .r5 { background: var(--azul-noche); color: #fff; }
+  p.fuente { font-size: 16px; line-height: 1.3; color: var(--gris-azul); }
+  p.enlace { font-family: var(--mono); font-size: 14.5px; line-height: 1.3; color: var(--azul); word-break: break-all; }
+  .dato-grande { font-weight: 900; font-size: 44px; line-height: 1; color: var(--azul); }
+
   /* ---------- Foco: clic para destacar un elemento y atenuar los demás ---------- */
   .destacable { cursor: pointer; transition: opacity .25s ease, transform .25s ease, box-shadow .25s ease, filter .25s ease; }
   .destacable.atenuado { opacity: .3; filter: grayscale(.6); }

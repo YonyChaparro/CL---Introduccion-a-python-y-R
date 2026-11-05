@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 4: Primer contacto con datos reales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/uifce.css">
+</head>
+<body>
+<div class="viewport">
+<main class="deck" id="deck">
+  <div class="progreso" id="progreso"></div>
+
+  <!-- Portada -->
+  <section class="slide portada">
+    <div class="bloque-azul"></div>
+    <img class="uifcito" src="../assets/uifcito/saludo.png" alt="UIFCITO saludando" style="right: 330px; top: 46px; width: 380px;">
+    <div class="textos">
+      <div class="curso">Introducción a Python y R · Sesión 4</div>
+      <h1>De la lista a la tabla</h1>
+      <div class="monitor">Nombre del monitor(a): Yony Sebastián Chaparro Mesa</div>
+      <div class="rol">Estudiante Auxiliar</div>
+    </div>
+    <div class="panel">
+      <img class="logo" src="../assets/img/logo_uifce.png" alt="UIFCE · Unidad de Informática">
+      <div class="dato" style="top: 196px;"><b>Curso:</b><span>Introducción a Python y R</span></div>
+      <div class="dato" style="top: 300px;"><b>Sesión 4:</b><span>Primer contacto con datos reales: pandas</span></div>
+    </div>
+    <div class="contacto">
+      <i>Correo:</i> <a href="mailto:uniic_bog@unal.edu.co">uniic_bog@unal.edu.co</a><br>
+      <i>Tel:</i> 3165000 &nbsp; <i>Ext:</i> 12301
+    </div>
+    <div class="franja" role="img" aria-label="Facultad de Ciencias Económicas, Unidad de Informática, Sede Bogotá · Universidad Nacional de Colombia"></div>
+    <aside class="notas">La meta de hoy es <b>motivación</b>, no dominio de pandas: que vean que con pocas líneas se responden preguntas sobre datos reales. No entres en <code>groupby</code>, <code>merge</code> ni limpieza de datos; esos temas se ven en R con dplyr. Antes de clase, prueba desde Colab que el enlace al CSV abre.</aside>
+  </section>
+
+  <!-- Agenda -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Contenido</h2>
+      <p class="subtitulo">Sesión 4 · Python en Google Colab</p>
+      <div class="agenda">
+        <div class="item"><div class="circulo">1</div><div><h3>Repaso activo</h3></div></div>
+        <div class="item"><div class="circulo">2</div><div><h3>¿Qué es un dataset?</h3></div></div>
+        <div class="item"><div class="circulo">3</div><div><h3>Leer y explorar</h3></div></div>
+        <div class="item"><div class="circulo">4</div><div><h3>Seleccionar y filtrar</h3></div></div>
+        <div class="item"><div class="circulo">5</div><div><h3>Resumir y graficar</h3></div></div>
+        <div class="item"><div class="circulo">6</div><div><h3>¡A practicar!</h3></div></div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Mapa de la sesión. Pausa de 10 minutos a la 1:05, después de la práctica en parejas. Si en la sesión 3 no alcanzaste a ver funciones, empieza por ellas y reduce el bloque 5.</aside>
+  </section>
+
+  <!-- ===================== 1 · REPASO ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>1</span></div>
+    <div class="textos">
+      <h2>Repaso activo</h2>
+      <p>Lo que vimos en la sesión 3</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Repaso activo (0:00–0:15).</b> Un ejercicio que junta lista, bucle, condicional y función.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Calentamiento</h2>
+      <div class="actividad" style="width: 820px; margin-top: 22px;">
+        <span class="etiqueta">Reto</span>
+        <p>Escribe una función <code class="inline">contar_mayores(valores, umbral)</code> que devuelva cuántos valores de una lista superan un umbral.</p>
+      </div>
+      <div class="pregunta" style="width: 1150px; min-height: 0; margin-top: 20px;">
+        <div class="q" style="font-size: 23px;">Con <code class="inline">[3.5, 4.2, 2.8, 4.9]</code> y umbral <code class="inline">4.0</code>, ¿qué devuelve?</div>
+        <div class="pista" style="margin-top: 6px;">Clic para ver una solución</div>
+        <div class="respuesta dos-col" style="margin-top: 10px; grid-template-columns: 590px 1fr; gap: 26px; align-items: center;">
+<pre class="code" style="font-size: 16px; margin: 0; padding: 12px 18px;"><span class="k">def</span> <span class="f">contar_mayores</span>(valores, umbral):
+    cuenta <span class="o">=</span> <span class="n">0</span>
+    <span class="k">for</span> valor <span class="k">in</span> valores:
+        <span class="k">if</span> valor <span class="o">&gt;</span> umbral:
+            cuenta <span class="o">=</span> cuenta <span class="o">+</span> <span class="n">1</span>
+    <span class="k">return</span> cuenta
+
+<span class="f">print</span>(<span class="f">contar_mayores</span>([<span class="n">3.5</span>, <span class="n">4.2</span>, <span class="n">2.8</span>, <span class="n">4.9</span>], <span class="n">4.0</span>))   <span class="c"># 2</span></pre>
+          <span style="font-size: 22px;">Devuelve <b>2</b>: solo 4.2 y 4.9 superan 4.0.</span></div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/pensando.png" alt="UIFCITO pensando" style="right: 100px; top: 40px; height: 190px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Dales 8 minutos. Revisa que <code>cuenta</code> empiece antes del <code>for</code> y que el <code>return</code> quede por fuera del bucle. Pregunta al final: ¿y si no fuera una lista de 4 notas, sino una tabla de mil filas con varias columnas? Esa pregunta abre el tema de hoy.</aside>
+  </section>
+
+  <!-- ===================== 2 · DATASET ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>2</span></div>
+    <div class="textos">
+      <h2>¿Qué es un dataset?</h2>
+      <p>Datos organizados en una tabla</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Concepto (0:15–0:30).</b> De la lista a la tabla. Muestra el CSV abierto como hoja de cálculo.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">De la lista a la tabla</h2>
+      <div style="display: grid; grid-template-columns: 590px 1fr; gap: 40px; margin-top: 24px; align-items: start;">
+        <div>
+          <span class="etiqueta">Sesión 3 · Lista</span>
+          <p style="font-size: 22px; margin-bottom: 8px;">Muchos valores de <strong>una sola cosa</strong>.</p>
+<pre class="code" style="font-size: 19px;">irca <span class="o">=</span> [<span class="n">1.7</span>, <span class="n">0.3</span>, <span class="n">5.0</span>]</pre>
+          <span class="etiqueta" style="margin-top: 22px;">Sesión 3 · Diccionario</span>
+          <p style="font-size: 22px; margin-bottom: 8px;">Varias cosas de <strong>un solo caso</strong>.</p>
+<pre class="code" style="font-size: 19px;">fila <span class="o">=</span> {<span class="s">"municipio"</span>: <span class="s">"Medellín"</span>, <span class="s">"irca"</span>: <span class="n">1.7</span>}</pre>
+        </div>
+        <div>
+          <span class="etiqueta" style="background: var(--amarillo); color: var(--azul-noche);">Hoy · Tabla</span>
+          <p style="font-size: 22px; margin-bottom: 8px;">Varias cosas de <strong>muchos casos</strong>.</p>
+          <table class="df" style="font-size: 22px;">
+            <tr><th class="txt">municipio</th><th>irca</th><th class="txt">nivel</th></tr>
+            <tr><td class="txt">Medellín</td><td>1.7</td><td class="txt">Sin riesgo</td></tr>
+            <tr><td class="txt">Abejorral</td><td>0.3</td><td class="txt">Sin riesgo</td></tr>
+            <tr><td class="txt">Abriaquí</td><td>5.0</td><td class="txt">Sin riesgo</td></tr>
+          </table>
+        </div>
+      </div>
+      <p style="margin-top: 34px; width: 1100px;">Un <strong>dataset</strong> es una tabla de datos. Con <strong>pandas</strong>, Python puede leerla y responder preguntas sobre ella.</p>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Conecta con el adelanto de la sesión 3: el diccionario era una “fila” con nombres de columna. Una tabla es, en el fondo, muchas filas con los mismos nombres. Los diccionarios no se vuelven a usar hoy.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Filas y columnas</h2>
+      <div style="display: grid; grid-template-columns: 650px 1fr; gap: 36px; margin-top: 24px; align-items: start;">
+        <table class="df" style="font-size: 21px;">
+          <tr><th class="txt">departamento</th><th class="txt">municipio</th><th class="col-on">irca</th><th class="txt">nivel</th></tr>
+          <tr><td class="txt">Antioquia</td><td class="txt">Medellín</td><td class="col-on">1.7</td><td class="txt">Sin riesgo</td></tr>
+          <tr><td class="txt">Antioquia</td><td class="txt">Abejorral</td><td class="col-on">0.3</td><td class="txt">Sin riesgo</td></tr>
+          <tr><td class="txt">Antioquia</td><td class="txt">Abriaquí</td><td class="col-on">5.0</td><td class="txt">Sin riesgo</td></tr>
+          <tr><td class="txt">Antioquia</td><td class="txt">Alejandría</td><td class="col-on">0.2</td><td class="txt">Sin riesgo</td></tr>
+          <tr class="fila-on"><td class="txt">Antioquia</td><td class="txt">Amagá</td><td class="col-on">31.3</td><td class="txt">Riesgo medio</td></tr>
+        </table>
+        <div style="display: grid; gap: 16px;">
+          <div class="card" style="border-top-color: var(--amarillo);"><h3>Fila = observación</h3><p>Un caso. Aquí, <strong>un municipio</strong>.</p></div>
+          <div class="card" style="border-top-color: var(--azul-2);"><h3>Columna = variable</h3><p>Lo que sabemos de cada caso. Aquí, su <strong>IRCA</strong>.</p></div>
+        </div>
+      </div>
+      <p style="margin-top: 28px; width: 1100px;">Cada columna tiene un solo tipo de dato: <code class="inline">irca</code> es un número; <code class="inline">nivel</code> es texto.</p>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Señala la fila amarilla y la columna azul. Pregunta qué sería una fila en otro dataset: un estudiante, una venta, un partido. Los tipos de dato son los mismos de la sesión 1: <code>float</code> y <code>str</code>.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">¿Qué es un archivo CSV?</h2>
+      <p class="subtitulo">Comma-Separated Values: valores separados por comas</p>
+      <div class="versus" style="width: 1150px;">
+        <div class="lado">
+          <h3>Por dentro: solo texto</h3>
+          <p>Cada línea es una fila; las comas separan columnas.</p>
+<pre class="code" style="font-size: 19px;"><span class="o">departamento,municipio,irca,nivel</span>
+Antioquia,Medellín,1.7,Sin riesgo
+Antioquia,Abejorral,0.3,Sin riesgo
+Antioquia,Abriaquí,5,Sin riesgo</pre>
+        </div>
+        <div class="lado">
+          <h3>En una hoja de cálculo</h3>
+          <p>Los mismos datos, ordenados en celdas.</p>
+          <table class="df" style="font-size: 19px;">
+            <tr><th class="txt">departamento</th><th class="txt">municipio</th><th>irca</th><th class="txt">nivel</th></tr>
+            <tr><td class="txt">Antioquia</td><td class="txt">Medellín</td><td>1.7</td><td class="txt">Sin riesgo</td></tr>
+            <tr><td class="txt">Antioquia</td><td class="txt">Abejorral</td><td>0.3</td><td class="txt">Sin riesgo</td></tr>
+            <tr><td class="txt">Antioquia</td><td class="txt">Abriaquí</td><td>5</td><td class="txt">Sin riesgo</td></tr>
+          </table>
+        </div>
+      </div>
+      <p style="margin-top: 24px; width: 1100px;">La <strong>primera línea</strong> trae los nombres de las columnas. Casi cualquier programa puede abrir un CSV.</p>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Se muestran solo las primeras 4 de las 8 columnas. Abre el archivo real en Google Sheets para que lo vean como hoja de cálculo. Dato curioso: Bogotá se guarda entre comillas, <code>"Bogotá, D.C."</code>, porque su nombre tiene una coma.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Nuestro dataset: el agua que tomamos</h2>
+      <p class="subtitulo">IRCA: Índice de Riesgo de la Calidad del Agua para consumo humano</p>
+      <p style="margin-top: 18px; font-size: 23px;">Cada municipio tiene un puntaje de <strong>0 a 100</strong>. Entre más alto, mayor es el riesgo de enfermedades relacionadas con la calidad del agua.</p>
+      <div class="escala">
+        <div class="r1"><b>Sin riesgo</b><span>0 a 5</span></div>
+        <div class="r2"><b>Riesgo bajo</b><span>5.1 a 14</span></div>
+        <div class="r3"><b>Riesgo medio</b><span>14.1 a 35</span></div>
+        <div class="r4"><b>Riesgo alto</b><span>35.1 a 80</span></div>
+        <div class="r5"><b>Inviable sanitariamente</b><span>80.1 a 100</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px;">
+        <div class="card" style="padding: 14px 20px;"><div class="dato-grande">1.019</div><p>municipios con dato</p></div>
+        <div class="card" style="padding: 14px 20px;"><div class="dato-grande">8</div><p>columnas</p></div>
+        <div class="card" style="padding: 14px 20px;"><div class="dato-grande">2025</div><p>año de los datos</p></div>
+      </div>
+      <p class="fuente" style="margin-top: 14px;">Fuente: Instituto Nacional de Salud (SIVICAP), datos.gov.co. Licencia CC BY-SA 4.0. Versión adaptada para el curso.</p>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Este dataset nos acompaña también en las sesiones 6, 7 y 8. Pregunta: ¿creen que el agua de su municipio sale sin riesgo? Lo revisaremos con código. Aclara dos cosas: no están todos los municipios del país, solo los que tienen dato en 2025, y Cali aparece como “Santiago de Cali”.</aside>
+  </section>
+
+  <!-- ===================== 3 · LEER Y EXPLORAR ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>3</span></div>
+    <div class="textos">
+      <h2>Leer y explorar</h2>
+      <p>Lo primero que se le pregunta a un dataset</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Live coding (0:30–0:55).</b> Importar pandas, leer el CSV y explorar con <code>head()</code>, <code>shape</code>, <code>columns</code> e <code>info()</code>.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Leer el archivo con pandas</h2>
+<pre class="code" style="font-size: 21px; line-height: 1.65; margin-top: 22px;"><span class="k">import</span> pandas<span class="marca">1</span> <span class="k">as</span> pd<span class="marca">2</span>
+
+url<span class="marca">3</span> <span class="o">=</span> <span class="s">"https://raw.githubusercontent.com/…/agua_municipios_2025.csv"</span>
+df<span class="marca">4</span> <span class="o">=</span> pd.<span class="f">read_csv</span>(url)<span class="marca">5</span></pre>
+      <ol class="leyenda" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 30px; margin-top: 18px;">
+        <li><span class="marca">1</span><span><strong>pandas</strong> es una librería para trabajar con tablas.</span></li>
+        <li><span class="marca">4</span><span><strong>df</strong> guarda la tabla: es un <strong>DataFrame</strong>.</span></li>
+        <li><span class="marca">2</span><span><strong>pd</strong> es su apodo: así la llamamos después.</span></li>
+        <li><span class="marca">5</span><span><strong>read_csv</strong> lee el archivo y arma la tabla.</span></li>
+        <li><span class="marca">3</span><span><strong>url</strong> es una variable con la dirección del archivo.</span></li>
+      </ol>
+      <p class="enlace" style="margin-top: 2px;"><a href="https://raw.githubusercontent.com/YonyChaparro/CL---Introduccion-a-python-y-R/main/datos/agua_municipios_2025.csv">https://raw.githubusercontent.com/YonyChaparro/CL---Introduccion-a-python-y-R/main/datos/agua_municipios_2025.csv</a></p>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Comparte el enlace completo por el chat. Escribe las líneas en vivo y ejecútalas. Si no aparece nada, está bien: la tabla se guardó en <code>df</code>, igual que cuando guardamos un valor en una variable. Colab ya trae pandas instalado. Si el enlace falla en el salón, descarga el CSV, súbelo al panel de archivos de Colab y usa <code>pd.read_csv("agua_municipios_2025.csv")</code>.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">head(): las primeras filas</h2>
+      <div class="colab" style="margin-top: 20px;">
+        <div class="barra"><span class="punto"></span><span class="punto"></span><span class="punto"></span><b>Sesion04.ipynb</b></div>
+        <div class="cuerpo">
+          <div class="celda"><div class="play"></div><div class="entrada">df.<span class="f">head</span>()</div>
+            <div class="salida"><table class="df" style="font-size: 16px; margin-top: 6px;">
+              <tr><th class="i"></th><th class="txt">departamento</th><th class="txt">municipio</th><th>irca</th><th class="txt">nivel</th><th>irca_urbano</th><th class="txt">nivel_urbano</th><th>irca_rural</th><th class="txt">nivel_rural</th></tr>
+              <tr><td class="i">0</td><td class="txt">Antioquia</td><td class="txt">Medellín</td><td>1.7</td><td class="txt">Sin riesgo</td><td>0.8</td><td class="txt">Sin riesgo</td><td>4.8</td><td class="txt">Sin riesgo</td></tr>
+              <tr><td class="i">1</td><td class="txt">Antioquia</td><td class="txt">Abejorral</td><td>0.3</td><td class="txt">Sin riesgo</td><td>0.3</td><td class="txt">Sin riesgo</td><td class="nan">NaN</td><td class="txt nan">NaN</td></tr>
+              <tr><td class="i">2</td><td class="txt">Antioquia</td><td class="txt">Abriaquí</td><td>5.0</td><td class="txt">Sin riesgo</td><td>5.0</td><td class="txt">Sin riesgo</td><td class="nan">NaN</td><td class="txt nan">NaN</td></tr>
+              <tr><td class="i">3</td><td class="txt">Antioquia</td><td class="txt">Alejandría</td><td>0.2</td><td class="txt">Sin riesgo</td><td>0.2</td><td class="txt">Sin riesgo</td><td class="nan">NaN</td><td class="txt nan">NaN</td></tr>
+              <tr><td class="i">4</td><td class="txt">Antioquia</td><td class="txt">Amagá</td><td>31.3</td><td class="txt">Riesgo medio</td><td>0.6</td><td class="txt">Sin riesgo</td><td>55.9</td><td class="txt">Riesgo alto</td></tr>
+            </table></div></div>
+        </div>
+      </div>
+      <ul class="lista" style="margin-top: 18px;">
+        <li>Las filas se numeran desde <strong>0</strong>, igual que las listas.</li>
+        <li><strong style="color: #B3261E;">NaN</strong> significa <strong>dato faltante</strong>. Y <code class="inline">df.head(10)</code> muestra 10 filas.</li>
+      </ul>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Por defecto, <code>head()</code> muestra 5 filas. Haz notar a Amagá: su área urbana sale sin riesgo (0.6) y la rural en riesgo alto (55.9). En Colab, la tabla se verá con otro estilo, pero con los mismos datos.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">shape y columns: el tamaño y los nombres</h2>
+      <div class="versus" style="width: 1150px; grid-template-columns: 430px 1fr;">
+        <div class="lado">
+          <h3><code>df.shape</code></h3>
+          <p>Cuántas filas y columnas hay.</p>
+<pre class="code" style="font-size: 19px;">df.shape
+<span class="c"># Salida</span>
+(1019, 8)   <span class="c"># (filas, columnas)</span></pre>
+        </div>
+        <div class="lado">
+          <h3><code>df.columns</code></h3>
+          <p>Cómo se llama cada columna.</p>
+<pre class="code" style="font-size: 15.5px;">df.columns
+<span class="c"># Salida</span>
+Index(['departamento', 'municipio', 'irca', 'nivel', 'irca_urbano',
+       'nivel_urbano', 'irca_rural', 'nivel_rural'],
+      dtype='str')</pre>
+        </div>
+      </div>
+      <div class="comun" style="margin-top: 26px; width: 1150px;"><b>¿Con o sin paréntesis?</b> <code>shape</code> y <code>columns</code> son datos que la tabla ya tiene: van <b>sin</b> paréntesis. <code>head()</code> e <code>info()</code> son acciones: van <b>con</b> paréntesis.</div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Según la versión de pandas de Colab, puedes ver <code>dtype='object'</code> en vez de <code>dtype='str'</code>: hoy significan lo mismo. Conviene copiar los nombres de aquí: un nombre mal escrito produce <code>KeyError</code>.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">info(): tipos y datos faltantes</h2>
+      <div style="display: grid; grid-template-columns: 590px 1fr; gap: 32px; margin-top: 18px; align-items: start;">
+<pre class="code" style="font-size: 16px; line-height: 1.38; padding: 14px 18px;">df.<span class="f">info</span>()
+<span class="c"># Salida</span>
+RangeIndex: 1019 entries, 0 to 1018
+Data columns (total 8 columns):
+ #   Column        Non-Null Count  Dtype
+---  ------        --------------  -----
+ 0   departamento  1019 non-null   str
+ 1   municipio     1019 non-null   str
+ 2   irca          1019 non-null   float64
+ 3   nivel         1019 non-null   str
+ 4   irca_urbano   1010 non-null   float64
+ 5   nivel_urbano  1010 non-null   str
+<span style="background: rgba(242,200,27,.28);"> 6   irca_rural    432 non-null    float64</span>
+<span style="background: rgba(242,200,27,.28);"> 7   nivel_rural   432 non-null    str</span></pre>
+        <div>
+          <ul class="lista" style="margin-top: 0;">
+            <li style="font-size: 23px;"><strong>Non-Null Count</strong>: cuántos valores no faltan en cada columna.</li>
+            <li style="font-size: 23px;"><strong>float64</strong>: número decimal. <strong>str</strong>: texto.</li>
+            <li style="font-size: 23px;">A <code class="inline">irca_rural</code> le faltan <strong>587</strong> de 1.019 valores.</li>
+          </ul>
+          <div class="dialogo" style="position: static; width: 520px; height: 130px; margin-top: 14px; font-size: 23px; padding: 26px 40px 30px 42px;">Antes de confiar en una columna, revisa cuánto le falta.</div>
+        </div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Salida recortada: se omitieron la primera línea y las dos últimas (resumen de tipos y memoria). 1019 − 432 = 587. No hay que limpiar nada hoy: basta con saber que los faltantes existen. Si Colab usa una versión anterior de pandas, verás <code>object</code> en vez de <code>str</code>; para nosotros es lo mismo.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Práctica en parejas</h2>
+      <p class="subtitulo">Exploren el dataset con <code class="inline">df.shape</code>, <code class="inline">df.head()</code> y <code class="inline">df.info()</code></p>
+      <div class="repaso">
+        <div class="pregunta"><div class="q">¿Cuántos municipios tiene el dataset?</div><div class="pista">Clic para ver la respuesta</div><div class="respuesta"><b>1.019</b>: es el primer número de <code>df.shape</code>.</div></div>
+        <div class="pregunta"><div class="q">¿Cuál es el quinto municipio de la tabla?</div><div class="pista">Clic para ver la respuesta</div><div class="respuesta"><b>Amagá</b>: tiene el índice 4, porque se cuenta desde 0.</div></div>
+        <div class="pregunta"><div class="q">¿A cuántos municipios les falta el IRCA urbano?</div><div class="pista">Clic para ver la respuesta</div><div class="respuesta"><b>9</b>: <code>info()</code> muestra 1010 valores de 1019.</div></div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas"><b>Práctica guiada (0:55–1:05).</b> Usa los papelitos verde y rojo. Revela cada respuesta con un clic solo después de que las parejas respondan.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content" style="display: grid; grid-template-columns: 1fr 380px; align-items: center;">
+      <div>
+        <h2 class="titulo">Pausa</h2>
+        <p class="subtitulo">Estírate y toma agua.</p>
+        <div class="reloj" id="reloj">10:00</div>
+        <div style="display: flex; gap: 10px; margin-top: 18px;">
+          <button class="boton" id="relojIniciar">Iniciar</button>
+          <button class="boton sec" id="relojReiniciar">Reiniciar</button>
+        </div>
+      </div>
+      <img src="../assets/uifcito/neutral.png" alt="UIFCITO" style="width: 340px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas"><b>Pausa (1:05–1:15).</b></aside>
+  </section>
+
+  <!-- ===================== 4 · SELECCIONAR Y FILTRAR ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>4</span></div>
+    <div class="textos">
+      <h2>Seleccionar y filtrar</h2>
+      <p>Quedarnos solo con lo que necesitamos</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Live coding (1:15–1:35).</b> Este bloque y el siguiente comparten el tiempo: seleccionar, filtrar, <code>mean()</code>, <code>value_counts()</code> y una gráfica. Seleccionar es elegir columnas; filtrar es elegir filas.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Seleccionar columnas</h2>
+      <div class="versus" style="width: 1150px;">
+        <div class="lado">
+          <h3>Una columna: <code>[ ]</code></h3>
+          <p>El nombre, entre comillas y corchetes.</p>
+<pre class="code" style="font-size: 19px;">df[<span class="s">"municipio"</span>].<span class="f">head</span>(<span class="n">3</span>)
+<span class="c"># Salida</span>
+0     Medellín
+1    Abejorral
+2     Abriaquí</pre>
+        </div>
+        <div class="lado">
+          <h3>Varias columnas: <code>[[ ]]</code></h3>
+          <p>Una <strong>lista</strong> de nombres dentro de los corchetes.</p>
+<pre class="code" style="font-size: 19px;">df[[<span class="s">"municipio"</span>, <span class="s">"irca"</span>]].<span class="f">head</span>(<span class="n">3</span>)
+<span class="c"># Salida</span>
+   municipio  irca
+0   Medellín   1.7
+1  Abejorral   0.3
+2   Abriaquí   5.0</pre>
+        </div>
+      </div>
+      <div class="comun" style="margin-top: 24px; width: 1150px;"><b>Ojo:</b> con un solo par de corchetes, <code>df["municipio", "irca"]</code> produce <code>KeyError</code>. Para pedir varias columnas se necesitan los dos pares.</div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Agregamos <code>.head(3)</code> solo para ver menos filas. Basta con mencionar la confusión entre <code>df["col"]</code> y <code>df[["col"]]</code>. Los corchetes de adentro son la misma lista de la sesión 3.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Filtrar filas: una condición por fila</h2>
+      <div style="display: grid; grid-template-columns: 590px 1fr; gap: 36px; margin-top: 20px; align-items: start;">
+        <div>
+<pre class="code" style="font-size: 25px; line-height: 1.6;">df[df[<span class="s">"irca"</span>] <span class="o">&gt;</span> <span class="n">35</span><span class="marca">1</span>]<span class="marca">2</span></pre>
+          <ol class="leyenda" style="margin-top: 18px;">
+            <li><span class="marca">1</span><span>La <strong>condición</strong> se revisa en cada fila: da <code class="inline">True</code> o <code class="inline">False</code>.</span></li>
+            <li><span class="marca">2</span><span><strong>df[ ]</strong> conserva solo las filas con <code class="inline">True</code>.</span></li>
+          </ol>
+<pre class="code" style="font-size: 20px; margin-top: 6px;">altos <span class="o">=</span> df[df[<span class="s">"irca"</span>] <span class="o">&gt;</span> <span class="n">35</span>]
+<span class="f">len</span>(altos)   <span class="c"># 64</span></pre>
+        </div>
+        <div>
+          <span class="etiqueta">Cinco filas de ejemplo</span>
+          <table class="df" style="font-size: 21px;">
+            <tr><th class="i"></th><th class="txt">municipio</th><th>irca</th><th>irca &gt; 35</th></tr>
+            <tr><td class="i">0</td><td class="txt">Medellín</td><td>1.7</td><td class="no">False</td></tr>
+            <tr><td class="i">4</td><td class="txt">Amagá</td><td>31.3</td><td class="no">False</td></tr>
+            <tr class="fila-on"><td class="i">36</td><td class="txt">Cisneros</td><td>46.5</td><td class="si">True</td></tr>
+            <tr class="fila-on"><td class="i">109</td><td class="txt">Titiribí</td><td>49.4</td><td class="si">True</td></tr>
+            <tr class="fila-on"><td class="i">113</td><td class="txt">Urrao</td><td>97.0</td><td class="si">True</td></tr>
+          </table>
+          <p style="margin-top: 16px; font-size: 22px;">Quedan <strong>64 de 1.019</strong> municipios: los que tienen riesgo alto o agua inviable sanitariamente.</p>
+        </div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Escribe primero solo <code>df["irca"] &gt; 35</code> y ejecútalo: aparece una columna de True y False. Luego envuélvelo en <code>df[ ]</code>. Filtrar no cambia <code>df</code>: el resultado se guarda aparte, en <code>altos</code>. Los índices conservan su número original (36, 109, 113).</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Es un for + if en una sola línea</h2>
+      <div class="versus" style="width: 1150px;">
+        <div class="lado">
+          <h3>Con lo de la sesión 3</h3>
+          <p>Recorrer los valores uno por uno.</p>
+<pre class="code" style="font-size: 20px;">cuenta <span class="o">=</span> <span class="n">0</span>
+<span class="k">for</span> valor <span class="k">in</span> df[<span class="s">"irca"</span>]:
+    <span class="k">if</span> valor <span class="o">&gt;</span> <span class="n">35</span>:
+        cuenta <span class="o">=</span> cuenta <span class="o">+</span> <span class="n">1</span>
+<span class="f">print</span>(cuenta)   <span class="c"># 64</span></pre>
+        </div>
+        <div class="lado">
+          <h3>Con pandas</h3>
+          <p>La misma pregunta, la misma respuesta.</p>
+<pre class="code" style="font-size: 20px;"><span class="f">print</span>(<span class="f">len</span>(df[df[<span class="s">"irca"</span>] <span class="o">&gt;</span> <span class="n">35</span>]))   <span class="c"># 64</span></pre>
+          <p style="margin-top: 22px; font-size: 24px;">Filtrar es aplicar una <strong>condición</strong> (sesión 2) a cada fila, sin escribir el <strong>bucle</strong> (sesión 3).</p>
+        </div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/feliz.png" alt="UIFCITO feliz" style="right: 90px; top: 395px; height: 150px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Ejecuta los dos y muestra que dan 64. Lo que aprendieron no se pierde: pandas hace el recorrido por ellos.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Filtrar por texto</h2>
+      <p class="subtitulo">Con <code class="inline">==</code> para comparar, igual que en la sesión 2</p>
+      <div style="display: grid; grid-template-columns: 720px 1fr; gap: 28px; margin-top: 20px; align-items: start;">
+<pre class="code" style="font-size: 19px;">cundi <span class="o">=</span> df[df[<span class="s">"departamento"</span>] <span class="o">==</span> <span class="s">"Cundinamarca"</span>]
+<span class="f">len</span>(cundi)   <span class="c"># 113</span>
+
+cundi[[<span class="s">"municipio"</span>, <span class="s">"irca"</span>, <span class="s">"nivel"</span>]].<span class="f">head</span>(<span class="n">3</span>)
+<span class="c"># Salida</span>
+        municipio  irca        nivel
+442  Agua de Dios   3.3   Sin riesgo
+443         Albán   6.0  Riesgo bajo
+444      Anapoima   1.9   Sin riesgo</pre>
+        <div>
+          <div class="dialogo" style="position: static; width: 400px; height: 190px; font-size: 23px;">El texto debe ser idéntico. Con “cundinamarca” quedan 0 filas, y no sale ningún error.</div>
+          <img class="uifcito" src="../assets/uifcito/alerta2.png" alt="UIFCITO alerta" style="position: static; display: block; margin: 6px auto 0; height: 180px; animation: none;">
+        </div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Pregunta por qué van dos iguales: uno solo asigna y dos comparan. Prueba en vivo con “cundinamarca” en minúscula: la tabla sale vacía. También importan las tildes: “Boyaca” no encuentra a “Boyacá”. Una tabla vacía es señal de revisar el texto del filtro.</aside>
+  </section>
+
+  <!-- ===================== 5 · RESUMIR Y GRAFICAR ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>5</span></div>
+    <div class="textos">
+      <h2>Resumir y graficar</h2>
+      <p>De mil filas a una respuesta</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas">Hasta ahora vimos filas. Ahora convertimos muchas filas en un número, un conteo y una gráfica.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">mean(): el promedio de una columna</h2>
+      <div style="display: grid; grid-template-columns: 650px 1fr; gap: 30px; margin-top: 20px; align-items: start;">
+        <table class="tabla texto" style="width: 100%;">
+          <tr><th>Código</th><th>Resultado</th></tr>
+          <tr><td><code>df["irca"].mean()</code></td><td>10.50</td></tr>
+          <tr><td><code>cundi["irca"].mean()</code></td><td>6.83</td></tr>
+          <tr><td><code>df["irca_urbano"].mean()</code></td><td>8.64</td></tr>
+          <tr class="ojo"><td><code>df["irca_rural"].mean()</code></td><td>21.83</td></tr>
+          <tr><td><code>df["irca"].max()</code></td><td>97.0</td></tr>
+        </table>
+        <div style="display: grid; gap: 14px;">
+          <div class="card" style="padding: 16px 20px;"><h3>¿Qué se ve?</h3><p>En promedio, el IRCA rural es más alto que el urbano.</p></div>
+          <div class="card" style="padding: 16px 20px; border-top-color: var(--amarillo);"><h3>Con cuidado</h3><p>Es un promedio entre municipios, no entre personas: cada municipio pesa lo mismo.</p></div>
+        </div>
+      </div>
+      <p style="margin-top: 18px; width: 1150px; font-size: 23px;"><code class="inline">mean()</code> ignora los <strong style="color: #B3261E;">NaN</strong>: el promedio rural usa solo los 432 municipios con ese dato.</p>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Los resultados están redondeados: en Colab verás más decimales, como <code>10.501864573110893</code>. <code>cundi</code> es la tabla que filtramos antes. Ojo con sacar conclusiones fuertes: Chocó tiene solo 4 municipios con dato, y la comparación rural-urbana usa grupos de municipios distintos (432 y 1010). Es una exploración, no un estudio.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">value_counts(): contar categorías</h2>
+      <p class="subtitulo">¿Cuántos municipios hay en cada nivel de riesgo?</p>
+      <div style="display: grid; grid-template-columns: 590px 1fr; gap: 34px; margin-top: 20px; align-items: start;">
+<pre class="code" style="font-size: 20px;">df[<span class="s">"nivel"</span>].<span class="f">value_counts</span>()
+<span class="c"># Salida</span>
+nivel
+Sin riesgo                 485
+Riesgo bajo                286
+Riesgo medio               184
+Riesgo alto                 60
+Inviable sanitariamente      4
+Name: count, dtype: int64</pre>
+        <div>
+          <span class="etiqueta">Dilo en una frase</span>
+          <p style="font-size: 25px;">Casi la mitad de los municipios (<strong>485 de 1.019</strong>) está sin riesgo, pero <strong>64</strong> están en riesgo alto o tienen agua inviable sanitariamente.</p>
+        </div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Ordena de mayor a menor cantidad; aquí coincide con el orden de riesgo, pero es casualidad. Los cuatro municipios inviables son Urrao, Margarita, Bosconia y Ataco. Lo importante es practicar la frase: un resultado solo sirve si sabemos decir qué significa. 485 / 1019 = 47.6 %; 60 + 4 = 64.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Una gráfica en una línea</h2>
+      <div style="display: grid; grid-template-columns: 610px 1fr; gap: 30px; margin-top: 12px; align-items: start;">
+        <div class="colab">
+          <div class="cuerpo" style="padding: 2px 14px 10px;">
+            <div class="celda" style="grid-template-columns: 34px 1fr;"><div class="play"></div><div class="entrada" style="font-size: 15.5px;">df[<span class="s">"nivel"</span>].<span class="f">value_counts</span>().<span class="f">plot</span>(kind=<span class="s">"bar"</span>)</div>
+              <div class="salida" style="padding: 6px 0 0; text-align: center;"><img src="grafica_nivel.png" alt="Gráfica de barras de municipios por nivel de riesgo: Sin riesgo 485, Riesgo bajo 286, Riesgo medio 184, Riesgo alto 60, Inviable sanitariamente 4" style="height: 412px; display: block; margin: 0 auto;"></div></div>
+          </div>
+        </div>
+        <div>
+          <ul class="lista" style="margin-top: 0;">
+            <li style="font-size: 23px;"><code class="inline">value_counts()</code> cuenta y <code class="inline">.plot()</code> dibuja ese resultado.</li>
+            <li style="font-size: 23px;">Cada barra es una categoría; su altura, cuántos municipios tiene.</li>
+            <li style="font-size: 23px;">A simple vista: pocos municipios en los dos niveles más altos.</li>
+          </ul>
+          <img class="uifcito" src="../assets/uifcito/presentando.png" alt="UIFCITO presentando" style="right: 90px; top: 372px; height: 150px; transform: scaleX(-1); animation: none;">
+        </div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Es la gráfica que produce este código, con el estilo por defecto. En Colab, encima de ella aparece un texto como <code>&lt;Axes: xlabel='nivel'&gt;</code>: se puede ignorar. Mejorar la presentación de una gráfica lo veremos en la sesión 7 con ggplot2. Encadenar con puntos es leer de izquierda a derecha: tomo la columna, cuento, grafico.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Todo el recorrido en pocas líneas</h2>
+      <div class="flujo" style="margin-top: 20px;">
+        <div class="paso on">Leer</div><div class="flecha">→</div>
+        <div class="paso">Explorar</div><div class="flecha">→</div>
+        <div class="paso">Seleccionar</div><div class="flecha">→</div>
+        <div class="paso">Filtrar</div><div class="flecha">→</div>
+        <div class="paso">Resumir</div><div class="flecha">→</div>
+        <div class="paso on">Graficar</div>
+      </div>
+<pre class="code" style="font-size: 22px; margin-top: 20px; width: 860px;"><span class="k">import</span> pandas <span class="k">as</span> pd
+df <span class="o">=</span> pd.<span class="f">read_csv</span>(url)                         <span class="c"># leer</span>
+df.<span class="f">head</span>()                                     <span class="c"># explorar</span>
+df[[<span class="s">"municipio"</span>, <span class="s">"irca"</span>]]                     <span class="c"># seleccionar</span>
+df[df[<span class="s">"irca"</span>] <span class="o">&gt;</span> <span class="n">35</span>]                           <span class="c"># filtrar</span>
+df[<span class="s">"irca"</span>].<span class="f">mean</span>()                             <span class="c"># resumir</span>
+df[<span class="s">"nivel"</span>].<span class="f">value_counts</span>().<span class="f">plot</span>(kind<span class="o">=</span><span class="s">"bar"</span>)   <span class="c"># graficar</span></pre>
+      <img class="uifcito" src="../assets/uifcito/feliz.png" alt="UIFCITO feliz" style="right: 50px; top: 210px; height: 300px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Es el recorrido de cualquier análisis pequeño, y el que usarán en el proyecto final. En R veremos las mismas ideas con otras palabras.</aside>
+  </section>
+
+  <!-- ===================== 6 · PRÁCTICA ===================== -->
+  <section class="slide seccion">
+    <div class="fondo"></div>
+    <div class="lateral"><span>6</span></div>
+    <div class="textos">
+      <h2>¡A practicar!</h2>
+      <p>Sus propias respuestas con datos reales</p>
+    </div>
+    <div class="banda"></div>
+    <aside class="notas"><b>Práctica autónoma (1:35–1:52).</b> Antes, los tres errores que más van a ver hoy.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Errores frecuentes de hoy</h2>
+      <div class="errores">
+        <div class="error revelable"><h3>KeyError</h3><div class="cuerpo">
+<pre>df["Irca"]
+<span class="err">KeyError: 'Irca'</span></pre>
+          <div class="pista">Clic para ver la causa y la solución</div>
+          <div class="respuesta">
+          <p>Esa columna no existe: el nombre debe ser idéntico, con minúsculas y mayúsculas.</p>
+          <div class="arreglo"><pre>df["irca"]</pre></div></div></div></div>
+        <div class="error revelable"><h3>TypeError</h3><div class="cuerpo">
+<pre>df.shape()
+<span class="err">TypeError: 'tuple' object
+is not callable</span></pre>
+          <div class="pista">Clic para ver la causa y la solución</div>
+          <div class="respuesta">
+          <p><b>shape</b> es un dato de la tabla, no una acción: va sin paréntesis.</p>
+          <div class="arreglo"><pre>df.shape</pre></div></div></div></div>
+        <div class="error revelable"><h3>SyntaxError</h3><div class="cuerpo">
+<pre>df[df["nivel"] = "Riesgo alto"]
+<span class="err">SyntaxError: ... Maybe you
+meant '==' instead of '='?</span></pre>
+          <div class="pista">Clic para ver la causa y la solución</div>
+          <div class="respuesta">
+          <p>Un solo <b>=</b> asigna. Para comparar se usan dos.</p>
+          <div class="arreglo"><pre style="font-size: 15.5px;">df[df["nivel"] == "Riesgo alto"]</pre></div></div></div></div>
+      </div>
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas">Muestra solo el error y pregunta al grupo qué lo causa antes de hacer clic en cada tarjeta. El <code>KeyError</code> es el más frecuente de la sesión: se resuelve mirando <code>df.columns</code>. El mensaje del <code>SyntaxError</code> está abreviado y puede variar un poco según la versión de Python.</aside>
+  </section>
+
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Ejercicios</h2>
+      <p class="subtitulo">Avanza hasta donde llegues</p>
+      <div class="niveles">
+        <div class="nivel-card"><header style="background: var(--uifce);">Básico <small>Todos</small></header>
+          <ol start="1">
+            <li>¿Cuántas filas y columnas tiene el dataset?</li>
+            <li>Muestra las primeras 10 filas.</li>
+            <li>Calcula el promedio de <code class="inline">irca_urbano</code>.</li>
+          </ol></div>
+        <div class="nivel-card"><header style="background: var(--azul-2);">Intermedio</header>
+          <ol start="4">
+            <li>Filtra los municipios con <code class="inline">irca</code> menor o igual a 5 y cuenta cuántos son.</li>
+            <li>Usa <code class="inline">value_counts()</code> en <code class="inline">departamento</code> e interpreta el resultado en una frase.</li>
+          </ol></div>
+        <div class="nivel-card"><header style="background: var(--azul);">Reto</header>
+          <ol start="6">
+            <li>Filtra Boyacá con <code class="inline">irca</code> mayor que 5 y grafica su <code class="inline">nivel</code>. Pista: <code class="inline">df[(cond1) &amp; (cond2)]</code>.</li>
+            <li>Formula tu propia pregunta y respóndela con código.</li>
+          </ol></div>
+      </div>
+      <div class="dialogo" style="left: 64px; top: 462px; width: 590px; height: 116px; font-size: 23px; padding: 26px 40px 30px 42px;">¿Atascado? Revisa los nombres con df.columns.</div>
+      <img class="uifcito" src="../assets/uifcito/presentando.png" alt="UIFCITO señalando" style="left: 670px; top: 448px; height: 150px; transform: scaleX(-1); animation: none;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas"><b>Soluciones.</b> 1: <code>df.shape</code>, (1019, 8). 3: <code>df["irca_urbano"].mean()</code>, 8.64. 4: <code>len(df[df["irca"] &lt;= 5])</code>, 485. 5: Antioquia encabeza con 123; ese número cuenta municipios con dato, no mide riesgo. 6: <code>df[(df["departamento"] == "Boyacá") &amp; (df["irca"] &gt; 5)]["nivel"].value_counts().plot(kind="bar")</code> da Riesgo medio 32, Riesgo bajo 30 y Riesgo alto 7. Cada condición va entre paréntesis.</aside>
+  </section>
+
+  <!-- ===================== CIERRE ===================== -->
+  <section class="slide">
+    <div class="content">
+      <h2 class="titulo">Tres ideas clave de hoy</h2>
+      <ol class="ideas">
+        <li><span>Un <strong>dataset</strong> es una tabla: las filas son casos y las columnas, variables.</span></li>
+        <li><span>Con pocas líneas de <strong>pandas</strong> se pueden leer, filtrar y resumir datos reales.</span></li>
+        <li><span><strong>Filtrar</strong> es aplicar una condición a cada fila.</span></li>
+      </ol>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; width: 840px; margin-top: 4px;">
+        <div class="card" style="padding: 14px 18px;"><h3 style="font-size: 21px;">Tarea corta</h3><p style="font-size: 18px;">Escribe 3 preguntas que quieras responder con este dataset.</p></div>
+        <div class="card" style="padding: 14px 18px; border-top-color: var(--amarillo);"><h3 style="font-size: 21px;">Obligatorio</h3><p style="font-size: 18px;">Crea tu cuenta gratis en <b>Posit Cloud</b> y verifica que abres un proyecto.</p></div>
+        <div class="card" style="padding: 14px 18px;"><h3 style="font-size: 21px;">Nivelación</h3><p style="font-size: 18px;">Hoja resumen con los comandos de pandas de hoy.</p></div>
+      </div>
+      <img class="uifcito" src="../assets/uifcito/feliz.png" alt="UIFCITO feliz" style="right: 40px; top: 120px; height: 320px;">
+    </div>
+    <div class="banda"></div><div class="num"></div>
+    <aside class="notas"><b>Cierre (1:52–2:00).</b> Adelanto: la próxima clase aprendemos R. Sin cuenta de Posit Cloud no podrán trabajar en la sesión 5. Las 3 preguntas se retoman en R. Entrega también la hoja resumen de las semanas 1 y 2.</aside>
+  </section>
+
+  <section class="slide final">
+    <div class="fondo"></div>
+    <img class="logo" src="../assets/img/logo_uifce_blanco.png" alt="UIFCE · Unidad de Informática">
+    <div class="textos">
+      <h2>¡Gracias!</h2>
+      <p>Próxima sesión: <b style="color: var(--gris-claro);">El puente a R</b>. Lo mismo, en otro idioma.</p>
+      <div class="contacto"><i>Correo:</i> uniic_bog@unal.edu.co<br><i>Tel:</i> 3165000 &nbsp; <i>Ext:</i> 12301</div>
+    </div>
+    <img class="uifcito" src="../assets/uifcito/cierre.png" alt="UIFCITO despidiéndose" style="right: 110px; top: 70px; height: 470px;">
+    <div class="franja" role="img" aria-label="Facultad de Ciencias Económicas, Unidad de Informática, Sede Bogotá · Universidad Nacional de Colombia"></div>
+    <aside class="notas">Recuerda la tarea corta y la cuenta de Posit Cloud, y comparte la hoja resumen.</aside>
+  </section>
+</main>
+</div>
+
+<div id="panelNotas"></div>
+<div class="controles">
+  <button id="prev" aria-label="Diapositiva anterior">←</button>
+  <button id="next" aria-label="Diapositiva siguiente">→</button>
+  <button id="btnNotas" title="Notas del monitor (N)">Notas</button>
+  <button id="btnFull" title="Pantalla completa (F)">⛶</button>
+</div>
+
+<script src="../assets/deck.js"></script>
+</body>
+</html>

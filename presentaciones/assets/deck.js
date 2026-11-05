@@ -50,7 +50,7 @@ const DESTACABLES = [
   '.card', '.versus .lado', '.pregunta', '.error', '.nivel-card', '.nivel-card li', '.agenda .item',
   '.lista li', '.leyenda li', '.ideas li', '.pasos li', '.lenguaje', '.lenguaje li', '.casilla', '.tabla tr:has(td)',
   '.actividad', 'pre.code', '.dialogo', '.definicion', '.comun', '.tipo', '.caja', '.bloque', '.modulo',
-  '.peldaño', '.flujo .paso', '.chip', '.colab .celda', 'svg.diagrama', '.content > p:not(.subtitulo)'
+  '.peldaño', '.flujo .paso', '.chip', '.colab .celda', 'svg.diagrama', '.df tr:has(td)', '.escala > div', '.content > p:not(.subtitulo):not(.fuente)'
 ].join(', ');
 let foco = null;
 
