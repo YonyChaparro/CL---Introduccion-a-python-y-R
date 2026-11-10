@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Ejercicios sesión 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Regular.otf"); font-weight: 400; }
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Italic.otf"); font-weight: 400; font-style: italic; }
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Bold.otf"); font-weight: 700; }
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Extrabold.otf"); font-weight: 800; }
+  @font-face { font-family: "Ancizar Sans"; src: url("../presentaciones/assets/fonts/AncizarSans-Extrablack.otf"); font-weight: 900; }
+  :root {
+    --azul: #073763; --azul-2: #0B5394; --azul-osc: #162848; --gris-claro: #EDEFF3; --gris-azul: #5F7D95;
+    --hielo: #CFE7FF; --uifce: #2A7FFF; --amarillo: #F2C81B; --verde: #1E7B34; --rojo: #B3261E;
+  }
+  @page { size: letter; margin: 13mm 17mm 13mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Ancizar Sans", system-ui, sans-serif; font-size: 11pt; line-height: 1.45; color: var(--azul-osc); background: #fff;
+         font-variant-ligatures: none; font-feature-settings: "calt" 0, "liga" 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  code, pre { font-family: "Fira Code", Menlo, monospace; font-variant-ligatures: none; font-feature-settings: "calt" 0, "liga" 0; }
+
+  h3 { font-weight: 800; font-size: 13.5pt; color: var(--azul-2); margin: 3.5mm 0 1mm; break-after: avoid; }
+  h3 + p, h3 + pre { break-before: avoid; }
+  p { margin: 0 0 1.8mm; }
+  strong { color: var(--azul); }
+  a { color: var(--azul-2); }
+  code { font-size: 9.8pt; background: var(--gris-claro); color: var(--azul); padding: .2mm 1.2mm; border-radius: 1.2mm; }
+  pre { margin: 1.5mm 0 2.5mm; padding: 2.2mm 4mm; background: #0E1E33; color: #E8F1FF; border-radius: 2.5mm; font-size: 9.6pt; line-height: 1.4; white-space: pre-wrap; break-inside: avoid; }
+  pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+  pre .s { color: #FFD866; } pre .k { color: #6CC7FF; }
+
+  .ojo { background: #FFF7D6; border-left: 1.8mm solid var(--amarillo); border-radius: 0 2.5mm 2.5mm 0; padding: 3mm 4.5mm; margin: 2.5mm 0 3.5mm; break-inside: avoid; }
+  .ojo b.t { display: block; font-weight: 800; font-size: 8.5pt; letter-spacing: .1em; text-transform: uppercase; color: #8A6A00; margin-bottom: .5mm; }
+
+  table { width: 100%; border-collapse: separate; border-spacing: 0 .8mm; margin: 1mm 0 3mm; break-inside: avoid; font-size: 10.5pt; }
+  th { text-align: left; font-weight: 800; font-size: 8pt; letter-spacing: .1em; text-transform: uppercase; color: var(--gris-azul); padding: 0 3mm; }
+  td { background: var(--gris-claro); padding: 1.3mm 3mm; vertical-align: top; }
+  td:first-child { border-radius: 2mm 0 0 2mm; } td:last-child { border-radius: 0 2mm 2mm 0; }
+  td code { background: #fff; }
+  th code { text-transform: none; letter-spacing: 0; background: none; padding: 0; font-size: 8.5pt; color: var(--gris-azul); }
+  td code.b { display: block; white-space: pre; background: #fff; padding: .6mm 1.5mm; font-size: 8.8pt; line-height: 1.35; }
+  p:has(+ pre), p:has(+ table) { break-after: avoid; }
+
+  .ej { break-inside: avoid; margin-bottom: 2.2mm; }
+  .nivel { display: inline-block; font-weight: 800; font-size: 8pt; letter-spacing: .1em; text-transform: uppercase; padding: .6mm 2.4mm; border-radius: 10mm; background: var(--azul); color: #fff; margin-right: 2mm; }
+  .nivel.int { background: var(--azul-2); } .nivel.reto { background: var(--amarillo); color: var(--azul); }
+  .lineas { border-bottom: .3mm dashed #B9C6D3; height: 7mm; }
+  .enlace { overflow-wrap: anywhere; font-size: 9.8pt; }
+  .encabezado { background: var(--azul); color: #fff; border-radius: 3mm; padding: 6mm 8mm 5mm; position: relative; border-bottom: 2mm solid var(--amarillo); margin-bottom: 5mm; }
+  .encabezado .kicker { font-weight: 800; font-size: 9.5pt; letter-spacing: .12em; text-transform: uppercase; color: var(--hielo); }
+  .encabezado h1 { font-weight: 900; font-size: 26pt; line-height: 1.05; margin: 2mm 0 1.5mm; }
+  .encabezado .sub { font-size: 11.5pt; opacity: .92; }
+  .encabezado img { position: absolute; right: 6mm; bottom: -2mm; height: 28mm; }
+</style>
+</head>
+<body>
+
+<div class="encabezado">
+  <div class="kicker">Introducción a la Programación en Python y R · 2026-2</div>
+  <h1>Ejercicios sesión 4</h1>
+  <div class="sub">Leer, filtrar y resumir: primeros datos con pandas</div>
+  <div class="sub" style="font-size:9.5pt;margin-top:1.5mm;opacity:.8">Estudiante auxiliar: Yony Sebastián Chaparro Mesa · UIFCE · Facultad de Ciencias Económicas</div>
+  <img src="../presentaciones/assets/uifcito/explicando.png" alt="">
+</div>
+<p>Resuélvelos en Google Colab. Avanza hasta donde llegues y, si te atascas, repasa la guía de la sesión 4.</p>
+
+  <h3>Antes de empezar: carga los datos</h3>
+  <p>Pega este enlace en lugar de <code>PEGA_AQUI_EL_ENLACE</code>, dejando las comillas, y ejecuta la celda:</p>
+  <p class="enlace"><a href="https://raw.githubusercontent.com/YonyChaparro/CL---Introduccion-a-python-y-R/main/datos/agua_municipios_2025.csv">https://raw.githubusercontent.com/YonyChaparro/CL---Introduccion-a-python-y-R/main/datos/agua_municipios_2025.csv</a></p>
+<pre><code><span class="k">import</span> pandas <span class="k">as</span> pd
+
+url = <span class="s">"PEGA_AQUI_EL_ENLACE"</span>
+df = pd.read_csv(url)</code></pre>
+
+  <h3>Ponte a prueba: ¿qué muestra cada línea?</h3>
+  <p>Escribe tu respuesta <strong>antes</strong> de ejecutar el código. Usa una celda para cada fila de la tabla.</p>
+  <table>
+    <tr><th>Código</th><th style="width:45%">Tu respuesta</th></tr>
+    <tr><td><code class="b">df.head(3).shape</code></td><td></td></tr>
+    <tr><td><code class="b">df[["municipio", "irca"]].shape</code></td><td></td></tr>
+    <tr><td><code class="b">df[df["nivel"] == "sin riesgo"].shape</code></td><td></td></tr>
+    <tr><td><code class="b">len(df[df["irca"] &gt; 100])</code></td><td></td></tr>
+    <tr><td><code class="b">altos = df[df["irca"] &gt; 35]
+len(df)</code></td><td></td></tr>
+    <tr><td><code class="b">len(df.head())</code></td><td></td></tr>
+  </table>
+
+  <h3>Filtrar a mano</h3>
+  <p>Sin ejecutar nada, escribe qué da la condición <code>irca &gt; 5</code> en cada fila. ¿Cuántas de estas filas conservaría el filtro?</p>
+  <table>
+    <tr><th>Municipio</th><th><code>irca</code></th><th style="width:40%"><code>irca &gt; 5</code></th></tr>
+    <tr><td>Medellín</td><td><code>1.7</code></td><td></td></tr>
+    <tr><td>Abriaquí</td><td><code>5.0</code></td><td></td></tr>
+    <tr><td>Amagá</td><td><code>31.3</code></td><td></td></tr>
+    <tr><td>Angostura</td><td><code>11.0</code></td><td></td></tr>
+  </table>
+
+  <h3>Encuentra el error</h3>
+  <p>Di qué tipo de error produce cada línea y corrígela.</p>
+  <table>
+    <tr><th>Código</th><th style="width:50%">Error y corrección</th></tr>
+    <tr><td><code class="b">df["Municipio"]</code></td><td></td></tr>
+    <tr><td><code class="b">df.columns()</code></td><td></td></tr>
+    <tr><td><code class="b">df[df["nivel"] = "Riesgo alto"]</code></td><td></td></tr>
+    <tr><td><code class="b">df["municipio", "nivel"]</code></td><td></td></tr>
+  </table>
+
+  <h3>Completa el código: el agua en Santander</h3>
+  <p>Llena los espacios para filtrar el departamento de Santander, contar sus municipios y calcular su IRCA promedio.</p>
+<pre><code>santander = df[df[<span class="s">"departamento"</span>] ______ <span class="s">"Santander"</span>]
+<span class="k">print</span>(<span class="k">len</span>(______))
+<span class="k">print</span>(santander[<span class="s">"______"</span>].______())</code></pre>
+
+  <h3>Ejercicios de la clase</h3>
+  <div class="ej"><span class="nivel">Básico</span><b>1.</b> ¿Cuántas filas y columnas tiene el dataset?</div>
+  <div class="ej"><span class="nivel">Básico</span><b>2.</b> Muestra las primeras 10 filas.</div>
+  <div class="ej"><span class="nivel">Básico</span><b>3.</b> Calcula el promedio de <code>irca_urbano</code>.</div>
+  <div class="ej"><span class="nivel int">Intermedio</span><b>4.</b> Filtra los municipios con <code>irca</code> menor o igual a 5 y cuenta cuántos son.</div>
+  <div class="ej"><span class="nivel int">Intermedio</span><b>5.</b> Usa <code>value_counts()</code> en <code>departamento</code> e interpreta el resultado en una frase.</div>
+  <div class="ej"><span class="nivel reto">Reto</span><b>6.</b> Filtra Boyacá con <code>irca</code> mayor que 5 y grafica su <code>nivel</code>. Pista: <code>df[(cond1) &amp; (cond2)]</code>.</div>
+  <div class="ej"><span class="nivel reto">Reto</span><b>7.</b> Formula tu propia pregunta y respóndela con código.</div>
+  <div class="ojo"><b class="t">Consejo</b>¿Te atascaste? Revisa los nombres con <code>df.columns</code>. Si un filtro da una tabla vacía, compara tu texto con el que aparece en los datos.</div>
+
+  <h3>Tarea corta: mis 3 preguntas</h3>
+  <p>Escribe 3 preguntas que quieras responder con este dataset. Las retomaremos en R.</p>
+  <div class="lineas"></div>
+  <div class="lineas"></div>
+  <div class="lineas" style="margin-bottom:3.5mm"></div>
+  <div class="ojo"><b class="t">Obligatorio para la próxima sesión</b>Crea tu cuenta gratis en <strong>Posit Cloud</strong> y verifica que puedes abrir un proyecto.</div>
+
+</body>
+</html>
